@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>motion</name>
+  <version>0.0.0</version>
+  <description>The motion package</description>
+  <maintainer email="davide@todo.todo">davide</maintainer>
+
+  <license>TODO</license>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <build_depend>message_generation</build_depend>
+  <exec_depend>message_runtime</exec_depend>
+  <depend>roscpp</depend>
+  <depend>std_msgs</depend>
+  <depend>sensor_msgs</depend>
+</package>

@@ -1,0 +1,93 @@
+<?xml version='1.0'?>
+<sdf version="1.6"> 
+ 
+         <model name="mesh_X1-Y2-Z2"> 
+             <static>0</static> 
+             <self_collide>0</self_collide> 
+             <allow_auto_disable>1</allow_auto_disable> 
+
+            <pose>0 0 0 0 -0 0</pose>
+
+             <link name="link"> 
+
+                 <gravity>1</gravity> 
+                 <self_collide>0</self_collide> 
+                 <kinematic>0</kinematic> 
+ 
+ 
+                 <inertial>
+                    <!-- Volume:  1.4626929000e-05 -->
+                    <mass> 1.0 </mass>
+
+                    <!-- Center of mass:  9.6000000000e-07  5.6000000000e-07  2.8797740000e-02 -->
+                    <pose>  9.6000000000e-07  5.6000000000e-07  2.8797740000e-02 0 0 0 </pose>
+
+                    <!-- Inertia matrix -->
+                    <inertia>
+                        <ixx>  6.8430237133e-04 </ixx>
+                        <ixy>  3.0149869463e-09 </ixy>
+                        <ixz> -1.8746245367e-08 </ixz>
+                        <iyy>  3.9997040390e-04 </iyy>
+                        <iyz> -1.6298704943e-08 </iyz>
+                        <izz>  5.4460814707e-04 </izz>
+                    </inertia>
+                </inertial>
+
+                 
+                 <collision name="collision"> 
+                     <!-- 
+                         Maximum number of contacts allowed between two entities. 
+                         This value overrides the max_contacts element defined in physics. 
+                     --> 
+                     <max_contacts>20</max_contacts> 
+ 
+                    <pose>0 0 0 0 -0 0</pose>
+ 
+                     <geometry> 
+                         <mesh> 
+                             <uri>model://X1-Y2-Z2/mesh/X1-Y2-Z2.stl</uri> 
+                             <!-- <uri>model://mymodel/meshes/model.stl</uri> --> 
+                             <!-- Scaling factor applied to the mesh --> 
+                             <scale>1.0 1.0 1.0</scale> 
+                         </mesh> 
+                     </geometry> 
+                     <!-- http://sdformat.org/spec?ver=1.6&elem=collision#surface_soft_contact --> 
+                     <surface></surface> 
+                 </collision> 
+                 
+                 <visual name="visual"> 
+                     <cast_shadows>1</cast_shadows>
+                     <transparency>0</transparency>
+ 
+                   <pose>0 0 0 0 -0 0</pose>
+ 
+                     <material> 
+ 
+                         <script> 
+                             <uri>file://media/materials/scripts/gazebo.material</uri>
+                             <!-- <name>Gazebo/TurquoiseGlowOutline</name> -->
+                             <name>Gazebo/Red</name>
+                         </script>
+                         <shader type="vertex">
+                           <normal_map>__default__</normal_map>
+                         </shader>
+ 
+                         <lighting>1</lighting> 
+ 		                <ambient>0.15 0.75 0.35 1</ambient> 
+ 		                <diffuse>0.1 0.95 0.25 1</diffuse> 
+ 		                <specular>0.01 0.01 0.01 1</specular> 
+ 		                <emissive>0 0 0 1</emissive> 
+                     </material>
+ 
+                     <geometry> 
+                         <mesh> 
+                             <uri>model://X1-Y2-Z2/mesh/X1-Y2-Z2.stl</uri> 
+                             <!-- <uri>model://mymodel/meshes/model.stl</uri> --> 
+                             <!-- Scaling factor applied to the mesh --> 
+                             <scale>1.0 1.0 1.0</scale> 
+                         </mesh> 
+                     </geometry> 
+                 </visual> 
+             </link> 
+         </model> 
+     </sdf>
