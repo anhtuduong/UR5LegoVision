@@ -24,7 +24,7 @@
 
 
 ## Project Description
-The goal of this project was to develop an autonomous robot that can perform pick and place tasks. The manipulator is an Ur5 that uses a Zed cam for the perception. The pick and place task consists in picking different types of "lego" blocks and placing them in their corresponding position. The robot is able to detect the blocks and perform the pick and place task autonomously.
+The goal of this project was to develop an autonomous robot that can perform pick and place tasks. The manipulator is an Ur5 that uses a Zed cam for the perception. The pick and place task consists in picking different types of "lego-like" Mega Bloks and placing them in their corresponding position. The robot is able to detect the blocks and perform the pick and place task autonomously.
 
 ![final.gif](test/final.gif)
 
