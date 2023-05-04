@@ -6,8 +6,6 @@
 """
 
 # ---------------------- IMPORT ----------------------
-from pathlib import Path
-import sys
 import os
 import rospy as ros
 import numpy as np
@@ -20,12 +18,6 @@ from std_msgs.msg import Int32
 from localization.BlockDetect import BlockDetect
 
 # ---------------------- GLOBAL CONSTANTS ----------------------
-FILE = Path(__file__).resolve()
-ROOT = FILE.parents[1]
-if str(ROOT) not in sys.path:
-    sys.path.append(str(ROOT))  # add ROOT to PATH
-ROOT = Path(os.path.relpath(ROOT, Path.cwd()))  # relative
-
 IMG_ZED = os.path.abspath(os.path.join(ROOT, "log/img_ZED_cam.png"))
 
 w_R_c = np.matrix([[0, -0.499, 0.866], [-1, 0, 0], [0, -0.866, -0.499]])
