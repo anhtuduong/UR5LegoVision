@@ -1,8 +1,8 @@
 """!
-@file Lego.py
+@file Block.py
 @author Anh Tu Duong (anhtu.duong@studenti.unitn.it)
-@brief Defines the class Lego.
-@date 2023-02-17
+@brief Defines the class Block.
+@date 2023-05-04
 """
 # ---------------------- IMPORT ----------------------
 from IPython.display import display
@@ -10,7 +10,7 @@ from PIL import Image
 
 # ---------------------- GLOBAL CONSTANTS ----------------------
 
-LEGO_NAMES = [  'X1-Y1-Z2',
+BLOCK_NAMES = [  'X1-Y1-Z2',
                 'X1-Y2-Z1',
                 'X1-Y2-Z2',
                 'X1-Y2-Z2-CHAMFER',
@@ -24,14 +24,14 @@ LEGO_NAMES = [  'X1-Y1-Z2',
 
 # ---------------------- CLASS ----------------------
 
-class Lego:
+class Block:
     """
-    @brief This class represents info of detected lego
+    @brief This class represents info of detected BLOCK
     """
 
     def __init__(self, name, conf, x1, y1, x2, y2, img_source_path):
         """ @brief Class constructor
-            @param name (String): lego name
+            @param name (String): block name
             @param conf (float): confidence
             @param x1 (float): xmin of bounding box
             @param y1 (float): ymin of bounding box
@@ -41,7 +41,7 @@ class Lego:
         """
 
         self.name = name
-        self.class_id = LEGO_NAMES.index(name)
+        self.class_id = BLOCK_NAMES.index(name)
         self.confidence = conf
         self.xmin = x1
         self.ymin = y1
@@ -53,9 +53,10 @@ class Lego:
         self.center_point_uv = (self.img_source.width - self.center_point[0], self.center_point[1])
         self.point_cloud = ()
         self.point_world = ()
+        self.segment = None
 
     def show(self):
-        """ @brief Show lego info
+        """ @brief Show block info
         """
 
         self.img = self.img_source.crop((self.xmin, self.ymin, self.xmax, self.ymax))
@@ -67,8 +68,11 @@ class Lego:
         new_size = (new_width, int(new_width * aspect_ratio))
         self.img = self.img.resize(new_size, Image.LANCZOS)
 
-        # Lego details
+        # Block details
         display(self.img)
+        print(str(self))
+
+    def __str__(self) -> str:
         print('class =', self.name)
         print('id =', self.class_id)
         print('confidence =', '%.2f' %self.confidence)

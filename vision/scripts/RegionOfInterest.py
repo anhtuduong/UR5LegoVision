@@ -1,6 +1,6 @@
 """!
 @file RegionOfInterest.py
-@author Giulio Zamberlan (giulio.zamberlan@studenti.unitn.it)
+@author Anh Tu Duong (anhtu.duong@studenti.unitn.it)
 @brief Defines the class RegionOfInterest.py
 @date 2023-02-17
 """
@@ -17,6 +17,7 @@ ROOT = FILE.parents[0]
 if str(ROOT) not in sys.path:
     sys.path.append(str(ROOT))  # add ROOT to PATH
 ROOT = Path(os.path.relpath(ROOT, Path.cwd()))  # relative
+
 USING_REAL_CAM = False
 
 # ---------------------- CLASS ----------------------

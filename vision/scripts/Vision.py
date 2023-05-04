@@ -1,8 +1,8 @@
 """!
 @file Vision.py
-@author Anh Tu Duong (anhtu.duong@studenti.unitn.it), Giulio Zamberlan (giulio.zamberlan@studenti.unitn.it)
+@author Anh Tu Duong (anhtu.duong@studenti.unitn.it)
 @brief Defines the Vision node that communicates with Motion node.
-@date 2023-02-17
+@date 2023-05-04
 """
 
 # ---------------------- IMPORT ----------------------
@@ -17,8 +17,7 @@ from sensor_msgs.msg import Image
 import sensor_msgs.point_cloud2 as point_cloud2
 from sensor_msgs.msg import PointCloud2
 from std_msgs.msg import Int32
-from motion.msg import pos
-from LegoDetect import LegoDetect
+import BlockDetect
 
 # ---------------------- GLOBAL CONSTANTS ----------------------
 FILE = Path(__file__).resolve()
@@ -39,7 +38,7 @@ REAL_ROBOT = False
 
 class Vision:
     """
-    @brief This class recognizes lego blocks from ZED camera and communicates with different ROS node
+    @brief This class recognizes block blocks from ZED camera and communicates with different ROS node
     """
 
     def __init__(self):
@@ -48,7 +47,7 @@ class Vision:
 
         ros.init_node('vision', anonymous=True)
 
-        self.lego_list = []
+        self.block_list = []
         self.bridge = CvBridge()
 
         # Flags
@@ -79,10 +78,10 @@ class Vision:
         except CvBridgeError as e:
             print(e)
 
-        # Save image and detect lego
+        # Save image and detect block
         cv.imwrite(IMG_ZED, cv_image)
-        legoDetect = LegoDetect(IMG_ZED)
-        self.lego_list = legoDetect.lego_list
+        blockDetect = BlockDetect(IMG_ZED)
+        self.block_list = blockDetect.block_list
 
         self.allow_receive_pointcloud = True
 
@@ -98,27 +97,27 @@ class Vision:
         
         self.pos_msg_list = []
 
-        for lego in self.lego_list:
+        for block in self.block_list:
 
             # Get point cloud
-            for data in point_cloud2.read_points(msg, field_names=['x','y','z'], skip_nans=True, uvs=[lego.center_point]):
-                lego.point_cloud = (data[0], data[1], data[2])
+            for data in point_cloud2.read_points(msg, field_names=['x','y','z'], skip_nans=True, uvs=[block.center_point]):
+                block.point_cloud = (data[0], data[1], data[2])
 
             if REAL_ROBOT:
-                lego.point_world = lego.point_cloud
+                block.point_world = block.point_cloud
             else:
                 # Transform point cloud to world
-                lego.point_world = w_R_c.dot(lego.point_cloud) + x_c + base_offset
+                block.point_world = w_R_c.dot(block.point_cloud) + x_c + base_offset
 
             # Show details
-            lego.show()
+            block.show()
 
             # Create msg for pos_pub
             pos_msg = pos()
-            pos_msg.class_id = lego.class_id
-            pos_msg.x = lego.point_world[0, 0] + 0.007
-            pos_msg.y = lego.point_world[0, 1]
-            pos_msg.z = lego.point_world[[0, 2]]
+            pos_msg.class_id = block.class_id
+            pos_msg.x = block.point_world[0, 0] + 0.007
+            pos_msg.y = block.point_world[0, 1]
+            pos_msg.z = block.point_world[[0, 2]]
             pos_msg.pitch = 0
             pos_msg.roll = 0
             pos_msg.yaw = 0
@@ -126,12 +125,12 @@ class Vision:
             if pos_msg.z < OFF_SET:
                 self.pos_msg_list.append(pos_msg)
             
-        print('\nVISION DONE DETECTING LEGO!\nREADY FOR MOTION!')
+        print('\nVISION DONE DETECTING block!\nREADY FOR MOTION!')
         self.vision_ready = 1
         self.send_pos_msg()
 
     def ackCallbak(self, ack_ready):
-        """ @brief check if the motion planner is ready to receive the position of the lego
+        """ @brief check if the motion planner is ready to receive the position of the block
             @param ack_ready (msg): msg from Motion node
         """
 
@@ -139,14 +138,14 @@ class Vision:
             self.send_pos_msg()
             
     def send_pos_msg(self):
-        """ @brief send the position of the lego to motion planner
+        """ @brief send the position of the block to motion planner
         """
         try:
             pos_msg = self.pos_msg_list.pop()
             self.pos_pub.publish(pos_msg)
             print('\nPosition published:\n', pos_msg)
         except IndexError:
-            print('\nFINISH ALL LEGO\n')
+            print('\nFINISH ALL BLOCK\n')
             
 # ---------------------- MAIN ----------------------
 # To use in command:

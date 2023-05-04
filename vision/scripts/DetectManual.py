@@ -2,7 +2,7 @@
 @file DetectManual.py
 @author Anh Tu Duong (anhtu.duong@studenti.unitn.it)
 @brief Defines the class DetectManual.py
-@date 2023-02-19
+@date 2023-05-04
 """
 # ---------------------- IMPORT ----------------------
 import cv2
@@ -10,7 +10,7 @@ import numpy as np
 from pathlib import Path
 import sys
 import os
-from Lego import Lego
+import Block
 
 # ---------------------- GLOBAL CONSTANTS ----------------------
 FILE = Path(__file__).resolve()
@@ -19,7 +19,7 @@ if str(ROOT) not in sys.path:
     sys.path.append(str(ROOT))  # add ROOT to PATH
 ROOT = Path(os.path.relpath(ROOT, Path.cwd()))  # relative
 
-LEGO_NAMES = [  'X1-Y1-Z2',
+BLOCK_NAMES = [  'X1-Y1-Z2',
                 'X1-Y2-Z1',
                 'X1-Y2-Z2',
                 'X1-Y2-Z2-CHAMFER',
@@ -45,9 +45,9 @@ class DetectManual:
         """
 
         self.image_path = image_path
-        self.class_list = LEGO_NAMES
+        self.class_list = BLOCK_NAMES
         self.point_list = []
-        self.lego_list = []
+        self.block_list = []
 
         self.select_points()
 
@@ -73,9 +73,9 @@ class DetectManual:
             y1 = point[1] - 20
             x2 = point[0] + 20
             y2 = point[1] + 20
-            lego = Lego(name, 100, x1, y1, x2, y2,self.image_path)
-            lego.center_point = center_point
-            self.lego_list.append(lego)
+            block = Block(name, 100, x1, y1, x2, y2,self.image_path)
+            block.center_point = center_point
+            self.block_list.append(block)
             
 
     def _on_mouse(self, event, x, y, flags, param):

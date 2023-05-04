@@ -1,8 +1,8 @@
 """!
-@file LegoDetect.py
+@file BlockDetect.py
 @author Anh Tu Duong (anhtu.duong@studenti.unitn.it)
-@brief Defines the class LegoDetect.
-@date 2023-02-17
+@brief Defines the class BlockDetect.
+@date 2023-05-04
 """
 # ---------------------- IMPORT ----------------------
 from pathlib import Path
@@ -16,7 +16,7 @@ from IPython.display import display
 from PIL import Image
 from RegionOfInterest import RegionOfInterest
 from DetectManual import DetectManual
-from Lego import Lego
+import Block
 
 # ---------------------- GLOBAL CONSTANTS ----------------------
 FILE = Path(__file__).resolve()
@@ -31,7 +31,7 @@ WEIGHTS_PATH = os.path.join(VISION_PATH, "weights/best.pt")
 CONFIDENCE = 0.7
 MODEL = torch.hub.load('ultralytics/yolov5', 'custom', WEIGHTS_PATH)
 
-LEGO_NAMES = [  'X1-Y1-Z2',
+block_NAMES = [  'X1-Y1-Z2',
                 'X1-Y2-Z1',
                 'X1-Y2-Z2',
                 'X1-Y2-Z2-CHAMFER',
@@ -45,9 +45,9 @@ LEGO_NAMES = [  'X1-Y1-Z2',
 
 # ---------------------- CLASS ----------------------
 
-class LegoDetect:
+class BlockDetect:
     """
-    @brief This class use custom trained weights and detect lego blocks with YOLOv5
+    @brief This class use custom trained weights and detect blocks with YOLOv5
     """
 
     def __init__(self, img_path):
@@ -59,7 +59,7 @@ class LegoDetect:
         MODEL.multi_label = False
         # MODEL.iou = 0.5
     
-        self.lego_list = []
+        self.block_list = []
         self.detect(img_path)
 
         # Let user choose detect method
@@ -95,12 +95,12 @@ class LegoDetect:
                 choice = '0'
 
     def detect_manual(self, img_path):
-        self.lego_list.clear()
+        self.block_list.clear()
         detectManual = DetectManual(img_path)
-        self.lego_list = detectManual.lego_list
+        self.block_list = detectManual.block_list
         
         # Info
-        print('Detected', len(self.lego_list), 'object(s)\n')
+        print('Detected', len(self.block_list), 'object(s)\n')
         self.show()
 
     def detect_ROI(self, img_path):
@@ -117,7 +117,7 @@ class LegoDetect:
         """ @brief This function pass the image path to the model and calculate bounding boxes for each object
             @param img_path (String): path of input image
         """
-        self.lego_list.clear()
+        self.block_list.clear()
 
         # Detection model
         self.results = MODEL(img_path)
@@ -135,25 +135,25 @@ class LegoDetect:
             y1 = int(bbox['ymin'])
             x2 = int(bbox['xmax'])
             y2 = int(bbox['ymax'])
-            # Add lego to list
-            self.lego_list.append(Lego(name, conf, x1, y1, x2, y2, img_path))
+            # Add block to list
+            self.block_list.append(Block(name, conf, x1, y1, x2, y2, img_path))
 
         # Info
-        print('Detected', len(self.lego_list), 'object(s)\n')
+        print('Detected', len(self.block_list), 'object(s)\n')
         self.show()
 
     def show(self):
-        """ @brief This function show infos of detected legos
+        """ @brief This function show infos of detected blocks
         """
-        for index, lego in enumerate(self.lego_list, start=1):
+        for index, block in enumerate(self.block_list, start=1):
             print(index)
-            lego.show()
+            block.show()
 
 
 # ---------------------- MAIN ----------------------
 # To use in command:
-# python3 LegoDetect.py /path/to/img...
+# python3 BlockDetect.py /path/to/img...
 
 if __name__ == '__main__':
-    legoDetect = LegoDetect(img_origin_path=sys.argv[1])
+    BlockDetect = BlockDetect(img_origin_path=sys.argv[1])
 
