@@ -1,5 +1,6 @@
 """!
-@file Vision.py
+@package vision.scripts.Vision
+@file vision/scripts/Vision.py
 @author Anh Tu Duong (anhtu.duong@studenti.unitn.it)
 @brief Defines the Vision node that communicates with Motion node.
 @date 2023-05-04

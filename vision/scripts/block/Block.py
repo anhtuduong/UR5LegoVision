@@ -1,10 +1,12 @@
 """!
-@file Block.py
+@package vision.scripts.block.Block
+@file vision/scripts/block/Block.py
 @author Anh Tu Duong (anhtu.duong@studenti.unitn.it)
-@brief Defines the class Block.
+@brief Defines the abstract class Block.
 @date 2023-05-04
 """
 # ---------------------- IMPORT ----------------------
+from abc import ABC, abstractmethod
 from IPython.display import display
 from PIL import Image
 
@@ -24,7 +26,9 @@ BLOCK_NAMES = [  'X1-Y1-Z2',
 
 # ---------------------- CLASS ----------------------
 
-class Block:
+# TODO: make abstract class
+
+class Block(ABC):
     """
     @brief This class represents info of detected BLOCK
     """

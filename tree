@@ -1,0 +1,48 @@
+```
+./
+│
+├── logs/
+├── models/
+├── motion/
+│   │
+│   └── src/
+│       ├── motionPlanner.cpp
+│       └── taskManager.cpp
+│
+├── tests/
+│   └── test_logger.py
+│
+└── vision/
+    │
+    ├── dataset/
+    │
+    ├── scripts/
+    │   │
+    │   ├── assembly/
+    │   │
+    │   ├── block/
+    │   │   └── Block.py
+    │   │
+    │   ├── camera/
+    │   │   ├── ZED.py
+    │   │   └── calibration.py
+    │   │
+    │   ├── localization/
+    │   │   ├── BlockDetect.py
+    │   │   ├── BlockLocalization.py
+    │   │   ├── BlockTracking.py
+    │   │   ├── DetectManual.py
+    │   │   ├── PointCloud.py
+    │   │   └── RegionOfInterest.py
+    │   │
+    │   ├── utils/
+    │   │   ├── Logger.py
+    │   │   ├── detect_random.ipynb
+    │   │   ├── detect_single_img.ipynb
+    │   │   └── world_random_generator.py
+    │   │
+    │   └── Vision.py
+    │
+    └── weights/
+        └── best.pt
+```
