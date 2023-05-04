@@ -14,9 +14,9 @@ import numpy as np
 import cv2 as cv
 from IPython.display import display
 from PIL import Image
-from RegionOfInterest import RegionOfInterest
+from UR5BlokVision.vision.scripts.localization.RegionOfInterest import RegionOfInterest
 from DetectManual import DetectManual
-import Block
+import UR5BlokVision.vision.scripts.Block as Block
 
 # ---------------------- GLOBAL CONSTANTS ----------------------
 FILE = Path(__file__).resolve()

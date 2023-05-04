@@ -10,7 +10,7 @@ import numpy as np
 from pathlib import Path
 import sys
 import os
-import Block
+import UR5BlokVision.vision.scripts.Block as Block
 
 # ---------------------- GLOBAL CONSTANTS ----------------------
 FILE = Path(__file__).resolve()
