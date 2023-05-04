@@ -22,13 +22,16 @@ class Logger:
 
     def info(text):
         print("[INFO] " + text)
+        return "[INFO] " + text
 
     def warning(text):
         print("[WARNING] " + text)
+        return "[WARNING] " + text
 
     def error(text):
         print("[ERROR] " + text)
+        return "[ERROR] " + text
     
     def debug(text):
         print("[DEBUG] " + text)
-
+        return "[DEBUG] " + text

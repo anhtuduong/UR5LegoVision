@@ -17,7 +17,7 @@ from sensor_msgs.msg import Image
 import sensor_msgs.point_cloud2 as point_cloud2
 from sensor_msgs.msg import PointCloud2
 from std_msgs.msg import Int32
-import BlockDetect
+from localization.BlockDetect import BlockDetect
 
 # ---------------------- GLOBAL CONSTANTS ----------------------
 FILE = Path(__file__).resolve()
@@ -25,6 +25,7 @@ ROOT = FILE.parents[0]
 if str(ROOT) not in sys.path:
     sys.path.append(str(ROOT))  # add ROOT to PATH
 ROOT = Path(os.path.relpath(ROOT, Path.cwd()))  # relative
+
 IMG_ZED = os.path.abspath(os.path.join(ROOT, "log/img_ZED_cam.png"))
 
 w_R_c = np.matrix([[0, -0.499, 0.866], [-1, 0, 0], [0, -0.866, -0.499]])
