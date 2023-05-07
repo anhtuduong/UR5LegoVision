@@ -59,6 +59,16 @@ class Block(ABC):
         self.point_world = ()
         self.segment = None
 
+    def get_pixels(self):
+        """ @brief Get pixel coordinates of block
+            @return (list): list of pixel coordinates of block
+        """
+        pixels = []
+        for i in range(self.xmin, self.xmax):
+            for j in range(self.ymin, self.ymax):
+                pixels.append((i, j))
+        return pixels
+
     def show(self):
         """ @brief Show block info
         """
