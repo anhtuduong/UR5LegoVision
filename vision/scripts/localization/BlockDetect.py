@@ -30,7 +30,7 @@ from block.Block import Block
 IMG_ROI_PATH = os.path.abspath(os.path.join(ROOT, "logs/img_ROI.png"))
 WEIGHTS_PATH = os.path.abspath(os.path.join(ROOT, "vision/weights/best.pt"))
 CONFIDENCE = 0.7
-MODEL = torch.hub.load('ultralytics/yolov5', 'custom', WEIGHTS_PATH)
+MODEL = torch.hub.load('ultralytics/yolov5', 'custom', WEIGHTS_PATH, force_reload=True)
 
 BLOCK_NAMES = [ 'X1-Y1-Z2',
                 'X1-Y2-Z1',

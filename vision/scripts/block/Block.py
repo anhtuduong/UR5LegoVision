@@ -28,7 +28,7 @@ BLOCK_NAMES = [  'X1-Y1-Z2',
 
 # TODO: make abstract class
 
-class Block(ABC):
+class Block():
     """
     @brief This class represents info of detected BLOCK
     """

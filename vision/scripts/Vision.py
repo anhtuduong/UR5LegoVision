@@ -24,7 +24,7 @@ from camera.ZED import ZED
 from camera.PointCloud import PointCloud
 
 # Global constants
-IMG_ZED_PATH = os.path.abspath(os.path.join(ROOT, "logs/img_ZED_cam.png"))
+IMG_ZED_PATH = os.path.abspath(os.path.join(ROOT, "logs/img.png"))
 
 # ---------------------- CLASS ----------------------
 
@@ -39,13 +39,13 @@ class Vision:
 
         ros.init_node('vision', anonymous=True)
         zed = ZED()
-        img = zed.save_image(IMG_ZED_PATH, zed.get_image())
-        block_detect = BlockDetect(img)
+        zed.save_image(IMG_ZED_PATH)
+        block_detect = BlockDetect(IMG_ZED_PATH)
         block_list = block_detect.get_block_list()
         pc = PointCloud()
 
         for block in block_list:
-            print(pc.get_pointcloud(block.get_pixels()))
+            print('pointcloud:', pc.get_pointcloud(block.get_pixels()))
         
             
 # ---------------------- MAIN ----------------------
