@@ -22,9 +22,11 @@ import numpy as np
 from localization.BlockDetect import BlockDetect
 from camera.ZED import ZED
 from camera.PointCloud import PointCloud
+from scripts.utils.Logger import Logger as log
 
 # Global constants
-IMG_ZED_PATH = os.path.abspath(os.path.join(ROOT, "logs/img.png"))
+IMG_ZED_PATH = os.path.abspath(os.path.join(ROOT, "logs/img_ZED_cam.png"))
+POINT_CLOUD_PATH = os.path.abspath(os.path.join(ROOT, "logs/point_cloud.txt"))
 
 # ---------------------- CLASS ----------------------
 
@@ -39,13 +41,16 @@ class Vision:
 
         ros.init_node('vision', anonymous=True)
         zed = ZED()
-        zed.save_image(IMG_ZED_PATH)
+        zed.save_image(IMG_ZED_PATH, zed.get_image())
         block_detect = BlockDetect(IMG_ZED_PATH)
         block_list = block_detect.get_block_list()
         pc = PointCloud()
 
         for block in block_list:
-            print('pointcloud:', pc.get_pointcloud(block.get_pixels()))
+            # save point cloud to file
+            with open(POINT_CLOUD_PATH, 'w') as f:
+                f.write(str(pc.get_pointcloud(block.get_pixels())))
+            log.debug("Point cloud saved to file: " + POINT_CLOUD_PATH)
         
             
 # ---------------------- MAIN ----------------------

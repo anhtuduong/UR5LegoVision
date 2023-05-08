@@ -84,9 +84,9 @@ class Block():
 
         # Block details
         display(self.img)
-        print(str(self))
+        print(self.info())
 
-    def __str__(self) -> str:
+    def info(self) -> str:
         print('class =', self.name)
         print('id =', self.class_id)
         print('confidence =', '%.2f' %self.confidence)

@@ -13,9 +13,11 @@ import datetime
 # Resolve paths
 FILE = Path(__file__).resolve()
 ROOT = FILE.parents[3]
-VISION_PATH = os.path.abspath(os.path.join(ROOT, "vision"))
-if VISION_PATH not in sys.path:
-    sys.path.append(VISION_PATH)  # add VISION_SCRIPTS_PATH to PATH
+if ROOT not in sys.path:
+    sys.path.append(ROOT)  # add ROOT to PATH
+ROOT = Path(os.path.relpath(ROOT, Path.cwd()))  # relative
+
+# Global constants
 LOG_PATH = os.path.abspath(os.path.join(ROOT, "vision/logs"))
 
 # Class Logger
