@@ -39,7 +39,6 @@ class PointCloud:
         for pixel in pixels:
             for data in point_cloud2.read_points(self.pointcloud_received, field_names=['x','y','z'], skip_nans=True, uvs=[pixel]):
                 point_cloud.append((data[0], data[1], data[2]))
-                point_cloud2.
 
         log.debug('point_cloud returned')
         return point_cloud
