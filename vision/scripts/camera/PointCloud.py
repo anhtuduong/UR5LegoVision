@@ -20,6 +20,7 @@ class PointCloud:
     def __init__(self):
         self.pointcloud_received = None
         self.pointcloud_sub = ros.Subscriber("/ur5/zed_node/point_cloud/cloud_registered", PointCloud2, self.receive_pointcloud, queue_size=1)
+        self.pointcloud_pub = ros.Publisher("/ur5/zed_node/point_cloud/block", PointCloud2, queue_size=1)
         # wait for point cloud to be ready
         ros.sleep(2)
         log.debug('Point cloud initialized')
@@ -42,6 +43,14 @@ class PointCloud:
 
         log.debug('point_cloud returned')
         return point_cloud
+
+    def publish_pointcloud(self, pixels):
+        """ @brief Publish point_cloud to ZED camera
+            @param pixels (list): list of pixel
+        """
+        pc = point_cloud2.create_cloud_xyz32(self.pointcloud_received.header, self.get_pointcloud(pixels))
+        self.pointcloud_pub.publish(pc)
+        log.debug('point_cloud published')
 
 
 if __name__ == '__main__':
