@@ -46,14 +46,11 @@ class Vision:
         block_list = block_detect.get_block_list()
         pc = PointCloud()
 
-        for block in block_list:
-            # # save point cloud to file
-            # with open(POINT_CLOUD_PATH, 'w') as f:
-            #     f.write(str(pc.get_pointcloud(block.get_pixels())))
-            # log.debug("Point cloud saved to file: " + POINT_CLOUD_PATH)
-
-            # publish point cloud to ROS
-            pc.publish_pointcloud(block.get_pixels())
+        while not ros.is_shutdown():
+            for block in block_list:
+                # publish point cloud to ROS
+                pc.publish_pointcloud(block.get_pixels())
+                
         
             
 # ---------------------- MAIN ----------------------
