@@ -4,34 +4,35 @@
 @brief Defines the class BlockDetect.
 @date 2023-05-04
 """
-# ---------------------- IMPORT ----------------------
-from pathlib import Path
-import sys
+
 import os
+import sys
+from pathlib import Path
+
+# Resolve paths
+FILE = Path(__file__).resolve()
+ROOT = FILE.parents[3]
+if str(ROOT) not in sys.path:
+    sys.path.append(str(ROOT))  # add ROOT to PATH
+ROOT = Path(os.path.relpath(ROOT, Path.cwd()))  # relative
+
 import torch
 from matplotlib import pyplot as plt
 import numpy as np
 import cv2 as cv
 from IPython.display import display
 from PIL import Image
-from UR5BlokVision.vision.scripts.localization.RegionOfInterest import RegionOfInterest
+from localization.RegionOfInterest import RegionOfInterest
 from DetectManual import DetectManual
-import UR5BlokVision.vision.scripts.Block as Block
+from block.Block import Block
 
-# ---------------------- GLOBAL CONSTANTS ----------------------
-FILE = Path(__file__).resolve()
-ROOT = FILE.parents[0]
-if str(ROOT) not in sys.path:
-    sys.path.append(str(ROOT))  # add ROOT to PATH
-ROOT = Path(os.path.relpath(ROOT, Path.cwd()))  # relative
-VISION_PATH = os.path.abspath(os.path.join(ROOT, ".."))
-IMG_ROI = os.path.abspath(os.path.join(ROOT, "log/img_ROI.png"))
-
-WEIGHTS_PATH = os.path.join(VISION_PATH, "weights/best.pt")
+# Global constants
+IMG_ROI_PATH = os.path.abspath(os.path.join(ROOT, "logs/img_ROI.png"))
+WEIGHTS_PATH = os.path.abspath(os.path.join(ROOT, "vision/weights/best.pt"))
 CONFIDENCE = 0.7
-MODEL = torch.hub.load('ultralytics/yolov5', 'custom', WEIGHTS_PATH)
+MODEL = torch.hub.load('ultralytics/yolov5', 'custom', WEIGHTS_PATH, force_reload=True)
 
-block_NAMES = [  'X1-Y1-Z2',
+BLOCK_NAMES = [ 'X1-Y1-Z2',
                 'X1-Y2-Z1',
                 'X1-Y2-Z2',
                 'X1-Y2-Z2-CHAMFER',
@@ -148,6 +149,12 @@ class BlockDetect:
         for index, block in enumerate(self.block_list, start=1):
             print(index)
             block.show()
+
+    def get_block_list(self): 
+        """ @brief This function return the list of detected blocks
+            @return block_list (list): list of detected blocks
+        """
+        return self.block_list
 
 
 # ---------------------- MAIN ----------------------
