@@ -23,10 +23,7 @@ from localization.BlockDetect import BlockDetect
 from camera.ZED import ZED
 from camera.PointCloud import PointCloud
 from scripts.utils.Logger import Logger as log
-
-# Global constants
-IMG_ZED_PATH = os.path.abspath(os.path.join(ROOT, "logs/img_ZED_cam.png"))
-POINT_CLOUD_PATH = os.path.abspath(os.path.join(ROOT, "logs/point_cloud.txt"))
+from vision.constants import *
 
 # ---------------------- CLASS ----------------------
 
