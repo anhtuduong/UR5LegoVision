@@ -36,7 +36,8 @@ class Vision:
     """
 
     def __init__(self):
-        """ @brief Class constructor
+        """
+        @brief Class constructor
         """
 
         ros.init_node('vision', anonymous=True)
