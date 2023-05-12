@@ -13,7 +13,7 @@ ROOT = Path(os.path.relpath(ROOT, Path.cwd()))  # relative
 import numpy as np
 import pyvista as pv
 from vision.scripts.utils.Logger import Logger
-from vision.constants import MODEL, PLY_PATH
+from vision.constants import MODEL, PLY_PATH, PLY_FROM_ROS_PATH
 
 # Render point cloud from STL file
 def render_pointcloud_from_stl(stl_path):

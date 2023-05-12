@@ -16,6 +16,13 @@ from sensor_msgs.msg import PointCloud2
 from vision.scripts.utils.Logger import Logger as log
 import pyvista as pv
 import numpy as np
+from vision.constants import *
+
+# Global variables
+w_R_c = np.matrix([[0, -0.499, 0.866], [-1, 0, 0], [0, -0.866, -0.499]])
+x_c = np.array([-0.9, 0.24, -0.35])
+base_offset = np.array([0.5, 0.35, 1.75])
+
 
 class PointCloud:
 
@@ -54,7 +61,7 @@ class PointCloud:
         self.pointcloud_pub.publish(pc)
         log.debug('point_cloud published')
 
-    def save_pointcloud_to_ply(self, point_cloud, output_path):
+    def save_pointcloud_to_ply(point_cloud, output_path):
         """ @brief Save point_cloud to ply file
             @param pointcloud (list): list of point_cloud
             @param output_path (str): output path of ply file
@@ -64,10 +71,56 @@ class PointCloud:
         polydata.save(output_path)
         log.debug(f'point_cloud saved to {output_path}')
 
+    # Clean point cloud that has Z value between 0.8 and 1.0
+    def clean_pointcloud(point_cloud):
+        """ @brief Clean point_cloud that has Z value between 0.8 and 1.0
+            @param point_cloud (list): list of point_cloud
+            @return point_cloud (list): list of point_cloud
+        """
+        point_cloud = np.array(point_cloud)
+        point_cloud = point_cloud[np.where(point_cloud[:, 2] > 0.8)]
+        point_cloud = point_cloud[np.where(point_cloud[:, 2] < 1.0)]
+        return point_cloud
+    
+    # Visualize point cloud from ply file
+    def visualize_pointcloud(ply_path):
+        """ @brief Visualize point_cloud from ply file
+            @param ply_path (str): path to ply file
+        """
+        point_cloud = pv.read(ply_path)
+        point_cloud.plot(scalars=np.arange(point_cloud.n_points), render_points_as_spheres=True, point_size=15)
+
+    # Transform point cloud to world frame
+    def transform_pointcloud(point_cloud):
+        """ @brief Transform point_cloud to world frame
+            @param point_cloud (list): list of point_cloud
+            @return point_cloud (list): list of point_cloud
+        """
+        point_cloud = np.array(point_cloud)
+        for i in range(len(point_cloud)):
+            point_cloud[i] = point_cloud[i].dot(w_R_c.T) + x_c + base_offset
+        
+        log.debug('point_cloud transformed')
+        return point_cloud
+    
+    # Get point cloud from ply file
+    def get_pointcloud_from_ply(ply_path):
+        """ @brief Get point_cloud from ply file
+            @param ply_path (str): path to ply file
+            @return point_cloud (list): list of point_cloud
+        """
+        point_cloud = pv.read(ply_path)
+        point_cloud = np.array(point_cloud.points)
+        log.debug(f'point_cloud returned from {ply_path}')
+        return point_cloud
 
 if __name__ == '__main__':
-    pc = PointCloud()
-    try:
-        ros.spin()
-    except KeyboardInterrupt:
-        print("Shutting down")
+
+    # point_cloud = PointCloud.get_pointcloud_from_ply(PLY_FROM_ROS_PATH)
+    # point_cloud = PointCloud.transform_pointcloud(point_cloud)
+    # PointCloud.save_pointcloud_to_ply(point_cloud, PLY_AFTER_TRANSFORM_PATH)
+    PointCloud.visualize_pointcloud(PLY_AFTER_TRANSFORM_PATH)
+    point_cloud = PointCloud.get_pointcloud_from_ply(PLY_AFTER_TRANSFORM_PATH)
+    point_cloud = PointCloud.clean_pointcloud(point_cloud)
+    PointCloud.save_pointcloud_to_ply(point_cloud, PLY_AFTER_CLEAN_PATH)
+    PointCloud.visualize_pointcloud(PLY_AFTER_CLEAN_PATH)

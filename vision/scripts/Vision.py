@@ -46,6 +46,7 @@ class Vision:
 
         for block in block_list:
             pointcloud = pc.get_pointcloud(block.get_pixels())
+            # pointcloud = pc.clean_pointcloud(pointcloud)
             pc.save_pointcloud_to_ply(pointcloud, PLY_FROM_ROS_PATH)
                 
         
