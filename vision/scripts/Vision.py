@@ -44,10 +44,9 @@ class Vision:
         block_list = block_detect.get_block_list()
         pc = PointCloud()
 
-        while not ros.is_shutdown():
-            for block in block_list:
-                # publish point cloud to ROS
-                pc.publish_pointcloud(block.get_pixels())
+        for block in block_list:
+            pointcloud = pc.get_pointcloud(block.get_pixels())
+            pc.save_pointcloud_to_ply(pointcloud, PLY_FROM_ROS_PATH)
                 
         
             

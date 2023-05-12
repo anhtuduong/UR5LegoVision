@@ -1,0 +1,24 @@
+<!DOCTYPE MeshLabDocument>
+<MeshLabProject>
+ <MeshGroup>
+  <MLMesh filename="point_cloud_from_ros.ply" label="point_cloud_from_ros.ply" visible="1" idInFile="-1">
+   <MLMatrix44>
+1 0 0 0 
+0 1 0 0 
+0 0 1 0 
+0 0 0 1 
+</MLMatrix44>
+   <RenderingOption pointSize="3" pointColor="0 255 59 255" solidColor="192 192 192 255" wireWidth="1" wireColor="38 255 0 255" boxColor="234 234 234 255">000111000000000000000100000001000000001010100000000100111010000111001101</RenderingOption>
+  </MLMesh>
+  <MLMesh filename="point_cloud.ply" label="point_cloud.ply" visible="1" idInFile="-1">
+   <MLMatrix44>
+0.208446 -0.977525 0.0315474 -0.0144975 
+-0.489239 -0.132146 -0.86208 0.106813 
+0.846874 0.164263 -0.505789 0.874378 
+0 0 0 1 
+</MLMatrix44>
+   <RenderingOption pointSize="3" pointColor="255 0 4 255" solidColor="192 192 192 255" wireWidth="1" wireColor="64 64 64 255" boxColor="234 234 234 255">000111000000000000000100000001000000001010100000000100111010000111001101</RenderingOption>
+  </MLMesh>
+ </MeshGroup>
+ <RasterGroup/>
+</MeshLabProject>

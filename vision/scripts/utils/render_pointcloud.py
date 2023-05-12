@@ -12,7 +12,8 @@ ROOT = Path(os.path.relpath(ROOT, Path.cwd()))  # relative
 # Import
 import numpy as np
 import pyvista as pv
-from vision.constants import MODEL
+from vision.scripts.utils.Logger import Logger
+from vision.constants import MODEL, PLY_PATH
 
 # Render point cloud from STL file
 def render_pointcloud_from_stl(stl_path):
@@ -28,9 +29,15 @@ def render_pointcloud_from_stl(stl_path):
 
     # Return the point cloud
     return point_cloud
+
+# Save point cloud to PLY file
+def save_pointcloud_to_ply(point_cloud, ply_path):
+    point_cloud.save(ply_path)
+    Logger.debug(f"Saved point cloud to PLY file: {ply_path}")
     
 
 # Main
 if __name__ == "__main__":
 
-    render_pointcloud_from_stl(MODEL['X1-Y1-Z2'])
+    pointcloud = render_pointcloud_from_stl(MODEL['X1-Y3-Z2-FILLET'])
+    save_pointcloud_to_ply(pointcloud, PLY_PATH)

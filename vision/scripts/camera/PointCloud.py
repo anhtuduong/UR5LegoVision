@@ -14,6 +14,8 @@ import rospy as ros
 import sensor_msgs.point_cloud2 as point_cloud2
 from sensor_msgs.msg import PointCloud2
 from vision.scripts.utils.Logger import Logger as log
+import pyvista as pv
+import numpy as np
 
 class PointCloud:
 
@@ -51,6 +53,16 @@ class PointCloud:
         pc = point_cloud2.create_cloud_xyz32(self.pointcloud_received.header, self.get_pointcloud(pixels))
         self.pointcloud_pub.publish(pc)
         log.debug('point_cloud published')
+
+    def save_pointcloud_to_ply(self, point_cloud, output_path):
+        """ @brief Save point_cloud to ply file
+            @param pointcloud (list): list of point_cloud
+            @param output_path (str): output path of ply file
+        """
+        point_cloud = np.array(point_cloud)
+        polydata = pv.PolyData(point_cloud)
+        polydata.save(output_path)
+        log.debug(f'point_cloud saved to {output_path}')
 
 
 if __name__ == '__main__':
