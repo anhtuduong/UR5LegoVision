@@ -1,0 +1,3 @@
+[submodule "locosim"]
+	path = locosim
+	url = git@github.com:anhtuduong/locosim.git

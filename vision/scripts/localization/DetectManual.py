@@ -5,19 +5,20 @@
 @date 2023-05-04
 """
 # ---------------------- IMPORT ----------------------
-import cv2
-import numpy as np
-from pathlib import Path
-import sys
 import os
-from block.Block import Block
-
-# ---------------------- GLOBAL CONSTANTS ----------------------
+import sys
+from pathlib import Path
 FILE = Path(__file__).resolve()
-ROOT = FILE.parents[0]
+ROOT = FILE.parents[3]
 if str(ROOT) not in sys.path:
     sys.path.append(str(ROOT))  # add ROOT to PATH
 ROOT = Path(os.path.relpath(ROOT, Path.cwd()))  # relative
+
+import cv2
+import numpy as np
+from vision.scripts.block.Block import Block
+
+# ---------------------- GLOBAL CONSTANTS ----------------------
 
 BLOCK_NAMES = [  'X1-Y1-Z2',
                 'X1-Y2-Z1',

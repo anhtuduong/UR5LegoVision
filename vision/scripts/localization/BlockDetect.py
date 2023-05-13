@@ -22,9 +22,9 @@ import numpy as np
 import cv2 as cv
 from IPython.display import display
 from PIL import Image
-from localization.RegionOfInterest import RegionOfInterest
+from vision.scripts.localization.RegionOfInterest import RegionOfInterest
 from DetectManual import DetectManual
-from block.Block import Block
+from vision.scripts.block.Block import Block
 
 # Global constants
 IMG_ROI_PATH = os.path.abspath(os.path.join(ROOT, "logs/img_ROI.png"))
