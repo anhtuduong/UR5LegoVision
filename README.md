@@ -33,10 +33,6 @@ cd ros_ws/src/
 ```bash
 git clone git@github.com:anhtuduong/UR5BlokVision.git
 ```
-Go into that directory you just clone
-```
-git submodule update --init --recursive
-```
 
 ### Compile/Install the code
 Whenever you modify some of the ROS packages (e.g. the ones that contain the xacro fles inside the robot_description folder), you need to install them to be sure they are been updated in the ROS install folder.
@@ -47,7 +43,6 @@ cd ~/ros_ws/
 catkin_make install
 ```
 
-<<<<<<< HEAD
 ### Start the robot simulation
 **Option 1: Run in terminal**
 ```bash
