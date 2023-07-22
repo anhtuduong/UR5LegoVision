@@ -44,11 +44,6 @@ catkin_make install
 ```
 
 ### Start the robot simulation
-**Option 1: Run in terminal**
 ```bash
 python3 -i /ros_ws/src/UR5BlokVision/main.py
 ```
-**Option 2: Run in Pycharm**
-(https://github.com/anhtuduong/locosim#running-the-software-from-python-ide-pycharm)
-**Option 3: Run in VSCode**
-git a
