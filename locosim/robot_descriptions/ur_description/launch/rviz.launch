@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<launch>
+
+  <arg name="gripper" default="true" doc="starts model with gripper"/>
+
+  <include file="$(find ur_description)/launch/upload.launch">
+	  <arg name="gripper" value="$(arg gripper)" />
+  </include>
+  <arg name="robot_name_space" default="ur5"/>
+
+
+  <node name="joint_state_publisher_gui" pkg="joint_state_publisher_gui" type="joint_state_publisher_gui" ns="$(arg robot_name_space)"/>
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" ns="$(arg robot_name_space)"/>
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find ur_description)/rviz/conf.rviz" required="true" />
+</launch>

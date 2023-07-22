@@ -1,0 +1,49 @@
+<?xml version="1.0" ?>
+<sdf version="1.4">
+  <world name="default">
+    <plugin name="ros_link_attacher_plugin" filename="libgazebo_ros_link_attacher.so"/>
+    <physics type='ode'>
+      <gravity>0 0 -9.81</gravity>
+      <!-- max step size has to be a multiple of the desired task rate-->
+      <max_step_size>0.001</max_step_size> 
+      <real_time_factor>1</real_time_factor>
+    </physics>
+    <!-- A global light source -->
+    <include>
+      <uri>model://sun</uri>
+    </include>
+     <gui>
+    <camera name="gzclient_camera">
+      <pose>1. 3.2 2.2 0. 0.4 -1.75</pose>
+    </camera>
+    </gui>
+    <!-- A ground plane -->
+    <include>
+      <uri>model://ground_plane</uri>
+    </include>
+    <include>
+      <name>tavolo</name>
+      <uri>model://tavolo</uri>
+      <pose>0.0 0.0 0.0 0 0 0</pose>
+    </include>
+    
+
+    <include>
+      <name>X1-Y4-Z2</name>
+      <uri>model://X1-Y4-Z2</uri>
+      <pose>0.185 0.557 0.88 0 0 0</pose>
+    </include>
+    <include>
+      <name>X1-Y2-Z2</name>
+      <uri>model://X1-Y2-Z2</uri>
+      <pose>0.185 0.7 0.88 0 0 0</pose>
+    </include>
+    <include>
+      <name>X1-Y1-Z2</name>
+      <uri>model://X1-Y1-Z2</uri>
+      <pose>0.25 0.6 0.88 0 0 0</pose>
+    </include>
+
+
+  </world>
+</sdf>

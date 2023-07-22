@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<package format="2">
+  <name>base_hardware_interface</name>
+  <version>0.0.1</version>
+  <description>Hardware interface for WoLF</description>
+  <maintainer email="gennaro.raiola@gmail.com">Gennaro Raiola</maintainer>
+
+  <license>GNU General Public License v3.0</license>
+
+  <author>Gennaro Raiola</author>
+
+  <buildtool_depend>catkin</buildtool_depend>
+  <depend>roscpp</depend> 
+  <depend>hardware_interface</depend> 
+  <depend>transmission_interface</depend>
+  <depend>urdf</depend>
+  <depend>srdfdom</depend>
+
+  <export>
+    <cpp cflags="-I${prefix}/include"/>
+  </export>
+</package>

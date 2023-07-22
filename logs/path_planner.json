@@ -1,0 +1,248 @@
+[
+    {
+        "type": "move to",
+        "description": "Move to middle",
+        "pose": [
+            0.456,
+            0.619,
+            1.2,
+            0.0,
+            1.0,
+            0.0,
+            0.0
+        ]
+    },
+    {
+        "type": "move to",
+        "description": "Move above X1-Y4-Z2",
+        "pose": [
+            0.185,
+            0.557,
+            1.1,
+            0.0,
+            1.0,
+            0.0,
+            0.0
+        ]
+    },
+    {
+        "type": "move to",
+        "description": "Move above X1-Y4-Z2",
+        "pose": [
+            0.185,
+            0.557,
+            1.1,
+            0.7071055,
+            -0.7071081,
+            9e-07,
+            9e-07
+        ]
+    },
+    {
+        "type": "move gripper",
+        "description": "Open gripper",
+        "diameter": 50
+    },
+    {
+        "type": "move to",
+        "description": "Move down to X1-Y4-Z2",
+        "pose": [
+            0.185,
+            0.557,
+            0.91,
+            0.7071055,
+            -0.7071081,
+            9e-07,
+            9e-07
+        ]
+    },
+    {
+        "type": "move gripper",
+        "description": "Grasp X1-Y4-Z2",
+        "diameter": 29
+    },
+    {
+        "type": "move to",
+        "description": "Pick up X1-Y4-Z2",
+        "pose": [
+            0.185,
+            0.557,
+            1.0,
+            0.7071055,
+            -0.7071081,
+            9e-07,
+            9e-07
+        ]
+    },
+    {
+        "type": "move to",
+        "description": "Move to middle",
+        "pose": [
+            0.456,
+            0.619,
+            1.2,
+            0.0,
+            1.0,
+            0.0,
+            0.0
+        ]
+    },
+    {
+        "type": "move to",
+        "description": "Move above the place position",
+        "pose": [
+            0.72,
+            0.557,
+            1.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0
+        ]
+    },
+    {
+        "type": "move to",
+        "description": "Move down to the place position",
+        "pose": [
+            0.72,
+            0.557,
+            0.911,
+            0.0,
+            1.0,
+            0.0,
+            0.0
+        ]
+    },
+    {
+        "type": "move gripper",
+        "description": "Release X1-Y4-Z2",
+        "diameter": 60
+    },
+    {
+        "type": "move to",
+        "description": "Move above X1-Y4-Z2",
+        "pose": [
+            0.72,
+            0.557,
+            1.2,
+            0.0,
+            1.0,
+            0.0,
+            0.0
+        ]
+    },
+    {
+        "type": "move to",
+        "description": "Move to middle",
+        "pose": [
+            0.456,
+            0.619,
+            1.2,
+            0.0,
+            1.0,
+            0.0,
+            0.0
+        ]
+    },
+    {
+        "type": "move to",
+        "description": "Move above X1-Y2-Z2",
+        "pose": [
+            0.185,
+            0.7,
+            1.0,
+            0.7071055,
+            -0.7071081,
+            9e-07,
+            9e-07
+        ]
+    },
+    {
+        "type": "move to",
+        "description": "Move down to X1-Y2-Z2",
+        "pose": [
+            0.185,
+            0.7,
+            0.905,
+            0.7071055,
+            -0.7071081,
+            9e-07,
+            9e-07
+        ]
+    },
+    {
+        "type": "move gripper",
+        "description": "Grasp X1-Y2-Z2",
+        "diameter": 29
+    },
+    {
+        "type": "move to",
+        "description": "Pick up X1-Y2-Z2",
+        "pose": [
+            0.185,
+            0.7,
+            1.0,
+            0.7071055,
+            -0.7071081,
+            9e-07,
+            9e-07
+        ]
+    },
+    {
+        "type": "move to",
+        "description": "Move to middle",
+        "pose": [
+            0.456,
+            0.619,
+            1.2,
+            0.0,
+            1.0,
+            0.0,
+            0.0
+        ]
+    },
+    {
+        "type": "move to",
+        "description": "Move above the place position",
+        "pose": [
+            0.72,
+            0.557,
+            1.1,
+            0.0,
+            1.0,
+            0.0,
+            0.0
+        ]
+    },
+    {
+        "type": "move to",
+        "description": "Move down to the place position",
+        "pose": [
+            0.72,
+            0.557,
+            0.942,
+            0.0,
+            1.0,
+            0.0,
+            0.0
+        ]
+    },
+    {
+        "type": "move gripper",
+        "description": "Release X1-Y2-Z2",
+        "diameter": 60
+    },
+    {
+        "type": "move to",
+        "description": "Move above X1-Y2-Z2",
+        "pose": [
+            0.72,
+            0.557,
+            1.2,
+            0.0,
+            1.0,
+            0.0,
+            0.0
+        ]
+    }
+]

@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<launch>
+  <!--ur5e parameters files -->
+  <arg name="joint_limit_params" default="$(find ur_description)/config/ur5e/joint_limits.yaml"/>
+  <arg name="kinematics_params" default="$(find ur_description)/config/ur5e/default_kinematics.yaml"/>
+  <arg name="physical_params" default="$(find ur_description)/config/ur5e/physical_parameters.yaml"/>
+  <arg name="visual_params" default="$(find ur_description)/config/ur5e/visual_parameters.yaml"/>
+  <!--common parameters -->
+  <arg name="transmission_hw_interface" default="hardware_interface/EffortJointInterface" />
+  <arg name="safety_limits" default="false" doc="If True, enable the safety limits controller"/>
+  <arg name="safety_pos_margin" default="0.15" doc="The lower/upper limits in the safety controller" />
+  <arg name="safety_k_position" default="20" doc="Used to set k position in the safety controller" />
+
+  <arg name="gazebo" default="true" doc="starts model that works with gazebo" />
+  <arg name="gripper" default="false" doc="starts model with gripper activated"/>
+  <arg name="soft_gripper" default="true" doc="starts model with soft gripper"/>
+  <arg name="robot_name_space" default="ur5"/>
+
+
+  <param name="$(arg robot_name_space)/robot_description" command="$(find xacro)/xacro '$(find ur_description)/urdf/ur5.urdf.xacro'
+    joint_limit_params:=$(arg joint_limit_params)
+    kinematics_params:=$(arg kinematics_params)
+    physical_params:=$(arg physical_params)
+    visual_params:=$(arg visual_params)
+    transmission_hw_interface:=$(arg transmission_hw_interface)
+    safety_limits:=$(arg safety_limits)
+    safety_pos_margin:=$(arg safety_pos_margin)
+    safety_k_position:=$(arg safety_k_position)
+    gazebo:=$(arg gazebo)
+    gripper:=$(arg gripper)
+    soft_gripper:=$(arg soft_gripper)"	
+    />
+
+    <param name="robot_semantic_description" command="$(find xacro)/xacro --inorder '$(find ur_description)/urdf/ur5.srdf.xacro'" />
+    
+     <!-- load soft_gripper state into param server-->
+     <param name="soft_gripper" type="bool" value="$(arg soft_gripper)" />
+
+</launch>

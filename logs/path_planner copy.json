@@ -1,0 +1,241 @@
+[
+    {
+        "type": "move to",
+        "description": "Move above the object 1",
+        "pose": {
+            "position": {
+                "x": 0.1,
+                "y": 0.4539,
+                "z": 1.045
+            },
+            "orientation": {
+                "x": 0.0,
+                "y": 1.0,
+                "z": 0.0,
+                "w": 0.0
+            }
+        }
+    },
+    {
+        "type": "move to",
+        "description": "Move down to the object 1",
+        "pose": {
+            "position": {
+                "x": 0.1,
+                "y": 0.4539,
+                "z": 0.945
+            },
+            "orientation": {
+                "x": 0.0,
+                "y": 1.0,
+                "z": 0.0,
+                "w": 0.0
+            }
+        }
+    },
+    {
+        "type": "move gripper",
+        "description": "Grasp the object 1",
+        "diameter": 40
+    },
+    {
+        "type": "move to",
+        "description": "Pick up the object 1",
+        "pose": {
+            "position": {
+                "x": 0.1,
+                "y": 0.4539,
+                "z": 1.045
+            },
+            "orientation": {
+                "x": 0.0,
+                "y": 1.0,
+                "z": 0.0,
+                "w": 0.0
+            }
+        }
+    },
+    {
+        "type": "move joints",
+        "description": "Move to middle",
+        "joints": [-1.24, -1.12, -2.64, -0.98, -1.59, -0.27]
+    },
+    {
+        "type": "move to",
+        "description": "Move above the place position",
+        "pose": {
+            "position": {
+                "x": 0.72,
+                "y": 0.5570,
+                "z": 1.045
+            },
+            "orientation": {
+                "x": 0.0,
+                "y": 1.0,
+                "z": 0.0,
+                "w": 0.0
+            }
+        }
+    },
+    {
+        "type": "move to",
+        "description": "Move down to the place position",
+        "pose": {
+            "position": {
+                "x": 0.72,
+                "y": 0.5570,
+                "z": 0.945
+            },
+            "orientation": {
+                "x": 0.0,
+                "y": 1.0,
+                "z": 0.0,
+                "w": 0.0
+            }
+        }
+    },
+    {
+        "type": "move gripper",
+        "description": "Release the object 1",
+        "diameter": 70
+    },
+    {
+        "type": "move to",
+        "description": "Move above the place position",
+        "pose": {
+            "position": {
+                "x": 0.72,
+                "y": 0.5570,
+                "z": 1.045
+            },
+            "orientation": {
+                "x": 0.0,
+                "y": 1.0,
+                "z": 0.0,
+                "w": 0.0
+            }
+        }
+    },
+    {
+        "type": "move joints",
+        "description": "Move to middle",
+        "joints": [-1.24, -1.12, -2.64, -0.98, -1.59, -0.27]
+    },
+    {
+        "type": "move to",
+        "description": "Move above the object 2",
+        "pose": {
+            "position": {
+                "x": 0.1850,
+                "y": 0.6,
+                "z": 1.045
+            },
+            "orientation": {
+                "x": 0.0,
+                "y": 1.0,
+                "z": 0.0,
+                "w": 0.0
+            }
+        }
+    },
+    {
+        "type": "move to",
+        "description": "Move down to the object 2",
+        "pose": {
+            "position": {
+                "x": 0.1850,
+                "y": 0.6,
+                "z": 0.945
+            },
+            "orientation": {
+                "x": 0.0,
+                "y": 1.0,
+                "z": 0.0,
+                "w": 0.0
+            }
+        }
+    },
+    {
+        "type": "move gripper",
+        "description": "Grasp the object 2",
+        "diameter": 40
+    },
+    {
+        "type": "move to",
+        "description": "Pick up the object 2",
+        "pose": {
+            "position": {
+                "x": 0.1850,
+                "y": 0.6,
+                "z": 1.045
+            },
+            "orientation": {
+                "x": 0.0,
+                "y": 1.0,
+                "z": 0.0,
+                "w": 0.0
+            }
+        }
+    },
+    {
+        "type": "move joints",
+        "description": "Move to middle",
+        "joints": [-1.24, -1.12, -2.64, -0.98, -1.59, -0.27]
+    },
+    {
+        "type": "move to",
+        "description": "Move above the place position",
+        "pose": {
+            "position": {
+                "x": 0.72,
+                "y": 0.5570,
+                "z": 1.045
+            },
+            "orientation": {
+                "x": 0.0,
+                "y": 1.0,
+                "z": 0.0,
+                "w": 0.0
+            }
+        }
+    },
+    {
+        "type": "move to",
+        "description": "Move down to the place position",
+        "pose": {
+            "position": {
+                "x": 0.72,
+                "y": 0.5570,
+                "z": 0.9858
+            },
+            "orientation": {
+                "x": 0.0,
+                "y": 1.0,
+                "z": 0.0,
+                "w": 0.0
+            }
+        }
+    },
+    {
+        "type": "move gripper",
+        "description": "Release the object 2",
+        "diameter": 70
+    },
+    {
+        "type": "move to",
+        "description": "Move above the place position 2",
+        "pose": {
+            "position": {
+                "x": 0.72,
+                "y": 0.5570,
+                "z": 1.1
+            },
+            "orientation": {
+                "x": 0.0,
+                "y": 1.0,
+                "z": 0.0,
+                "w": 0.0
+            }
+        }
+    }
+]
