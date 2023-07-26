@@ -74,25 +74,6 @@ def talker(p):
                                         conf.robot_params[p.robot_name]['q_0'],
                                         rate)
 
-    
-
-
-    # test Vision
-    # vision = Vision()
-    # block_list = vision.get_block_list()
-    # for block in block_list:
-    #     pose_target = Pose()
-    #     pose_target.position.x = block.position[0]
-    #     pose_target.position.y = block.position[1]
-    #     pose_target.position.z = block.position[2]
-    #     p.move_to(pose_target, p.dt, p.v_des, rate)
-
-    # launch task planner node (implement the state machine)
-
-    # launch motion node (takes care of moving the end-effector, remember to add a rate.sleep!)
-
-    # launch vision node (visual pipelines to detect object, made with service call)
-
     # control loop (runs every dt seconds)
     while not ros.is_shutdown():
         p.updateKinematicsDynamics()
