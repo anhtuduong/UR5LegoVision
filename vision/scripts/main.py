@@ -17,11 +17,11 @@ if str(ROOT) not in sys.path:
 
 import rospy as ros
 import numpy as np
-from vision.scripts.camera.ZED import ZED
-from vision.scripts.localization.PointCloudRegistration import PointCloudRegistration
-from vision.scripts.camera.PointCloudService import PointCloudService
+from camera.ZED import ZED
+from localization.PointCloudRegistration import PointCloudRegistration
+from localization.BlockDetect import BlockDetect
+from camera.PointCloudService import PointCloudService
 from utils_ur5.TransformationUtils import TransformationUtils
-from vision.scripts.localization.BlockDetect import BlockDetect
 from utils_ur5.Logger import Logger as log
 from constants import *
 

@@ -6,29 +6,21 @@
 """
 # ---------------------- IMPORT ----------------------
 import os
-<<<<<<< HEAD:vision/scripts/localization/DetectManual.py
 import sys
 from pathlib import Path
-=======
-import Block
-
-# ---------------------- GLOBAL CONSTANTS ----------------------
->>>>>>> change name:vision/scripts/DetectManual.py
 FILE = Path(__file__).resolve()
 ROOT = FILE.parents[3]
 if str(ROOT) not in sys.path:
     sys.path.append(str(ROOT))  # add ROOT to PATH
 ROOT = Path(os.path.relpath(ROOT, Path.cwd()))  # relative
 
-<<<<<<< HEAD:vision/scripts/localization/DetectManual.py
+from block.Block import Block
 import cv2
 import numpy as np
 from vision.scripts.block.Block import Block
 
 # ---------------------- GLOBAL CONSTANTS ----------------------
 
-=======
->>>>>>> change name:vision/scripts/DetectManual.py
 BLOCK_NAMES = [  'X1-Y1-Z2',
                 'X1-Y2-Z1',
                 'X1-Y2-Z2',

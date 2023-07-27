@@ -24,11 +24,7 @@ from IPython.display import display
 from PIL import Image
 from vision.scripts.localization.RegionOfInterest import RegionOfInterest
 from DetectManual import DetectManual
-<<<<<<< HEAD:vision/scripts/localization/BlockDetect.py
 from vision.scripts.block.Block import Block
-=======
-import Block
->>>>>>> change name:vision/scripts/BlockDetect.py
 
 # Global constants
 IMG_ROI_PATH = os.path.abspath(os.path.join(ROOT, "logs/img_ROI.png"))
@@ -36,11 +32,7 @@ WEIGHTS_PATH = os.path.abspath(os.path.join(ROOT, "vision/weights/best.pt"))
 CONFIDENCE = 0.7
 MODEL = torch.hub.load('ultralytics/yolov5', 'custom', WEIGHTS_PATH, force_reload=True)
 
-<<<<<<< HEAD:vision/scripts/localization/BlockDetect.py
 BLOCK_NAMES = [ 'X1-Y1-Z2',
-=======
-block_NAMES = [  'X1-Y1-Z2',
->>>>>>> change name:vision/scripts/BlockDetect.py
                 'X1-Y2-Z1',
                 'X1-Y2-Z2',
                 'X1-Y2-Z2-CHAMFER',
@@ -157,15 +149,12 @@ class BlockDetect:
         for index, block in enumerate(self.block_list, start=1):
             print(index)
             block.show()
-<<<<<<< HEAD:vision/scripts/localization/BlockDetect.py
 
     def get_block_list(self): 
         """ @brief This function return the list of detected blocks
             @return block_list (list): list of detected blocks
         """
         return self.block_list
-=======
->>>>>>> change name:vision/scripts/BlockDetect.py
 
 
 # ---------------------- MAIN ----------------------

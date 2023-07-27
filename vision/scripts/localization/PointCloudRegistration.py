@@ -17,13 +17,13 @@ SOURCE_PATH = MODEL['X1-Y3-Z2-FILLET']['pointcloud_file']
 TARGET_PATH = PLY_AFTER_CLEAN_PATH
 
 # Import
-import open3d as o3d
 import numpy as np
 from scipy.spatial.transform import Rotation
 from vision.scripts.camera.PointCloudService import PointCloudService
 from utils_ur5.Logger import Logger as log
 from utils_ur5.TimeExecution import TimeExecution
 from utils_ur5.TransformationUtils import TransformationUtils
+import open3d as o3d
 
 class PointCloudRegistration:
     """

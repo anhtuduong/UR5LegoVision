@@ -1,29 +1,15 @@
 """!
-<<<<<<< HEAD:vision/scripts/block/Block.py
 @package vision.scripts.block.Block
 @file vision/scripts/block/Block.py
 @author Anh Tu Duong (anhtu.duong@studenti.unitn.it)
 @brief Defines the abstract class Block.
-=======
-@file Block.py
-@author Anh Tu Duong (anhtu.duong@studenti.unitn.it)
-@brief Defines the class Block.
->>>>>>> change name:vision/scripts/Block.py
 @date 2023-05-04
 """
 # ---------------------- IMPORT ----------------------
 from abc import ABC, abstractmethod
 from IPython.display import display
 from PIL import Image
-<<<<<<< HEAD:vision/scripts/block/Block.py
 from constants import BLOCK_NAMES
-
-# ---------------------- CLASS ----------------------
-
-# TODO: make abstract class
-
-class Block():
-=======
 
 # ---------------------- GLOBAL CONSTANTS ----------------------
 
@@ -42,7 +28,6 @@ BLOCK_NAMES = [  'X1-Y1-Z2',
 # ---------------------- CLASS ----------------------
 
 class Block:
->>>>>>> change name:vision/scripts/Block.py
     """
     @brief This class represents info of detected BLOCK
     """
@@ -69,11 +54,13 @@ class Block:
         self.img_source = Image.open(self.img_source_path)
         self.center_point = (int((x1+x2)/2), int((y1+y2)/2))
         self.center_point_uv = (self.img_source.width - self.center_point[0], self.center_point[1])
-<<<<<<< HEAD:vision/scripts/block/Block.py
         self.point_cloud = None
         self.transformation_matrix = None
         self.position = None
         self.rotation = None
+        self.point_cloud = ()
+        self.point_world = ()
+        self.segment = None
 
     def get_name(self):
         """ @brief Get block name
@@ -90,11 +77,6 @@ class Block:
             for j in range(self.ymin, self.ymax):
                 pixels.append((i, j))
         return pixels
-=======
-        self.point_cloud = ()
-        self.point_world = ()
-        self.segment = None
->>>>>>> change name:vision/scripts/Block.py
 
     def show(self):
         """ @brief Show block info
@@ -111,15 +93,9 @@ class Block:
 
         # Block details
         display(self.img)
-<<<<<<< HEAD:vision/scripts/block/Block.py
-        print(self.info())
-
-    def info(self) -> str:
-=======
         print(str(self))
 
     def __str__(self) -> str:
->>>>>>> change name:vision/scripts/Block.py
         print('class =', self.name)
         print('id =', self.class_id)
         print('confidence =', '%.2f' %self.confidence)

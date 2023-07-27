@@ -13,7 +13,7 @@ import rospy as ros
 from sensor_msgs.msg import Image
 from cv_bridge import CvBridge, CvBridgeError
 import cv2 as cv
-from utilities.Logger import Logger as log
+from utils_ur5.Logger import Logger as log
 
 class ZED:
 
