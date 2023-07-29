@@ -1,22 +1,21 @@
 <p align='center'>
-    <h1 align="center">UR5BlokVision</h1>
+    <h1 align="center">Vision-Based Lego Detection, Localization, and Assembly
+Using UR5 Robot</h1>
     <p align="center">
-    Robotic project at the University of Trento A.Y. 2022/2023
+    Robotic project at University of Trento A.Y. 2022/2023
     </p>
     <p align='center'>
-    Developed by:<br>
-    Duong Anh Tu <br>
+    Anh Tu Duong<br>
+    anhtu.duong@studenti.unitn.it
     </p>   
 </p>
 
-# Table of Contents
+## Table of Contents
 
 - [Project Description](#project-description)
-    - [Vision](#vision)
-    - [Motion](#motion)
-    - [Planning](#planning)
-- [Project Structure](#project-structure)
 - [Installation](#installation)
+- [Run UR5BlokVision](#run-ur5blokvision)
+- [Conclusion](#conclusion)
 
 
 # Project Description
@@ -42,7 +41,7 @@ To set up the UR5BlokVision project, follow these steps:
 
 ## 1. Install locosim:
 
-Locosim is a didactic framework to learn/test basic controllers schemes on quadruped robots (HyQ/Solo/Aliengo/Go1 are supported) and manipulators (UR5 is supported). Locosim in this project has been customized to cater to specific needs and requirements. For the original Locosim framework, please refer to the following [link](https://github.com/mfocchi/locosim)!
+Locosim is a didactic framework to learn/test basic controllers schemes on quadruped robots (HyQ/Solo/Aliengo/Go1 are supported) and manipulators (UR5 is supported). Locosim in this project has been customized to cater to specific needs and requirements. For the original Locosim framework, please refer to the following [link!](https://github.com/mfocchi/locosim)
 
 Locosim is composed by a **roscontrol** node called **ros_impedance_controller** (written in C++) that interfaces a python ROS node (where the controller is written) to a Gazebo simulator.
 
