@@ -4,6 +4,9 @@ Using UR5 Robot</h1>
     <p align="center">
     Robotic project at University of Trento A.Y. 2022/2023
     </p>
+    <div align="center">
+        <img src="docs/images/logo_disi.png" width=300>
+    </div>
     <p align='center'>
     Anh Tu Duong<br>
     anhtu.duong@studenti.unitn.it
