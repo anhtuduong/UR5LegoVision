@@ -10,6 +10,16 @@ Using UR5 Robot</h1>
     </p>   
 </p>
 
+<div style="text-align: center;">
+
+![Ubuntu](https://img.shields.io/badge/Ubuntu-E95420?style=for-the-badge&logo=ubuntu&logoColor=white)
+![ROS](https://img.shields.io/badge/ros-%230A0FF9.svg?style=for-the-badge&logo=ros&logoColor=white)
+![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
+![C++](https://img.shields.io/badge/c++-%2300599C.svg?style=for-the-badge&logo=c%2B%2B&logoColor=white)
+![PyTorch](https://img.shields.io/badge/PyTorch-%23EE4C2C.svg?style=for-the-badge&logo=PyTorch&logoColor=white)
+
+</div>
+
 ## Table of Contents
 
 - [Project Description](#project-description)
@@ -49,13 +59,13 @@ Locosim is composed by a **roscontrol** node called **ros_impedance_controller**
 
 Locosim is compatible with Ubuntu 16/18/20. The installation instructions have been generalized accordingly. You need replace four strings (PYTHON_PREFIX, PYTHON_VERSION, PIP_PREFIX, ROS_VERSION) with the appropriate values according to your operating systems as follows:
 
-| **Ubuntu 16**:               | Ubuntu 18:                   | **Ubuntu 20**:               |
+| **Ubuntu 20**:               | Ubuntu 18:                   | **Ubuntu 16**:               |
 | ---------------------------- | ---------------------------- | ---------------------------- |
-| PYTHON_PREFIX = python       | PYTHON_PREFIX = python3      | PYTHON_PREFIX = python3      |
-| PYTHON_VERSION = 2.7         | PYTHON_VERSION = 3.5         | PYTHON_VERSION = 3.8         |
-| ROBOTPKG_PYTHON_VERSION=py27 | ROBOTPKG_PYTHON_VERSION=py35 | ROBOTPKG_PYTHON_VERSION=py38 |
-| PIP_PREFIX = pip             | PIP_PREFIX = pip3            | PIP_PREFIX = pip3            |
-| ROS_VERSION = kinetic        | ROS_VERSION = bionic         | ROS_VERSION = noetic         |
+| PYTHON_PREFIX = python3      | PYTHON_PREFIX = python3      | PYTHON_PREFIX = python       |
+| PYTHON_VERSION = 3.8         | PYTHON_VERSION = 3.5         | PYTHON_VERSION = 2.7         |
+| ROBOTPKG_PYTHON_VERSION=py38 | ROBOTPKG_PYTHON_VERSION=py35 | ROBOTPKG_PYTHON_VERSION=py27 |
+| PIP_PREFIX = pip3            | PIP_PREFIX = pip3            | PIP_PREFIX = pip             |
+| ROS_VERSION = noetic         | ROS_VERSION = bionic         | ROS_VERSION = kinetic        |
 
 **NOTE:** ROS is no longer supported on Ubuntu 22 (only ROS2) hence is not possible to install Locosim on Ubuntu 22.
 
@@ -345,3 +355,5 @@ This code will start `motion` node and for now it will execute the robot command
 The UR5BlokVision project has made significant progress in implementing the Vision and Motion components, enabling the robot to detect and manipulate "lego-like" Mega Bloks autonomously. The Planning component remains to be developed, and addressing the challenges in planning and error handling will be crucial to achieving a fully autonomous Lego block assembly system.
 
 For more detailed technical information and results, refer to the [report](https://github.com/anhtuduong/UR5BlokVision/blob/main/docs/report.pdf) that will be provided upon completion of the Planning component. The project demonstrates the successful application of vision-based robotics in pick-and-place tasks, showcasing the potential for real-world applications of similar autonomous systems.
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
