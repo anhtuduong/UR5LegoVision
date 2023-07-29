@@ -1,0 +1,3 @@
+[submodule "gazebo_ros_link_attacher"]
+	path = gazebo_ros_link_attacher
+	url = git@github.com:pal-robotics/gazebo_ros_link_attacher.git

@@ -278,6 +278,15 @@ Now you can clone the repository inside the ROS workspace you just created:
 git clone git@github.com:anhtuduong/UR5BlokVision.git
 ```
 
+Update submodules:
+
+```
+cd ~/ros_ws/src/UR5BlokVision
+```
+```
+git submodule update --init --recursive
+```
+
 #### Compile/Install the code
 
 ```
