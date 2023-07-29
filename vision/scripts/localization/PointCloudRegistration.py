@@ -8,7 +8,6 @@ FILE = Path(__file__).resolve()
 ROOT = FILE.parents[3]
 if str(ROOT) not in sys.path:
     sys.path.append(str(ROOT))  # add ROOT to PATH
-ROOT = Path(os.path.relpath(ROOT, Path.cwd()))  # relative
 
 # Constants
 from constants import *
@@ -19,11 +18,11 @@ TARGET_PATH = PLY_AFTER_CLEAN_PATH
 # Import
 import numpy as np
 from scipy.spatial.transform import Rotation
-from vision.scripts.camera.PointCloudService import PointCloudService
 from utils_ur5.Logger import Logger as log
+import open3d as o3d
+from vision.scripts.camera.PointCloudService import PointCloudService
 from utils_ur5.TimeExecution import TimeExecution
 from utils_ur5.TransformationUtils import TransformationUtils
-import open3d as o3d
 
 class PointCloudRegistration:
     """

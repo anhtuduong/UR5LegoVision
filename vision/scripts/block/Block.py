@@ -9,7 +9,6 @@
 from abc import ABC, abstractmethod
 from IPython.display import display
 from PIL import Image
-from constants import BLOCK_NAMES
 
 # ---------------------- GLOBAL CONSTANTS ----------------------
 
@@ -93,17 +92,7 @@ class Block:
 
         # Block details
         display(self.img)
-        print(str(self))
-
-    def __str__(self) -> str:
-        print('class =', self.name)
-        print('id =', self.class_id)
-        print('confidence =', '%.2f' %self.confidence)
-        # print('center_point =', self.center_point)
-        # print('center_point_uv =', self.center_point_uv)
-        # print('--> point cloud =', self.point_cloud)
-        # print('--> point world =', self.point_world)
-        print()
+        
 
     def set_point_cloud(self, point_cloud):
         self.point_cloud = point_cloud

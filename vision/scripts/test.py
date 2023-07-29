@@ -10,3 +10,5 @@ if str(ROOT) not in sys.path:
 
 def test_root():
     return ROOT
+
+print("Current working directory:", os.getcwd())

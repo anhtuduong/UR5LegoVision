@@ -12,14 +12,13 @@ from pathlib import Path
 FILE = Path(__file__).resolve()
 ROOT = FILE.parents[1]
 if ROOT not in sys.path:
-    sys.path.append(ROOT)  # add ROOT to PATH
-ROOT = Path(os.path.relpath(ROOT, Path.cwd()))  # relative
+    sys.path.append(str(ROOT))  # add ROOT to PATH
 
 # Import
 from termcolor import colored
 
 # Global constants
-LOG_PATH = os.path.abspath(os.path.join(ROOT, "vision/logs"))
+# LOG_PATH = os.path.abspath(os.path.join(ROOT, "vision/logs"))
 
 # Class Logger
 class Logger:
