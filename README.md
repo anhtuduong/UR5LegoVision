@@ -336,7 +336,7 @@ python3 -i /ros_ws/src/UR5BlokVision/motion/main.py
 ```
 This code will start `motion` node and for now it will execute the robot command APIs, which can be found in `/ros_ws/src/UR5BlokVision/motion/action_list.py`.
 
-**Working in progress:** Develop `planning` node.
+**Work in progress:** Develop `planning` node.
 
 ---
 
