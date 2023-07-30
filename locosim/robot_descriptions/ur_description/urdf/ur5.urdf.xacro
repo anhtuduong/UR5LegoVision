@@ -42,7 +42,7 @@ safety_k_position="$(arg safety_k_position)"/>
 	<xacro:include filename="$(find gripper_description)/urdf/soft_gripper.macro.xacro" />
 	<xacro:soft_gripper 
 	transmission_hw_interface="$(arg transmission_hw_interface)"			
-	grasp_plugin="$(arg gripper)"			
+  grasp_plugin="false"
 	gripper_active="$(arg gripper)"/>
 </xacro:if>
 

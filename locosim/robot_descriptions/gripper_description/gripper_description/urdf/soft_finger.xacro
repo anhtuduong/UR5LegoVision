@@ -98,17 +98,21 @@
 	 <gazebo reference="${name}_link">
 	    <collision name="${name}_link_collision">
 	      <surface>
-		<friction>
-		  <torsional>
-		    <coefficient>10.0</coefficient>
-		    <use_patch_radius>true</use_patch_radius>
-		    <patch_radius>0.05</patch_radius>
-		  </torsional>
-		</friction>
-		<contact>
-		  <poissons_ratio>0.5</poissons_ratio>
-		  <elastic_modulus>1e8</elastic_modulus>
-		</contact>
+			<friction>
+			<torsional>
+				<coefficient>10.0</coefficient>
+				<use_patch_radius>true</use_patch_radius>
+				<patch_radius>0.05</patch_radius>
+			</torsional>
+			</friction>
+			<contact>
+				<ode>
+					<max_vel>0.0</max_vel>
+					<min_depth>0.0</min_depth>
+				</ode>
+				<poissons_ratio>0.5</poissons_ratio>
+				<elastic_modulus>1e8</elastic_modulus>
+			</contact>
 	      </surface>
 	    </collision>
 	    <mu1>10</mu1>

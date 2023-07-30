@@ -10,7 +10,6 @@ if str(ROOT) not in sys.path:
 
 import rospy as ros
 import moveit_commander
-# from moveit_commander import FKUtils
 import geometry_msgs.msg
 from moveit_msgs.msg import Constraints, OrientationConstraint
 
@@ -46,9 +45,6 @@ class MoveitControl():
             log.error(f"Target type {type(target)} not supported")
             return None
 
-        # Apply orientation constraint
-        # self.apply_orientation_constraint()
-
         # Plan
         success, plan, planning_time, _ = self.group.plan()
 
@@ -60,22 +56,3 @@ class MoveitControl():
             log.error(f'PLANNING FAILED in {planning_time} seconds')
             return None
 
-    def apply_orientation_constraint(self):
-        """
-        """
-        # Define the orientation constraint
-        orientation_constraint = Constraints()
-        orientation_constraint.orientation_constraints.append(OrientationConstraint())
-        orientation_constraint.orientation_constraints[0].link_name = self.group.get_end_effector_link()
-        orientation_constraint.orientation_constraints[0].header.frame_id = self.group.get_planning_frame()
-        orientation_constraint.orientation_constraints[0].orientation.x = 0.0
-        orientation_constraint.orientation_constraints[0].orientation.y = 1.0
-        orientation_constraint.orientation_constraints[0].orientation.z = 0.0
-        orientation_constraint.orientation_constraints[0].orientation.w = 0.0
-        orientation_constraint.orientation_constraints[0].absolute_x_axis_tolerance = 0.1
-        orientation_constraint.orientation_constraints[0].absolute_y_axis_tolerance = 0.1
-        orientation_constraint.orientation_constraints[0].absolute_z_axis_tolerance = 0.1
-        orientation_constraint.orientation_constraints[0].weight = 0.1
-
-        # Apply the orientation constraint
-        self.group.set_path_constraints(orientation_constraint)

@@ -68,22 +68,26 @@ class Command():
             'model_name': model_name
         }
     
-    def attach_models(description='', model_name_1='', model_name_2=''):
+    def attach_models(description='', model_name_1='', link_name_1='', model_name_2='', link_name_2=''):
         """
         """
         return {
             'type': 'attach models',
             'description': description,
             'model_name_1': model_name_1,
-            'model_name_2': model_name_2
+            'link_name_1': link_name_1,
+            'model_name_2': model_name_2,
+            'link_name_2': link_name_2
         }
     
-    def detach_models(description='', model_name_1='', model_name_2=''):
+    def detach_models(description='', model_name_1='', link_name_1='', model_name_2='', link_name_2=''):
         """
         """
         return {
             'type': 'detach models',
             'description': description,
             'model_name_1': model_name_1,
-            'model_name_2': model_name_2
+            'link_name_1': link_name_1,
+            'model_name_2': model_name_2,
+            'link_name_2': link_name_2
         }

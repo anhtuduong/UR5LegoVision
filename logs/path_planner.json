@@ -14,20 +14,7 @@
     },
     {
         "type": "move to",
-        "description": "Move above X1-Y4-Z2",
-        "pose": [
-            0.185,
-            0.557,
-            1.1,
-            0.0,
-            1.0,
-            0.0,
-            0.0
-        ]
-    },
-    {
-        "type": "move to",
-        "description": "Move above X1-Y4-Z2",
+        "description": "Move above X1-Y1-Z2 1",
         "pose": [
             0.185,
             0.557,
@@ -45,7 +32,7 @@
     },
     {
         "type": "move to",
-        "description": "Move down to X1-Y4-Z2",
+        "description": "Move down to X1-Y1-Z2 1",
         "pose": [
             0.185,
             0.557,
@@ -58,12 +45,20 @@
     },
     {
         "type": "move gripper",
-        "description": "Grasp X1-Y4-Z2",
-        "diameter": 29
+        "description": "Grasp X1-Y1-Z2 1",
+        "diameter": 35
+    },
+    {
+        "type": "attach models",
+        "description": "Attach X1-Y1-Z2 1 to gripper",
+        "model_name_1": "X1-Y1-Z2 1",
+        "link_name_1": "link",
+        "model_name_2": "ur5",
+        "link_name_2": "hand_1_link"
     },
     {
         "type": "move to",
-        "description": "Pick up X1-Y4-Z2",
+        "description": "Pick up X1-Y1-Z2 1",
         "pose": [
             0.185,
             0.557,
@@ -114,13 +109,21 @@
         ]
     },
     {
+        "type": "detach models",
+        "description": "Detach X1-Y1-Z2 1 from gripper",
+        "model_name_1": "X1-Y1-Z2 1",
+        "link_name_1": "link",
+        "model_name_2": "ur5",
+        "link_name_2": "hand_1_link"
+    },
+    {
         "type": "move gripper",
-        "description": "Release X1-Y4-Z2",
+        "description": "Release X1-Y1-Z2 1",
         "diameter": 60
     },
     {
         "type": "move to",
-        "description": "Move above X1-Y4-Z2",
+        "description": "Move above X1-Y1-Z2 1",
         "pose": [
             0.72,
             0.557,
@@ -146,11 +149,11 @@
     },
     {
         "type": "move to",
-        "description": "Move above X1-Y2-Z2",
+        "description": "Move above X1-Y1-Z2 2",
         "pose": [
             0.185,
             0.7,
-            1.0,
+            1.1,
             0.7071055,
             -0.7071081,
             9e-07,
@@ -159,11 +162,11 @@
     },
     {
         "type": "move to",
-        "description": "Move down to X1-Y2-Z2",
+        "description": "Move down to X1-Y1-Z2 2",
         "pose": [
             0.185,
             0.7,
-            0.905,
+            0.91,
             0.7071055,
             -0.7071081,
             9e-07,
@@ -172,12 +175,20 @@
     },
     {
         "type": "move gripper",
-        "description": "Grasp X1-Y2-Z2",
-        "diameter": 29
+        "description": "Grasp X1-Y1-Z2 2",
+        "diameter": 35
+    },
+    {
+        "type": "attach models",
+        "description": "Attach X1-Y1-Z2 2 to gripper",
+        "model_name_1": "X1-Y1-Z2 2",
+        "link_name_1": "link",
+        "model_name_2": "ur5",
+        "link_name_2": "hand_1_link"
     },
     {
         "type": "move to",
-        "description": "Pick up X1-Y2-Z2",
+        "description": "Pick up X1-Y1-Z2 2",
         "pose": [
             0.185,
             0.7,
@@ -220,7 +231,7 @@
         "pose": [
             0.72,
             0.557,
-            0.942,
+            0.9475,
             0.0,
             1.0,
             0.0,
@@ -228,13 +239,21 @@
         ]
     },
     {
+        "type": "detach models",
+        "description": "Detach X1-Y1-Z2 2 from gripper",
+        "model_name_1": "X1-Y1-Z2 2",
+        "link_name_1": "link",
+        "model_name_2": "ur5",
+        "link_name_2": "hand_1_link"
+    },
+    {
         "type": "move gripper",
-        "description": "Release X1-Y2-Z2",
+        "description": "Release X1-Y1-Z2 2",
         "diameter": 60
     },
     {
         "type": "move to",
-        "description": "Move above X1-Y2-Z2",
+        "description": "Move above X1-Y1-Z2 2",
         "pose": [
             0.72,
             0.557,

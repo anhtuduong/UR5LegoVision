@@ -29,20 +29,15 @@
     
 
     <include>
-      <name>X1-Y4-Z2</name>
-      <uri>model://X1-Y4-Z2</uri>
+      <name>X1-Y1-Z2 1</name>
+      <uri>model://X1-Y1-Z2</uri>
       <pose>0.185 0.557 0.88 0 0 0</pose>
     </include>
     <include>
-      <name>X1-Y2-Z2</name>
-      <uri>model://X1-Y2-Z2</uri>
+      <name>X1-Y1-Z2 2</name>
+      <uri>model://X1-Y1-Z2</uri>
       <pose>0.185 0.7 0.88 0 0 0</pose>
     </include>
-    <!-- <include>
-      <name>X1-Y1-Z2</name>
-      <uri>model://X1-Y1-Z2</uri>
-      <pose>0.25 0.6 0.88 0 0 0</pose>
-    </include> -->
 
 
   </world>

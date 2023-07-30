@@ -161,9 +161,9 @@ class Motion():
             elif action['type'] == 'delete model':
                 gazebo_command.delete_model(action['model_name'])
             elif action['type'] == 'attach models':
-                gazebo_command.attach_models(action['model_name_1'], action['model_name_2'])
-            elif action['type'] == 'dettach models':
-                gazebo_command.dettach_models(action['model_name_1'], action['model_name_2'])
+                gazebo_command.attach_models(action['model_name_1'], action['link_name_1'], action['model_name_2'], action['link_name_2'])
+            elif action['type'] == 'detach models':
+                gazebo_command.dettach_models(action['model_name_1'], action['link_name_1'], action['model_name_2'], action['link_name_2'])
 
         
 

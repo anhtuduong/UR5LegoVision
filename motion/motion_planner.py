@@ -84,14 +84,18 @@ class MotionPlanner():
                 self.action_list.append({'type': item['type'],
                                          'description': item['description'],
                                          'model_name_1': item['model_name_1'],
-                                         'model_name_2': item['model_name_2']})
+                                         'link_name_1': item['link_name_1'],
+                                         'model_name_2': item['model_name_2'],
+                                         'link_name_2': item['link_name_2']})
                 
             # Type detach models
             if item['type'] == 'detach models':
                 self.action_list.append({'type': item['type'],
                                          'description': item['description'],
                                          'model_name_1': item['model_name_1'],
-                                         'model_name_2': item['model_name_2']})
+                                         'link_name_1': item['link_name_1'],
+                                         'model_name_2': item['model_name_2'],
+                                         'link_name_2': item['link_name_2']})
 
     def to_json(self):
         """

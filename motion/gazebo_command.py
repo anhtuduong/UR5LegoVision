@@ -38,31 +38,31 @@ class GazeboCommand():
         self.attach_proxy = rospy.ServiceProxy('/link_attacher_node/attach', Attach)
         self.detach_proxy = rospy.ServiceProxy('/link_attacher_node/detach', Attach)
 
-    def attach_models(self, model_name_1, model_name_2):
+    def attach_models(self, model_name_1, link_name_1, model_name_2, link_name_2):
         """
         """
         rospy.wait_for_service('/link_attacher_node/attach')
         try:
             req = AttachRequest()
             req.model_name_1 = model_name_1
-            req.link_name_1 = 'link'
+            req.link_name_1 = link_name_1
             req.model_name_2 = model_name_2
-            req.link_name_2 = 'link'
+            req.link_name_2 = link_name_2
             self.attach_proxy(req)
             log.warning(f'Attached {model_name_1} to {model_name_2}')
         except rospy.ServiceException as e:
             log.error(f'Failed to attach {model_name_1} to {model_name_2}: {str(e)}')
 
-    def dettach_models(self, model_name_1, model_name_2):
+    def dettach_models(self, model_name_1, link_name_1, model_name_2, link_name_2):
         """
         """
         rospy.wait_for_service('/link_attacher_node/detach')
         try:
             req = AttachRequest()
             req.model_name_1 = model_name_1
-            req.link_name_1 = 'link'
+            req.link_name_1 = link_name_1
             req.model_name_2 = model_name_2
-            req.link_name_2 = 'link'
+            req.link_name_2 = link_name_2
             self.detach_proxy(req)
             log.warning(f'Detached {model_name_1} from {model_name_2}')
         except rospy.ServiceException as e:
