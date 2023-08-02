@@ -52,7 +52,7 @@
     </collision>
 
     <!-- Back collision -->
-    <collision name="back_collision">
+    <!-- <collision name="back_collision">
       <origin xyz="0.5 -0.02 1.35" rpy="1.57 0 0"/>
       <geometry>
         <box size="1 1.0 0.04"/>
@@ -65,7 +65,7 @@
           </ode>
         </friction>
       </surface>
-    </collision>
+    </collision> -->
 
   </link>
 

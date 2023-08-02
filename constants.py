@@ -20,12 +20,15 @@ PLY_AFTER_TRANSFORM_PATH = os.path.abspath(os.path.join(ROOT, "logs/point_cloud_
 PLY_AFTER_CLEAN_PATH = os.path.abspath(os.path.join(ROOT, "logs/point_cloud_after_clean.ply"))
 PLY_AFTER_ALIGN_PATH = os.path.abspath(os.path.join(ROOT, "logs/point_cloud_after_align.ply"))
 
-# Path planner path
-PLANNER_PATH = os.path.abspath(os.path.join(ROOT, "logs/path_planner.json"))
+# Planner path
+MOTION_PLANNER_PATH = os.path.abspath(os.path.join(ROOT, "logs/motion_planner.json"))
+PLANNING_CONFIG = os.path.abspath(os.path.join(ROOT, "planning/config.json"))
 
 # Robot and simulation constants
 WORLD_NAME = 'lego.world'
 ROBOT_NAME = 'ur5'
+GRIPPER_LINK = 'wrist_3_link'
+LEGO_SCENE = os.path.abspath(os.path.join(ROOT, 'lego_scene.json'))
 URDF_PATH = os.path.abspath(os.path.join(ROOT, 'locosim/robot_urdf/generated_urdf/ur5.urdf'))
 XACRO_PATH = os.path.abspath(os.path.join(ROOT, 'locosim/robot_descriptions/ur_description/urdf/ur5.urdf.xacro'))
 CUSTOM_MODELS_PATH = os.path.abspath(os.path.join(ROOT, 'locosim/ros_impedance_controller/worlds/models'))
@@ -117,3 +120,4 @@ MODEL = {
     }
 }
 
+TABLE_HEIGHT = 0.86992

@@ -61,6 +61,8 @@ class Motion():
         ros.wait_for_service('move_gripper')
         self.move_gripper_srv = ros.ServiceProxy('/ur5/move_gripper', generic_float)
 
+        self.gazebo_command = GazeboCommand()
+
         # Predefined poses
         self.q_pick = conf.robot_params[self.robot_name]['q_pick']
         self.q_middle = conf.robot_params[self.robot_name]['q_middle']
@@ -91,7 +93,7 @@ class Motion():
         req.v_des = self.v_des
 
         # Call the service
-        log.debug_highlight(f'Start movement! {text}')
+        log.debug(f'Start movement! {text}')
         res = self.move_joints_srv(req)
 
         if res.success:
@@ -117,7 +119,7 @@ class Motion():
         req.v_des = self.v_des
 
         # Call the service
-        log.debug_highlight(f'Start movement! {text}')
+        log.debug(f'Start movement! {text}')
         res = self.move_to_srv(req)
 
         if res.success:
@@ -129,7 +131,7 @@ class Motion():
     def move_gripper(self, diameter, text = ''):
         """
         """
-        log.debug_highlight(f'Start gripper')
+        log.debug(f'Start gripper')
         # Create a request object
         request = generic_float._request_class()
         request.data = diameter
@@ -147,7 +149,6 @@ class Motion():
     def run(self, planner: MotionPlanner):
         """
         """
-        gazebo_command = GazeboCommand()
 
         for action in planner.action_list:
             if action['type'] == 'move to':
@@ -157,13 +158,13 @@ class Motion():
             elif action['type'] == 'move gripper':
                 self.move_gripper(action['diameter'], action['description'])
             elif action['type'] == 'spawn model static':
-                gazebo_command.spawn_model_static(action['model_name'], action['is_static'])
+                self.gazebo_command.spawn_model_static(action['model_name'], action['is_static'])
             elif action['type'] == 'delete model':
-                gazebo_command.delete_model(action['model_name'])
+                self.gazebo_command.delete_model(action['model_name'])
             elif action['type'] == 'attach models':
-                gazebo_command.attach_models(action['model_name_1'], action['link_name_1'], action['model_name_2'], action['link_name_2'])
+                self.gazebo_command.attach_models(action['model_name_1'], action['link_name_1'], action['model_name_2'], action['link_name_2'])
             elif action['type'] == 'detach models':
-                gazebo_command.dettach_models(action['model_name_1'], action['link_name_1'], action['model_name_2'], action['link_name_2'])
+                self.gazebo_command.dettach_models(action['model_name_1'], action['link_name_1'], action['model_name_2'], action['link_name_2'])
 
         
 

@@ -9,5 +9,7 @@ controller_list:
       - wrist_2_joint
       - wrist_3_joint
 initial:  # Define initial robot poses per group
-  - group: ur5_arms
-    pose: home
+#  - group: ur5_arms
+#    pose: home
+
+  []

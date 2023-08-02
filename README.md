@@ -31,7 +31,7 @@ Using UR5 Robot</h1>
 # Project Description
 UR5BlokVision is an autonomous robotic project that performs pick-and-place tasks using a UR5 robot arm equipped with a ZED camera for perception. The goal of the project is to achieve autonomous assembly of "lego-like" Mega Bloks by detecting, localizing, and manipulating the blocks using the robot arm.
 
-![demo.gif](logs/demo.gif)
+![demo.gif](docs/demo.gif)
 
 The main components of the project are as follows:
 

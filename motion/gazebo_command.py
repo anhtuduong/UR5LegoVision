@@ -10,8 +10,9 @@ if str(ROOT) not in sys.path:
 
 # Import
 import locosim.robot_control.base_controllers.params as conf
+import json
 from utils_ur5.Logger import Logger as log
-from constants import MODEL
+from constants import MODEL, LEGO_SCENE
 from utils_ur5.xml_utils import *
 
 # ROS
@@ -68,45 +69,53 @@ class GazeboCommand():
         except rospy.ServiceException as e:
             log.error(f'Failed to detach {model_name_1} from {model_name_2}: {str(e)}')
         
-    def spawn_model_static(self, model_name, is_static=True):
-        """
-        """
-        # Get model original name
-        original_model_name = self.get_original_name(model_name)
-        # Get model SDF file
-        sdf_file = MODEL[original_model_name]['sdf_file']
-        # Parse XML file
-        root = parse_xml_file(sdf_file)
-        # Find static element
-        element = find_element(root, 'static')
+    # def spawn_model_static(self, model_name, is_static=True):
+    #     """
+    #     """
+    #     # Get model original name
+    #     original_model_name = self.get_original_name(model_name)
+    #     # Get model SDF file
+    #     sdf_file = MODEL[original_model_name]['sdf_file']
+    #     # Parse XML file
+    #     root = parse_xml_file(sdf_file)
+    #     # Find static element
+    #     element = find_element(root, 'static')
 
-        if is_static:
-            # Make static
-            modify_element(element, '1')
-        else:
-            # Make non static
-            modify_element(element, '0')
+    #     if is_static:
+    #         # Make static
+    #         modify_element(element, '1')
+    #     else:
+    #         # Make non static
+    #         modify_element(element, '0')
         
-        # Get model current pose
-        model_state = self.get_model_state(model_name=model_name)
-        # Spawn modified model in Gazebo
-        new_model_name = model_name + ' static'
-        self.spawn_model(model_name=new_model_name, model_xml=get_xml_content(root), pose=model_state.pose)
+    #     # Get model current pose
+    #     model_state = self.get_model_state(model_name=model_name)
+    #     # Spawn modified model in Gazebo
+    #     new_model_name = model_name + ' static'
+    #     self.spawn_model(model_name=new_model_name, model_xml=get_xml_content(root), pose=model_state.pose)
 
-        if is_static:
-            log.warning(f'Spawned model {model_name} static')
-        else:
-            log.warning(f'Spawned model {model_name} non static')
+    #     if is_static:
+    #         log.warning(f'Spawned model {model_name} static')
+    #     else:
+    #         log.warning(f'Spawned model {model_name} non static')
 
 
-    def spawn_model(self, model_name, model_xml, pose):
+    def spawn_model(self, name, model_name, pose):
         """
         """
         rospy.wait_for_service('/gazebo/spawn_sdf_model')
         try:
-            self.spawn_sdf_model(model_name, model_xml, model_name, pose, "world")
+            # Get model SDF file
+            sdf_file = MODEL[model_name]['sdf_file']
+            # Parse XML file
+            root = parse_xml_file(sdf_file)
+            model_xml = get_xml_content(root)
+
+            self.spawn_sdf_model(name, model_xml, model_name, pose, "world")
+            log.debug(f"Successfully spawned model '{model_name}' in Gazebo")
             rospy.loginfo(f"Successfully spawned model '{model_name}' in Gazebo")
         except rospy.ServiceException as e:
+            log.error(f"Failed to spawn model '{model_name}' in Gazebo: {str(e)}")
             rospy.logerr(f"Failed to spawn model '{model_name}' in Gazebo: {str(e)}")
 
     def delete_model(self, model_name):
@@ -115,8 +124,10 @@ class GazeboCommand():
         rospy.wait_for_service('/gazebo/delete_model')
         try:
             self.delete_model_proxy(model_name)
+            log.warning(f"Successfully deleted model '{model_name}' from Gazebo")
             rospy.loginfo(f"Successfully deleted model '{model_name}' from Gazebo")
         except rospy.ServiceException as e:
+            log.error(f"Failed to delete model '{model_name}' from Gazebo: {str(e)}")
             rospy.logerr(f"Failed to delete model '{model_name}' from Gazebo: {str(e)}")
 
     def set_pose(self, model_name='', pose=None):
@@ -191,10 +202,33 @@ class GazeboCommand():
         """
         return model_name + '_link'
     
+    def set_up_lego_scene(self):
+        """
+        """
+        # Load the JSON content from the file
+        with open(LEGO_SCENE, 'r') as file:
+            json_data = json.load(file)
 
+        # Extract the list of objects
+        for item in json_data:
+            name = item['name']
+            model_name = item['type']
+            pose = Pose()
+            pose.position.x = item['pose']['x']
+            pose.position.y = item['pose']['y']
+            pose.position.z = item['pose']['z']
+            pose.orientation.x = item['pose']['rx']
+            pose.orientation.y = item['pose']['ry']
+            pose.orientation.z = item['pose']['rz']
+
+            # Delete old model
+            self.delete_model(model_name=name)
+
+            # Spawn model
+            self.spawn_model(name=name, model_name=model_name, pose=pose)
 
 
 if __name__ == '__main__':
     gazebo_command = GazeboCommand()
 
-    gazebo_command.attach_models(model_name_1='X1-Y1-Z2 1', model_name_2='X1-Y1-Z2 2')
+    gazebo_command.set_up_lego_scene()

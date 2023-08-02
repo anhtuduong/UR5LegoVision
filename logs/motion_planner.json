@@ -1,0 +1,848 @@
+[
+    {
+        "type": "move gripper",
+        "description": "Open gripper",
+        "diameter": 60
+    },
+    {
+        "type": "move to",
+        "description": "Move to middle",
+        "pose": [
+            0.456,
+            0.619,
+            1.2,
+            0.0,
+            1.0,
+            0.0,
+            0.0
+        ]
+    },
+    {
+        "type": "move to",
+        "description": "Move above X1-Y2-Z2-CHAMFER 1",
+        "pose": [
+            0.19,
+            0.48,
+            1.0,
+            0.7071055,
+            -0.7071081,
+            9e-07,
+            9e-07
+        ]
+    },
+    {
+        "type": "move to",
+        "description": "Move down to X1-Y2-Z2-CHAMFER 1",
+        "pose": [
+            0.19,
+            0.48,
+            0.91,
+            0.7071055,
+            -0.7071081,
+            9e-07,
+            9e-07
+        ]
+    },
+    {
+        "type": "move gripper",
+        "description": "Grasp X1-Y2-Z2-CHAMFER 1",
+        "diameter": 35
+    },
+    {
+        "type": "attach models",
+        "description": "Attach X1-Y2-Z2-CHAMFER 1 to gripper",
+        "model_name_1": "X1-Y2-Z2-CHAMFER 1",
+        "link_name_1": "link",
+        "model_name_2": "ur5",
+        "link_name_2": "wrist_3_link"
+    },
+    {
+        "type": "move to",
+        "description": "Pick up X1-Y2-Z2-CHAMFER 1",
+        "pose": [
+            0.19,
+            0.48,
+            1.1,
+            0.7071055,
+            -0.7071081,
+            9e-07,
+            9e-07
+        ]
+    },
+    {
+        "type": "move to",
+        "description": "Move to middle",
+        "pose": [
+            0.456,
+            0.619,
+            1.2,
+            0.0,
+            1.0,
+            0.0,
+            0.0
+        ]
+    },
+    {
+        "type": "move to",
+        "description": "Move above the place position",
+        "pose": [
+            0.663671,
+            0.7,
+            1.0,
+            -1.0,
+            0.0,
+            0.0,
+            0.0
+        ]
+    },
+    {
+        "type": "move to",
+        "description": "Move down to the place position",
+        "pose": [
+            0.663671,
+            0.7,
+            0.91,
+            -1.0,
+            0.0,
+            0.0,
+            0.0
+        ]
+    },
+    {
+        "type": "attach models",
+        "description": "Attach X1-Y2-Z2-CHAMFER 1 to table",
+        "model_name_1": "X1-Y2-Z2-CHAMFER 1",
+        "link_name_1": "link",
+        "model_name_2": "tavolo",
+        "link_name_2": "link"
+    },
+    {
+        "type": "detach models",
+        "description": "Detach X1-Y2-Z2-CHAMFER 1 from gripper",
+        "model_name_1": "X1-Y2-Z2-CHAMFER 1",
+        "link_name_1": "link",
+        "model_name_2": "ur5",
+        "link_name_2": "wrist_3_link"
+    },
+    {
+        "type": "move gripper",
+        "description": "Release X1-Y2-Z2-CHAMFER 1",
+        "diameter": 60
+    },
+    {
+        "type": "move to",
+        "description": "Move above X1-Y2-Z2-CHAMFER 1",
+        "pose": [
+            0.663671,
+            0.7,
+            1.1,
+            -1.0,
+            0.0,
+            0.0,
+            0.0
+        ]
+    },
+    {
+        "type": "move to",
+        "description": "Move to middle",
+        "pose": [
+            0.456,
+            0.619,
+            1.2,
+            0.0,
+            1.0,
+            0.0,
+            0.0
+        ]
+    },
+    {
+        "type": "move to",
+        "description": "Move above X1-Y2-Z2-CHAMFER 2",
+        "pose": [
+            0.26,
+            0.63,
+            1.0,
+            0.7071055,
+            -0.7071081,
+            9e-07,
+            9e-07
+        ]
+    },
+    {
+        "type": "move to",
+        "description": "Move down to X1-Y2-Z2-CHAMFER 2",
+        "pose": [
+            0.26,
+            0.63,
+            0.91,
+            0.7071055,
+            -0.7071081,
+            9e-07,
+            9e-07
+        ]
+    },
+    {
+        "type": "move gripper",
+        "description": "Grasp X1-Y2-Z2-CHAMFER 2",
+        "diameter": 35
+    },
+    {
+        "type": "attach models",
+        "description": "Attach X1-Y2-Z2-CHAMFER 2 to gripper",
+        "model_name_1": "X1-Y2-Z2-CHAMFER 2",
+        "link_name_1": "link",
+        "model_name_2": "ur5",
+        "link_name_2": "wrist_3_link"
+    },
+    {
+        "type": "move to",
+        "description": "Pick up X1-Y2-Z2-CHAMFER 2",
+        "pose": [
+            0.26,
+            0.63,
+            1.1,
+            0.7071055,
+            -0.7071081,
+            9e-07,
+            9e-07
+        ]
+    },
+    {
+        "type": "move to",
+        "description": "Move to middle",
+        "pose": [
+            0.456,
+            0.619,
+            1.2,
+            0.0,
+            1.0,
+            0.0,
+            0.0
+        ]
+    },
+    {
+        "type": "move to",
+        "description": "Move above the place position",
+        "pose": [
+            0.536209,
+            0.7,
+            1.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0
+        ]
+    },
+    {
+        "type": "move to",
+        "description": "Move down to the place position",
+        "pose": [
+            0.536209,
+            0.7,
+            0.91,
+            0.0,
+            1.0,
+            0.0,
+            0.0
+        ]
+    },
+    {
+        "type": "attach models",
+        "description": "Attach X1-Y2-Z2-CHAMFER 2 to table",
+        "model_name_1": "X1-Y2-Z2-CHAMFER 2",
+        "link_name_1": "link",
+        "model_name_2": "tavolo",
+        "link_name_2": "link"
+    },
+    {
+        "type": "detach models",
+        "description": "Detach X1-Y2-Z2-CHAMFER 2 from gripper",
+        "model_name_1": "X1-Y2-Z2-CHAMFER 2",
+        "link_name_1": "link",
+        "model_name_2": "ur5",
+        "link_name_2": "wrist_3_link"
+    },
+    {
+        "type": "move gripper",
+        "description": "Release X1-Y2-Z2-CHAMFER 2",
+        "diameter": 60
+    },
+    {
+        "type": "move to",
+        "description": "Move above X1-Y2-Z2-CHAMFER 2",
+        "pose": [
+            0.536209,
+            0.7,
+            1.1,
+            0.0,
+            1.0,
+            0.0,
+            0.0
+        ]
+    },
+    {
+        "type": "move to",
+        "description": "Move to middle",
+        "pose": [
+            0.456,
+            0.619,
+            1.2,
+            0.0,
+            1.0,
+            0.0,
+            0.0
+        ]
+    },
+    {
+        "type": "move to",
+        "description": "Move above X1-Y2-Z2",
+        "pose": [
+            0.09,
+            0.51,
+            1.0,
+            0.7071055,
+            -0.7071081,
+            9e-07,
+            9e-07
+        ]
+    },
+    {
+        "type": "move to",
+        "description": "Move down to X1-Y2-Z2",
+        "pose": [
+            0.09,
+            0.51,
+            0.91,
+            0.7071055,
+            -0.7071081,
+            9e-07,
+            9e-07
+        ]
+    },
+    {
+        "type": "move gripper",
+        "description": "Grasp X1-Y2-Z2",
+        "diameter": 35
+    },
+    {
+        "type": "attach models",
+        "description": "Attach X1-Y2-Z2 to gripper",
+        "model_name_1": "X1-Y2-Z2",
+        "link_name_1": "link",
+        "model_name_2": "ur5",
+        "link_name_2": "wrist_3_link"
+    },
+    {
+        "type": "move to",
+        "description": "Pick up X1-Y2-Z2",
+        "pose": [
+            0.26,
+            0.63,
+            1.1,
+            0.7071055,
+            -0.7071081,
+            9e-07,
+            9e-07
+        ]
+    },
+    {
+        "type": "move to",
+        "description": "Move to middle",
+        "pose": [
+            0.456,
+            0.619,
+            1.2,
+            0.0,
+            1.0,
+            0.0,
+            0.0
+        ]
+    },
+    {
+        "type": "move to",
+        "description": "Move above the place position",
+        "pose": [
+            0.599847,
+            0.7,
+            1.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0
+        ]
+    },
+    {
+        "type": "move to",
+        "description": "Move down to the place position",
+        "pose": [
+            0.599847,
+            0.7,
+            0.91,
+            0.0,
+            1.0,
+            0.0,
+            0.0
+        ]
+    },
+    {
+        "type": "attach models",
+        "description": "Attach X1-Y2-Z2 to table",
+        "model_name_1": "X1-Y2-Z2",
+        "link_name_1": "link",
+        "model_name_2": "tavolo",
+        "link_name_2": "link"
+    },
+    {
+        "type": "detach models",
+        "description": "Detach X1-Y2-Z2 from gripper",
+        "model_name_1": "X1-Y2-Z2",
+        "link_name_1": "link",
+        "model_name_2": "ur5",
+        "link_name_2": "wrist_3_link"
+    },
+    {
+        "type": "move gripper",
+        "description": "Release X1-Y2-Z2",
+        "diameter": 60
+    },
+    {
+        "type": "move to",
+        "description": "Move above X1-Y2-Z2",
+        "pose": [
+            0.599847,
+            0.7,
+            1.1,
+            0.0,
+            1.0,
+            0.0,
+            0.0
+        ]
+    },
+    {
+        "type": "move to",
+        "description": "Move to middle",
+        "pose": [
+            0.456,
+            0.619,
+            1.2,
+            0.0,
+            1.0,
+            0.0,
+            0.0
+        ]
+    },
+    {
+        "type": "move to",
+        "description": "Move above X1-Y4-Z2",
+        "pose": [
+            0.09,
+            0.69,
+            1.0,
+            0.7071055,
+            -0.7071081,
+            9e-07,
+            9e-07
+        ]
+    },
+    {
+        "type": "move to",
+        "description": "Move down to X1-Y4-Z2",
+        "pose": [
+            0.09,
+            0.69,
+            0.91,
+            0.7071055,
+            -0.7071081,
+            9e-07,
+            9e-07
+        ]
+    },
+    {
+        "type": "move gripper",
+        "description": "Grasp X1-Y4-Z2",
+        "diameter": 35
+    },
+    {
+        "type": "attach models",
+        "description": "Attach X1-Y4-Z2 to gripper",
+        "model_name_1": "X1-Y4-Z2",
+        "link_name_1": "link",
+        "model_name_2": "ur5",
+        "link_name_2": "wrist_3_link"
+    },
+    {
+        "type": "move to",
+        "description": "Pick up X1-Y4-Z2",
+        "pose": [
+            0.09,
+            0.69,
+            1.1,
+            0.7071055,
+            -0.7071081,
+            9e-07,
+            9e-07
+        ]
+    },
+    {
+        "type": "move to",
+        "description": "Move to middle",
+        "pose": [
+            0.456,
+            0.619,
+            1.2,
+            0.0,
+            1.0,
+            0.0,
+            0.0
+        ]
+    },
+    {
+        "type": "move to",
+        "description": "Move above the place position",
+        "pose": [
+            0.6,
+            0.7,
+            1.0,
+            0.0,
+            1.0,
+            0.0,
+            0.0
+        ]
+    },
+    {
+        "type": "move to",
+        "description": "Move down to the place position",
+        "pose": [
+            0.6,
+            0.7,
+            0.9483,
+            0.0,
+            1.0,
+            0.0,
+            0.0
+        ]
+    },
+    {
+        "type": "attach models",
+        "description": "Attach X1-Y4-Z2 to table",
+        "model_name_1": "X1-Y4-Z2",
+        "link_name_1": "link",
+        "model_name_2": "tavolo",
+        "link_name_2": "link"
+    },
+    {
+        "type": "detach models",
+        "description": "Detach X1-Y4-Z2 from gripper",
+        "model_name_1": "X1-Y4-Z2",
+        "link_name_1": "link",
+        "model_name_2": "ur5",
+        "link_name_2": "wrist_3_link"
+    },
+    {
+        "type": "move gripper",
+        "description": "Release X1-Y4-Z2",
+        "diameter": 60
+    },
+    {
+        "type": "move to",
+        "description": "Move above X1-Y4-Z2",
+        "pose": [
+            0.6,
+            0.7,
+            1.1,
+            0.0,
+            1.0,
+            0.0,
+            0.0
+        ]
+    },
+    {
+        "type": "move to",
+        "description": "Move to middle",
+        "pose": [
+            0.456,
+            0.619,
+            1.2,
+            0.0,
+            1.0,
+            0.0,
+            0.0
+        ]
+    },
+    {
+        "type": "move to",
+        "description": "Move above X1-Y2-Z2-TWINFILLET",
+        "pose": [
+            0.19,
+            0.71,
+            1.0,
+            0.7071055,
+            -0.7071081,
+            9e-07,
+            9e-07
+        ]
+    },
+    {
+        "type": "move to",
+        "description": "Move down to X1-Y2-Z2-TWINFILLET",
+        "pose": [
+            0.19,
+            0.71,
+            0.91,
+            0.7071055,
+            -0.7071081,
+            9e-07,
+            9e-07
+        ]
+    },
+    {
+        "type": "move gripper",
+        "description": "Grasp X1-Y2-Z2-TWINFILLET",
+        "diameter": 35
+    },
+    {
+        "type": "attach models",
+        "description": "Attach X1-Y2-Z2-TWINFILLET to gripper",
+        "model_name_1": "X1-Y2-Z2-TWINFILLET",
+        "link_name_1": "link",
+        "model_name_2": "ur5",
+        "link_name_2": "wrist_3_link"
+    },
+    {
+        "type": "move to",
+        "description": "Pick up X1-Y2-Z2-TWINFILLET",
+        "pose": [
+            0.19,
+            0.71,
+            1.1,
+            0.7071055,
+            -0.7071081,
+            9e-07,
+            9e-07
+        ]
+    },
+    {
+        "type": "move to",
+        "description": "Move to middle",
+        "pose": [
+            0.456,
+            0.619,
+            1.2,
+            0.0,
+            1.0,
+            0.0,
+            0.0
+        ]
+    },
+    {
+        "type": "move to",
+        "description": "Move above the place position",
+        "pose": [
+            0.6,
+            0.7,
+            1.03,
+            0.0,
+            1.0,
+            0.0,
+            0.0
+        ]
+    },
+    {
+        "type": "move to",
+        "description": "Move down to the place position",
+        "pose": [
+            0.6,
+            0.7,
+            0.9863,
+            0.0,
+            1.0,
+            0.0,
+            0.0
+        ]
+    },
+    {
+        "type": "attach models",
+        "description": "Attach X1-Y2-Z2-TWINFILLET to table",
+        "model_name_1": "X1-Y2-Z2-TWINFILLET",
+        "link_name_1": "link",
+        "model_name_2": "tavolo",
+        "link_name_2": "link"
+    },
+    {
+        "type": "detach models",
+        "description": "Detach X1-Y2-Z2-TWINFILLET from gripper",
+        "model_name_1": "X1-Y2-Z2-TWINFILLET",
+        "link_name_1": "link",
+        "model_name_2": "ur5",
+        "link_name_2": "wrist_3_link"
+    },
+    {
+        "type": "move gripper",
+        "description": "Release X1-Y2-Z2-TWINFILLET",
+        "diameter": 60
+    },
+    {
+        "type": "move to",
+        "description": "Move above X1-Y2-Z2-TWINFILLET",
+        "pose": [
+            0.6,
+            0.7,
+            1.1,
+            0.0,
+            1.0,
+            0.0,
+            0.0
+        ]
+    },
+    {
+        "type": "move to",
+        "description": "Move to middle",
+        "pose": [
+            0.456,
+            0.619,
+            1.2,
+            0.0,
+            1.0,
+            0.0,
+            0.0
+        ]
+    },
+    {
+        "type": "move to",
+        "description": "Move above X1-Y1-Z2",
+        "pose": [
+            0.16,
+            0.58,
+            1.0,
+            0.7071055,
+            -0.7071081,
+            9e-07,
+            9e-07
+        ]
+    },
+    {
+        "type": "move to",
+        "description": "Move down to X1-Y1-Z2",
+        "pose": [
+            0.16,
+            0.58,
+            0.91,
+            0.7071055,
+            -0.7071081,
+            9e-07,
+            9e-07
+        ]
+    },
+    {
+        "type": "move gripper",
+        "description": "Grasp X1-Y1-Z2",
+        "diameter": 35
+    },
+    {
+        "type": "attach models",
+        "description": "Attach X1-Y1-Z2 to gripper",
+        "model_name_1": "X1-Y1-Z2",
+        "link_name_1": "link",
+        "model_name_2": "ur5",
+        "link_name_2": "wrist_3_link"
+    },
+    {
+        "type": "move to",
+        "description": "Pick up X1-Y1-Z2",
+        "pose": [
+            0.16,
+            0.58,
+            1.1,
+            0.7071055,
+            -0.7071081,
+            9e-07,
+            9e-07
+        ]
+    },
+    {
+        "type": "move to",
+        "description": "Move to middle",
+        "pose": [
+            0.456,
+            0.619,
+            1.2,
+            0.0,
+            1.0,
+            0.0,
+            0.0
+        ]
+    },
+    {
+        "type": "move to",
+        "description": "Move above the place position",
+        "pose": [
+            0.600155,
+            0.7,
+            1.07,
+            0.0,
+            1.0,
+            0.0,
+            0.0
+        ]
+    },
+    {
+        "type": "move to",
+        "description": "Move down to the place position",
+        "pose": [
+            0.600155,
+            0.7,
+            1.0245,
+            0.0,
+            1.0,
+            0.0,
+            0.0
+        ]
+    },
+    {
+        "type": "attach models",
+        "description": "Attach X1-Y1-Z2 to table",
+        "model_name_1": "X1-Y1-Z2",
+        "link_name_1": "link",
+        "model_name_2": "tavolo",
+        "link_name_2": "link"
+    },
+    {
+        "type": "detach models",
+        "description": "Detach X1-Y1-Z2 from gripper",
+        "model_name_1": "X1-Y1-Z2",
+        "link_name_1": "link",
+        "model_name_2": "ur5",
+        "link_name_2": "wrist_3_link"
+    },
+    {
+        "type": "move gripper",
+        "description": "Release X1-Y1-Z2",
+        "diameter": 60
+    },
+    {
+        "type": "move to",
+        "description": "Move above X1-Y1-Z2",
+        "pose": [
+            0.600155,
+            0.7,
+            1.1,
+            0.0,
+            1.0,
+            0.0,
+            0.0
+        ]
+    },
+    {
+        "type": "move to",
+        "description": "Move to middle",
+        "pose": [
+            0.456,
+            0.619,
+            1.2,
+            0.0,
+            1.0,
+            0.0,
+            0.0
+        ]
+    }
+]

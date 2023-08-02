@@ -30,6 +30,14 @@
             <geometry>
                 <box size="1 0.8 0.04" />
             </geometry>
+            <surface>
+                <friction>
+                    <ode>
+                        <mu>10</mu>
+                        <mu2>10</mu2>
+                    </ode>
+                </friction>
+            </surface>
         </collision>
         <!-- Box collision -->
         <collision name="box_collision">
@@ -37,6 +45,14 @@
             <geometry>
                 <box size="1 0.15 0.15" />
             </geometry>
+            <surface>
+                <friction>
+                    <ode>
+                        <mu>10</mu>
+                        <mu2>10</mu2>
+                    </ode>
+                </friction>
+            </surface>
         </collision>
         <!-- Back collision -->
         <collision name="back_collision">
@@ -44,6 +60,14 @@
             <geometry>
                 <box size="1 1.0 0.04" />
             </geometry>
+            <surface>
+                <friction>
+                    <ode>
+                        <mu>10</mu>
+                        <mu2>10</mu2>
+                    </ode>
+                </friction>
+            </surface>
         </collision>
         <inertial>
             <mass value="0.1" />
@@ -881,6 +905,7 @@
         <parent link="world" />
         <child link="base_link" />
         <origin rpy="0 0 0" xyz="0.5 0.35 1.75" />
+        <!-- <origin xyz="0 0 0" rpy="0 0 0"/> -->
     </joint>
     <!--
     Attach the Gazebo model to Gazebo's world frame.
