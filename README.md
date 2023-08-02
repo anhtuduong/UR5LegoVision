@@ -5,7 +5,7 @@ Using UR5 Robot</h1>
     Robotic project at University of Trento
     </p>
     <p align='center'>
-    <b>Anh Tu Duong</b><br>
+    Anh Tu Duong<br>
     anhtu.duong@studenti.unitn.it
     </p>   
 </p>
