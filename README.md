@@ -2,10 +2,10 @@
     <h1 align="center">Vision-Based Lego Detection, Localization, and Assembly
 Using UR5 Robot</h1>
     <p align="center">
-    Robotic project at University of Trento A.Y. 2022/2023
+    Robotic project at University of Trento
     </p>
     <p align='center'>
-    Anh Tu Duong<br>
+    <b>Anh Tu Duong</b><br>
     anhtu.duong@studenti.unitn.it
     </p>   
 </p>
