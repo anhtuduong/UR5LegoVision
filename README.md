@@ -287,6 +287,11 @@ cd ~/ros_ws/src/UR5BlokVision
 git submodule update --init --recursive
 ```
 
+Install requirements:
+```
+pip install -r requirements.txt
+```
+
 #### Compile/Install the code
 
 ```
