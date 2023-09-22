@@ -68,36 +68,6 @@ class GazeboCommand():
             log.warning(f'Detached {model_name_1} from {model_name_2}')
         except rospy.ServiceException as e:
             log.error(f'Failed to detach {model_name_1} from {model_name_2}: {str(e)}')
-        
-    # def spawn_model_static(self, model_name, is_static=True):
-    #     """
-    #     """
-    #     # Get model original name
-    #     original_model_name = self.get_original_name(model_name)
-    #     # Get model SDF file
-    #     sdf_file = MODEL[original_model_name]['sdf_file']
-    #     # Parse XML file
-    #     root = parse_xml_file(sdf_file)
-    #     # Find static element
-    #     element = find_element(root, 'static')
-
-    #     if is_static:
-    #         # Make static
-    #         modify_element(element, '1')
-    #     else:
-    #         # Make non static
-    #         modify_element(element, '0')
-        
-    #     # Get model current pose
-    #     model_state = self.get_model_state(model_name=model_name)
-    #     # Spawn modified model in Gazebo
-    #     new_model_name = model_name + ' static'
-    #     self.spawn_model(model_name=new_model_name, model_xml=get_xml_content(root), pose=model_state.pose)
-
-    #     if is_static:
-    #         log.warning(f'Spawned model {model_name} static')
-    #     else:
-    #         log.warning(f'Spawned model {model_name} non static')
 
 
     def spawn_model(self, name, model_name, pose):

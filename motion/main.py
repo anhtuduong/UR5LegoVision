@@ -157,10 +157,6 @@ class Motion():
                 self.move_joints(action['joints'], action['description'])
             elif action['type'] == 'move gripper':
                 self.move_gripper(action['diameter'], action['description'])
-            elif action['type'] == 'spawn model static':
-                self.gazebo_command.spawn_model_static(action['model_name'], action['is_static'])
-            elif action['type'] == 'delete model':
-                self.gazebo_command.delete_model(action['model_name'])
             elif action['type'] == 'attach models':
                 self.gazebo_command.attach_models(action['model_name_1'], action['link_name_1'], action['model_name_2'], action['link_name_2'])
             elif action['type'] == 'detach models':

@@ -68,19 +68,6 @@ class MotionPlanner():
                                          'description': item['description'],
                                          'diameter': item['diameter']})
                 
-            # Type make model static
-            if item['type'] == 'spawn model static':
-                self.action_list.append({'type': item['type'],
-                                         'description': item['description'],
-                                         'model_name': item['model_name'],
-                                         'is_static': item['is_static']})
-                
-            # Type delete model
-            if item['type'] == 'delete model':
-                self.action_list.append({'type': item['type'],
-                                         'description': item['description'],
-                                         'model_name': item['model_name']})
-                
             # Type attach models
             if item['type'] == 'attach models':
                 self.action_list.append({'type': item['type'],

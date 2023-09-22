@@ -89,3 +89,45 @@ class TransformationUtils:
         except (tf.LookupException, tf.ConnectivityException, tf.ExtrapolationException):
             ros.logerr("Transform failed")
             return None
+
+    def pose_to_position_rotation(pose_msg):
+        """
+        @brief Extract position and rotation matrix from a pose message
+        @param pose_msg (Pose): Pose message
+        @return position (np.array): 3x1 position vector
+        @return rotation_matrix (np.array): 3x3 rotation matrix
+        """
+        # Extract position from the pose message
+        position = np.array([pose_msg.position.x, pose_msg.position.y, pose_msg.position.z])
+        
+        # Extract quaternion components from the pose message
+        quaternion = np.array([pose_msg.orientation.x, pose_msg.orientation.y, pose_msg.orientation.z, pose_msg.orientation.w])
+        
+        # Normalize the quaternion
+        quaternion /= np.linalg.norm(quaternion)
+        
+        # Calculate the elements of the rotation matrix
+        x, y, z, w = quaternion
+        rotation_matrix = np.array([
+            [1 - 2*y**2 - 2*z**2, 2*x*y - 2*w*z, 2*x*z + 2*w*y],
+            [2*x*y + 2*w*z, 1 - 2*x**2 - 2*z**2, 2*y*z - 2*w*x],
+            [2*x*z - 2*w*y, 2*y*z + 2*w*x, 1 - 2*x**2 - 2*y**2]
+        ])
+        
+        return position, rotation_matrix
+
+    def get_original_position(transformed_position):
+        """
+        @brief Get the original position from the transformed position
+        @param transformed_position (np.array): 3x1 transformed position vector
+        @return original_position (np.array): 3x1 original position vector
+        """
+        # Calculate the original position by subtracting the transformed position
+        original_position = (
+            transformed_position[0] - 0.5,
+            transformed_position[1] - 0.35,
+            transformed_position[2] - 1.75
+        )
+        return original_position
+
+

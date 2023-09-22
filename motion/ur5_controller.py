@@ -41,6 +41,9 @@ from motion.utils import list_to_Pose
 from utils_ur5.TransformationUtils import TransformationUtils as tf_utils
 from utils_ur5.Logger import Logger as log
 
+from motion import kinematics as kin
+from motion import kine as kine
+
 # Services and messages
 from gazebo_msgs.srv import SetModelState
 from gazebo_msgs.srv import SetPhysicsProperties
@@ -205,6 +208,7 @@ class UR5Controller(threading.Thread):
         # instantiating objects
         self.ros_pub = RosPub(self.robot_name, only_visual=True)
         self.pub_des_jstate = ros.Publisher("/command", JointState, queue_size=1, tcp_nodelay=True)
+        self.pubRobot = ros.Publisher('/ur5/joint_group_pos_controller/command', Float64MultiArray, queue_size=10)
 
         # freeze base and pause simulation service
         self.reset_world = ros.ServiceProxy('/gazebo/set_model_state', SetModelState)
@@ -492,24 +496,63 @@ class UR5Controller(threading.Thread):
         return True
     
     # --------------------------- #
-    def move_to_callback(self, req):
+    # def move_to_callback(self, req): #NOTE: using MoveIt
+    #     """
+    #     """
+    #     pose_target = list_to_Pose(req.pose_target)
+    #     trajectory = self.moveit.get_trajectory(pose_target)
+
+    #     if trajectory is None:
+    #         log.error('Failed to get trajectory')
+    #         return False
+        
+    #     log.debug_highlight(f'Found trajectory. Starting movement')
+
+    #     for point in trajectory.points:
+    #         q_des = np.array(point.positions)
+    #         self.move_joints(req.dt, req.v_des, q_des, verbose=False)
+
+    #     log.info(f'Finished movement')
+    #     return True
+
+    # --------------------------- #
+    def move_to_callback(self, req): #NOTE: using manual IK
         """
         """
         pose_target = list_to_Pose(req.pose_target)
-        trajectory = self.moveit.get_trajectory(pose_target)
+        log.debug(f'Pose target: {pose_target}')
 
-        if trajectory is None:
-            log.error('Failed to get trajectory')
-            return False
-        
-        log.debug_highlight(f'Found trajectory. Starting movement')
+        pos, rotm = tf_utils.pose_to_position_rotation(pose_target) 
+        log.debug(f'Position: {pos}')
+        log.debug(f'Rotation: {rotm}')
 
-        for point in trajectory.points:
-            q_des = np.array(point.positions)
-            self.move_joints(req.dt, req.v_des, q_des, verbose=False)
+        T = np.identity(4)
+        T[:3,:3] = rotm
+        T[:3,3] = pos
+
+        base_transform = np.array([
+            [1, 0, 0, 0.5],raise ServiceException("service [%s] responded with an error: %s"%(self.resolved_name, str))
+rospy.service.ServiceException: service [/ur5/move_to] responded with an error: b'error processing request: math domain error'
+            joints = qi[:,i].flatten().tolist()
+            # self.publish_point(point)
+            self.move_joints(req.dt, req.v_des, joints, verbose=False)
+            log.debug(f'Joints: {joints}')
+        self.q_des = qf
+
+        rate = ros.Rate(1/req.dt)
+        rate.sleep()
 
         log.info(f'Finished movement')
         return True
+
+    # --------------------------- #
+    def publish_point(self, q):
+        msg = Float64MultiArray()
+        msg.data = q
+        msg.data[5] = 0
+        msg.data.extend([70, 70])
+        self.pubRobot.publish(msg)
+        
     
     # --------------------------- #
     def move_gripper_callback(self, req):
@@ -592,4 +635,5 @@ class UR5Controller(threading.Thread):
         ee_pose.orientation.z = rot[2]
         ee_pose.orientation.w = rot[3]
         return ee_pose
+    
     

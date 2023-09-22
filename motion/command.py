@@ -49,25 +49,6 @@ class Command():
             'diameter': diameter
         }
     
-    def spawn_model_static(description='', model_name='', is_static=True):
-        """
-        """
-        return {
-            'type': 'spawn model static',
-            'description': description,
-            'model_name': model_name,
-            'is_static': is_static
-        }
-    
-    def delete_model(description='', model_name=''):
-        """
-        """
-        return {
-            'type': 'delete model',
-            'description': description,
-            'model_name': model_name
-        }
-    
     def attach_models(description='', model_name_1='', link_name_1='', model_name_2='', link_name_2=''):
         """
         """
