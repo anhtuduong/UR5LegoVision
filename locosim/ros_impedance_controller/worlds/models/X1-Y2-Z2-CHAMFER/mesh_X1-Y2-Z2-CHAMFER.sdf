@@ -74,17 +74,17 @@
                          <script> 
                              <uri>file://media/materials/scripts/gazebo.material</uri>
                              <!-- <name>Gazebo/TurquoiseGlowOutline</name> -->
-                             <name>Gazebo/Red</name>
+                             <name>Gazebo/Green</name>
                          </script>
                          <shader type="vertex">
                            <normal_map>__default__</normal_map>
                          </shader>
  
-                         <lighting>1</lighting> 
+                         <!-- <lighting>1</lighting> 
  		                <ambient>0.15 0.75 0.35 1</ambient> 
  		                <diffuse>0.1 0.95 0.25 1</diffuse> 
  		                <specular>0.01 0.01 0.01 1</specular> 
- 		                <emissive>0 0 0 1</emissive> 
+ 		                <emissive>0 0 0 1</emissive>  -->
                      </material>
  
                      <geometry> 

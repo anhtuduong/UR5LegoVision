@@ -19,7 +19,7 @@
 			
 
 
-		     <!-- <collision name="base">
+		     <collision name="base">
 			<pose>0.5 0.4 0.85 0 0 0</pose>
 			<geometry>
 			  <box>
@@ -28,7 +28,7 @@
 			</geometry>
 		
 
-				see https://gazebosim.org/tutorials?tut=physics_params&cat=physics
+				<!-- see https://gazebosim.org/tutorials?tut=physics_params&cat=physics -->
 				 <surface>
 				  <bounce>
 				    <restitution_coefficient>0.01</restitution_coefficient>
@@ -85,7 +85,7 @@
 
 			      </collision>
 
-			   <collision name="back">
+			   <!-- <collision name="back">
 				<pose>0.5 -0.02 1.35 1.57 0 0</pose>
 				<geometry>
 				  <box>

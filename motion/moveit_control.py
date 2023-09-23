@@ -11,7 +11,7 @@ if str(ROOT) not in sys.path:
 import rospy as ros
 import moveit_commander
 import geometry_msgs.msg
-from moveit_msgs.msg import Constraints, OrientationConstraint
+from moveit_msgs.msg import RobotTrajectory
 
 import numpy as np
 from utils_ur5.Logger import Logger as log
@@ -50,9 +50,9 @@ class MoveitControl():
 
         if success:
             joint_trajectory = plan.joint_trajectory
+            
             log.info(f'PLANNING SUCCESSFUL in {planning_time} seconds')
             return joint_trajectory
         else:
             log.error(f'PLANNING FAILED in {planning_time} seconds')
             return None
-
