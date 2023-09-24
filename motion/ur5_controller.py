@@ -496,7 +496,7 @@ class UR5Controller(threading.Thread):
         return True
     
     # --------------------------- #
-    def move_to_callback(self, req): #NOTE: using MoveIt
+    def move_to_callback(self, req):
         """
         """
         pose_target = list_to_Pose(req.pose_target)
@@ -518,37 +518,6 @@ class UR5Controller(threading.Thread):
 
         log.info(f'Finished movement')
         return True
-
-    # --------------------------- #
-    # def move_to_callback(self, req): #NOTE: using manual IK
-    #     """
-    #     """
-    #     pose_target = list_to_Pose(req.pose_target)
-    #     log.debug(f'Pose target: {pose_target}')
-
-    #     pos, rotm = tf_utils.pose_to_position_rotation(pose_target) 
-    #     log.debug(f'Position: {pos}')
-    #     log.debug(f'Rotation: {rotm}')
-
-    #     T = np.identity(4)
-    #     T[:3,:3] = rotm
-    #     T[:3,3] = pos
-    #     possibleQ = kine.invKine(T)
-    #     possibleQT = np.transpose(possibleQ)
-    #     qf = kin.findClosestQ(self.q_des, possibleQT)
-    #     qi, qdi, qddi = kin.cubic_trajectory_planning(self.q_des, qf, np.zeros(6), np.zeros(6))
-    #     for i in range(len(qi[0,:])):
-    #         joints = qi[:,i].flatten().tolist()
-    #         # self.publish_point(point)
-    #         self.move_joints(req.dt, req.v_des, joints, verbose=False)
-    #         log.debug(f'Joints: {joints}')
-    #     self.q_des = qf
-
-    #     rate = ros.Rate(1/req.dt)
-    #     rate.sleep()
-
-    #     log.info(f'Finished movement')
-    #     return True
 
     # --------------------------- #
     def publish_point(self, q):
