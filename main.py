@@ -1,3 +1,11 @@
+"""!
+@file main.py
+@author Anh Tu Duong (anhtu.duong@studenti.unitn.it)
+@date 2023-04-29
+
+@brief Entry point to start the robot
+"""
+
 # Import system
 import os
 import sys
@@ -9,7 +17,6 @@ FILE = Path(__file__).resolve()
 ROOT = FILE.parents[0]
 if str(ROOT) not in sys.path:
     sys.path.append(str(ROOT))  # add ROOT to PATH
-ROOT = Path(os.path.relpath(ROOT, Path.cwd()))  # relative
 
 # Ros utils
 import rospy as ros
@@ -29,6 +36,9 @@ from constants import *
 # ----------- TALKER ----------- #
 def talker(p):
     """
+    Function that runs the robot
+    
+    :param p: controller object, ``UR5Controller``
     """
     # start thread
     p.start()
@@ -97,10 +107,8 @@ def talker(p):
 if __name__ == "__main__":
     
     p = UR5Controller()
-
     try:
         talker(p)
-
     except (ros.ROSInterruptException, ros.service.ServiceException):
         ros.signal_shutdown("killed")
         p.deregister_node()

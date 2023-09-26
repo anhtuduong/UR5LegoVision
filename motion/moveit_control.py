@@ -1,3 +1,11 @@
+"""!
+@package motion.moveit_control
+@file motion/moveit_control.py
+@author Anh Tu Duong (anhtu.duong@studenti.unitn.it)
+@date 2023-05-25
+
+@brief Defines the MoveitControl class that uses Moveit to plan trajectories
+"""
 
 # Resolve paths
 import os
@@ -16,11 +24,16 @@ from moveit_msgs.msg import RobotTrajectory
 import numpy as np
 from utils_ur5.Logger import Logger as log
 
+# ---------------------- CLASS ----------------------
+
 class MoveitControl():
     """
+    The class that uses Moveit to plan trajectories
     """
     def __init__(self):
-
+        """
+        Constructor
+        """
         self.robot = moveit_commander.RobotCommander()
         self.scene = moveit_commander.PlanningSceneInterface()
         self.group_name = "ur5_arms"  # Or whichever group you defined in your SRDF
@@ -29,6 +42,9 @@ class MoveitControl():
 
     def get_trajectory(self, target):
         """
+        Plans a trajectory to the target
+        :param target: target pose or joint states, ``geometry_msgs.msg.Pose`` or ``tuple``
+        :return: joint trajectory, ``moveit_msgs.msg.RobotTrajectory``
         """
         log.debug_highlight(f'Start planning trajectory')
 

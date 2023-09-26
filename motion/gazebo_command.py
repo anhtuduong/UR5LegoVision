@@ -1,3 +1,11 @@
+"""!
+@package motion.gazebo_command
+@file motion/gazebo_command.py
+@author Anh Tu Duong (anhtu.duong@studenti.unitn.it)
+@date 2023-05-25
+
+@brief Defines the GazeboCommand class that sends commands to Gazebo
+"""
 
 # Resolve paths
 import os
@@ -24,11 +32,16 @@ from geometry_msgs.msg import Pose
 from gazebo_msgs.srv import SpawnModel, DeleteModel
 from gazebo_ros_link_attacher.srv import Attach, AttachRequest
 
+# ---------------------- CLASS ----------------------
 
 class GazeboCommand():
+    """
+    The class that sends commands to Gazebo
+    """
 
     def __init__(self):
         """
+        Constructor
         """
         self.get_model_state_proxy = rospy.ServiceProxy('/gazebo/get_model_state', GetModelState)
         self.set_model_state_proxy = rospy.ServiceProxy('/gazebo/set_model_state', SetModelState)
@@ -41,6 +54,12 @@ class GazeboCommand():
 
     def attach_models(self, model_name_1, link_name_1, model_name_2, link_name_2):
         """
+        Command that attaches model_1 to model_2
+        :param model_name_1: name of the first model, ``str``
+        :param link_name_1: name of the first link, ``str``
+        :param model_name_2: name of the second model, ``str``
+        :param link_name_2: name of the second link, ``str``
+        :exception rospy.ServiceException: if the service call failed
         """
         rospy.wait_for_service('/link_attacher_node/attach')
         try:
@@ -56,6 +75,12 @@ class GazeboCommand():
 
     def dettach_models(self, model_name_1, link_name_1, model_name_2, link_name_2):
         """
+        Command that detaches model_1 from model_2
+        :param model_name_1: name of the first model, ``str``
+        :param link_name_1: name of the first link, ``str``
+        :param model_name_2: name of the second model, ``str``
+        :param link_name_2: name of the second link, ``str``
+        :exception rospy.ServiceException: if the service call failed
         """
         rospy.wait_for_service('/link_attacher_node/detach')
         try:
@@ -72,6 +97,13 @@ class GazeboCommand():
 
     def spawn_model(self, name, model_name, pose):
         """
+        Command that spawns a model in Gazebo
+        (not updated to the new API yet)
+
+        :param name: name of the model, ``str``
+        :param model_name: name of the model, ``str``
+        :param pose: pose of the model, ``Pose``
+        :exception rospy.ServiceException: if the service call failed
         """
         rospy.wait_for_service('/gazebo/spawn_sdf_model')
         try:
@@ -90,6 +122,11 @@ class GazeboCommand():
 
     def delete_model(self, model_name):
         """
+        Command that deletes a model in Gazebo
+        (not updated to the new API yet)
+
+        :param model_name: name of the model, ``str``
+        :exception rospy.ServiceException: if the service call failed
         """
         rospy.wait_for_service('/gazebo/delete_model')
         try:
@@ -102,6 +139,12 @@ class GazeboCommand():
 
     def set_pose(self, model_name='', pose=None):
         """
+        Command that sets the pose of a model in Gazebo
+        (not updated to the new API yet)
+
+        :param model_name: name of the model, ``str``
+        :param pose: pose of the model, ``Pose``
+        :exception rospy.ServiceException: if the service call failed
         """
         # Retrieve the current pose of the model
         model_state = GazeboCommand.get_model_state(model_name=model_name)
@@ -117,6 +160,11 @@ class GazeboCommand():
 
     def get_model_state(self, model_name=''):
         """
+        Command that retrieves the pose of a model in Gazebo
+        (not updated to the new API yet)
+
+        :param model_name: name of the model, ``str``
+        :return: pose of the model, ``Pose``
         """
         # Retrieve the current pose of the model
         request = GetModelStateRequest()
@@ -132,6 +180,11 @@ class GazeboCommand():
     
     def set_model_state(self, model_name='', model_state=None):
         """
+        Command that sets the pose of a model in Gazebo
+        (not updated to the new API yet)
+
+        :param model_name: name of the model, ``str``
+        :param model_state: pose of the model, ``Pose``
         """
         model_state.model_name = model_name
 
@@ -140,6 +193,11 @@ class GazeboCommand():
 
     def get_link_state(self, model_name=''):
         """
+        Command that retrieves the pose of a link in Gazebo
+        (not updated to the new API yet)
+
+        :param model_name: name of the model, ``str``
+        :return: pose of the model, ``Pose``
         """
         # Retrieve the current pose of the model
         request = GetLinkStateRequest()
@@ -155,6 +213,12 @@ class GazeboCommand():
 
     def set_link_state(self, model_name='', link_name='', link_state=None):
         """
+        Command that sets the pose of a link in Gazebo
+        (not updated to the new API yet)
+
+        :param model_name: name of the model, ``str``
+        :param link_name: name of the link, ``str``
+        :param link_state: pose of the model, ``Pose``
         """
         link_state.link_name = model_name + '::' + link_name
         link_state.reference_frame = "world"
@@ -169,11 +233,15 @@ class GazeboCommand():
 
     def get_model_link_name(self, model_name):
         """
+        Returns the name of the link of a model
+        :param model_name: name of the model, ``str``
+        :return: name of the link, ``str``
         """
         return model_name + '_link'
     
     def set_up_lego_scene(self):
         """
+        Sets up the LEGO scene in Gazebo
         """
         # Load the JSON content from the file
         with open(LEGO_SCENE, 'r') as file:
@@ -200,5 +268,4 @@ class GazeboCommand():
 
 if __name__ == '__main__':
     gazebo_command = GazeboCommand()
-
     gazebo_command.set_up_lego_scene()

@@ -1,3 +1,12 @@
+"""!
+@package motion.UR5Controller
+@file motion/ur5_controller.py
+@author Anh Tu Duong (anhtu.duong@studenti.unitn.it)
+@date 2023-04-29
+
+@brief Defines the UR5Controller class that controls the UR5 robot.
+"""
+
 # Import system
 import os
 import sys
@@ -69,11 +78,13 @@ from constants import *
 
 class UR5Controller(threading.Thread):
     """
-    Class to control the UR5 robot
+    The class that controls the UR5 robot.
     """
 
     def __init__(self, external_conf = None):
         """
+        Constructor
+        :param external_conf: external configuration file, ``Params``
         """
         threading.Thread.__init__(self)
 
@@ -129,6 +140,7 @@ class UR5Controller(threading.Thread):
     # --------------------------- #
     def startRealRobot(self):
         """
+        Starts the real robot
         """
         os.system("killall rviz gzserver gzclient")
         log.warning('STARTING REAL ROBOT')
@@ -164,6 +176,11 @@ class UR5Controller(threading.Thread):
     # --------------------------- #
     def startSimulator(self, world_name = None, use_torque_control = True, additional_args = None, launch_file = None):
         """
+        Starts Gazebos simulator
+        :param world_name: name of the world to be loaded, ``str``
+        :param use_torque_control: whether to use torque control, ``bool``
+        :param additional_args: additional arguments to be passed to the launch file, ``list``
+        :param launch_file: path to the launch file, ``str``
         """
         # needed to be able to load a custom world file
         log.debug_highlight('Adding gazebo model path!')
@@ -204,6 +221,9 @@ class UR5Controller(threading.Thread):
     # --------------------------- #
     def loadModelAndPublishers(self, xacro_path = None, additional_urdf_args = None):
         """
+        Loads the robot model and starts the publishers
+        :param xacro_path: path to the xacro file, ``str``
+        :param additional_urdf_args: additional arguments to be passed to the urdf file, ``list``
         """
         # instantiating objects
         self.ros_pub = RosPub(self.robot_name, only_visual=True)
@@ -291,7 +311,9 @@ class UR5Controller(threading.Thread):
 
     # --------------------------- #
     def initVars(self):
-
+        """
+        Initializes the variables
+        """
         self.q = np.zeros(self.robot.na)
         self.qd = np.zeros(self.robot.na)
         self.tau = np.zeros(self.robot.na)
@@ -326,6 +348,7 @@ class UR5Controller(threading.Thread):
     # --------------------------- #
     def startupProcedure(self):
         """
+        Startup procedure
         """
         if (self.use_torque_control):
             #set joint pdi gains
@@ -343,6 +366,7 @@ class UR5Controller(threading.Thread):
     def switch_controller(self, target_controller):
         """
         Activates the desired controller and stops all others from the predefined list above
+        :param target_controller: name of the controller to be activated, ``str``
         """
         log.debug_highlight(f'Available controllers: {self.available_controllers}')
         log.debug_highlight(f'[Controller manager] loading {target_controller}')
@@ -366,6 +390,11 @@ class UR5Controller(threading.Thread):
     # --------------------------- #
     def homing_procedure(self, dt, v_des, q_home, rate):
         """
+        Homing procedure
+        :param dt: time step, ``float``
+        :param v_des: desired velocity, ``float``
+        :param q_home: joint configuration to be reached, ``list``
+        :param rate: rate of the control loop, ``rospy.Rate``
         """
         # broadcast base world TF
         # self.broadcaster.sendTransform(self.base_offset, (0.0, 0.0, 0.0, 1.0), Time.now(), '/base_link', '/world')
@@ -380,6 +409,7 @@ class UR5Controller(threading.Thread):
     # --------------------------- #
     def updateKinematicsDynamics(self):
         """
+        Updates the kinematics and dynamics of the robot
         """
         # q is continuously updated
         # should put neutral base to compute in the base frame
@@ -419,6 +449,8 @@ class UR5Controller(threading.Thread):
     # --------------------------- #
     def _receive_jstate(self, msg):
         """
+        Callback for the joint state subscriber
+        :param msg: message received from the subscriber, ``JointState``
         """
         self.ros_pub.joint_pub.publish(msg)
 
@@ -432,6 +464,8 @@ class UR5Controller(threading.Thread):
     # --------------------------- #
     def _receive_ftsensor(self, msg):
         """
+        Callback for the force torque sensor subscriber
+        :param msg: message received from the subscriber, ``WrenchStamped``
         """
         contactForceTool0 = np.zeros(3)
         contactMomentTool0 = np.zeros(3)
@@ -446,6 +480,9 @@ class UR5Controller(threading.Thread):
 
     # --------------------------- #
     def logData(self):
+        """
+        Logs the data
+        """
         if (self.log_counter < conf.robot_params[self.robot_name]['buffer_size']):
             self.q_des_log[:, self.log_counter] = self.q_des
             self.q_log[:,self.log_counter] =  self.q
@@ -461,6 +498,9 @@ class UR5Controller(threading.Thread):
 
     # --------------------------- #
     def deregister_node(self):
+        """
+        Deregisters the node
+        """
         log.debug_highlight("deregistering nodes")
         self.ros_pub.deregister_node()
         if not self.real_robot:
@@ -469,6 +509,10 @@ class UR5Controller(threading.Thread):
 
     # --------------------------- #
     def plotStuff(self, time_log):
+        """
+        Plots the data
+        :param time_log: time log, ``numpy.array``
+        """
         plotJoint('position', time_log, self.time_log, self.q_log, self.q_des_log)
         # plotJoint('position', time_log, self.time_log, self.q_log, self.q_des_log, self.qd_log, self.qd_des_log, None, None, self.tau_log,
         #             self.tau_ffwd_log, self.joint_names)
@@ -478,6 +522,8 @@ class UR5Controller(threading.Thread):
     # --------------------------- #
     def move_joints_callback(self, req):
         """
+        Callback for the move joints service
+        :param req: request received from the service, ``MoveJoints``
         """
         joint_target = req.q_des
         trajectory = self.moveit.get_trajectory(joint_target)
@@ -498,6 +544,8 @@ class UR5Controller(threading.Thread):
     # --------------------------- #
     def move_to_callback(self, req):
         """
+        Callback for the move to service
+        :param req: request received from the service, ``MoveTo``
         """
         pose_target = list_to_Pose(req.pose_target)
         trajectory = self.moveit.get_trajectory(pose_target)
@@ -521,16 +569,21 @@ class UR5Controller(threading.Thread):
 
     # --------------------------- #
     def publish_point(self, q):
+        """
+        Publishes a point
+        :param q: joint configuration, ``numpy.array``
+        """
         msg = Float64MultiArray()
         msg.data = q
         msg.data[5] = 0
         msg.data.extend([70, 70])
         self.pubRobot.publish(msg)
         
-    
     # --------------------------- #
     def move_gripper_callback(self, req):
         """
+        Callback for the move gripper service
+        :param req: request received from the service, ``generic_float``
         """
         diameter = req.data
         rate = ros.Rate(1/self.dt)
@@ -557,6 +610,11 @@ class UR5Controller(threading.Thread):
     # --------------------------- #
     def move_joints(self, dt, v_des, q_des, verbose=True):
         """
+        Moves the joints to the desired configuration
+        :param dt: time step, ``float``
+        :param v_des: desired velocity, ``float``
+        :param q_des: desired joint configuration, ``numpy.array``
+        :param verbose: whether to print debug messages, ``bool``
         """
         time_start = time.time()
         
@@ -593,6 +651,8 @@ class UR5Controller(threading.Thread):
     # --------------------------- #
     def get_ee_pose(self):
         """
+        Returns the end effector pose
+        :return: end effector pose, ``geometry_msgs.msg.Pose``
         """
         ee_pose = geometry_msgs.msg.Pose()
         ee_pose.position.x = self.x_ee[0]

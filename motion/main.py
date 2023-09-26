@@ -1,3 +1,10 @@
+"""!
+@file motion/main.py
+@author Anh Tu Duong (anhtu.duong@studenti.unitn.it)
+@date 2023-05-09
+
+@brief Defines the Motion node that executes the motion plan
+"""
 
 # Resolve paths
 import os
@@ -24,12 +31,15 @@ from ros_impedance_controller.srv import MoveTo, MoveToRequest, MoveToResponse
 from ros_impedance_controller.srv import generic_float
 from sensor_msgs.msg import JointState
 
+# ---------------------- CLASS ----------------------
 class Motion():
     """
+    The class that starts the motion node
     """
 
     def __init__(self):
         """
+        Constructor
         """
         # Start motion node
         ros.init_node('motion_node', anonymous=True)
@@ -70,6 +80,8 @@ class Motion():
 
     def joint_states_callback(self, msg):
         """
+        Callback function for the joint states subscriber
+        :param msg: The message received from the subscriber, ``JointState``
         """
         for msg_idx in range(len(msg.name)):          
             for joint_idx in range(len(self.joint_names)):
@@ -80,11 +92,16 @@ class Motion():
 
     def ee_pose_callback(self, msg):
         """
+        Callback function for the end-effector pose subscriber
+        :param msg: The message received from the subscriber, ``Pose``
         """
         self.ee_pose = msg
 
     def move_joints(self, q_des, text = ''):
         """
+        Moves the robot to the desired joint configuration
+        :param q_des: The desired joint configuration, ``list``
+        :param text: The description of the movement, ``str``
         """
         # Create a request object for MoveJoints
         req = MoveJointsRequest()
@@ -104,6 +121,9 @@ class Motion():
         
     def move_to(self, pose_target, text = ''):
         """
+        Moves the robot to the desired pose
+        :param pose_target: The desired pose, ``Pose`` or ``list``
+        :param text: The description of the movement, ``str``
         """
         if isinstance(pose_target, Pose):
             pose_target = Pose_to_list(pose_target)
@@ -130,6 +150,9 @@ class Motion():
 
     def move_gripper(self, diameter, text = ''):
         """
+        Opens or closes the gripper to the desired diameter
+        :param diameter: The desired diameter, ``float``
+        :param text: The description of the movement, ``str``
         """
         log.debug(f'Start gripper')
         # Create a request object
@@ -146,10 +169,11 @@ class Motion():
 
     
 
-    def run(self, planner: MotionPlanner):
+    def run(self, planner:MotionPlanner):
         """
+        Executes the actions in the motion plan
+        :param planner: The motion planner, ``MotionPlanner``
         """
-
         for action in planner.action_list:
             if action['type'] == 'move to':
                 self.move_to(action['pose'], action['description'])

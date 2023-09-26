@@ -1,13 +1,13 @@
 """!
 @package vision.scripts.Vision
-@file vision/scripts/Vision.py
+@file vision/scripts/main.py
 @author Anh Tu Duong (anhtu.duong@studenti.unitn.it)
-@brief Defines the Vision node that communicates with Motion node.
 @date 2023-05-04
+
+@brief Defines the Vision node that detects and localizes blocks from ZED camera
 """
 
 # Resolve paths
-import os
 import sys
 from pathlib import Path
 FILE = Path(__file__).resolve()
@@ -29,12 +29,12 @@ from constants import *
 
 class Vision:
     """
-    @brief This class detects blocks from ZED camera and communicates with different ROS node
+    The class that starts the vision node
     """
 
     def __init__(self):
         """
-        @brief Class constructor
+        Constructor
         """
 
         ros.init_node('vision', anonymous=True)
@@ -97,8 +97,10 @@ class Vision:
             block.set_pose(translation, euler_angles)
 
     def get_block_list(self):
-        """ @brief Get list of detected blocks
-            @return (list): list of detected blocks
+        """
+        Getter for block_list
+
+        :return block_list: list of Block objects
         """
         return self.block_list
 

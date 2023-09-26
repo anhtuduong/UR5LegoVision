@@ -1,3 +1,13 @@
+"""!
+@package motion/action_list
+@file motion/action_list.py
+@author Anh Tu Duong (anhtu.duong@studenti.unitn.it)
+@date 2023-05-25
+
+@brief Defines the manual action list.
+This is a list of manual commands that the robot will execute.
+To enable this, set ``USE_ACTION_LIST = True`` in ``motion/motion_planner.py``.
+"""
 
 # Resolve paths
 import os

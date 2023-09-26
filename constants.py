@@ -1,3 +1,10 @@
+"""!
+@file constants.py
+@author Anh Tu Duong (anhtu.duong@studenti.unitn.it)
+@date 2023-05-01
+
+@brief Constants used in the project
+"""
 
 # Resolve paths
 import os

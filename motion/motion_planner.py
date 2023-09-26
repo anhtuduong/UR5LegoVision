@@ -1,3 +1,11 @@
+"""!
+@package motion.motion_planner
+@file motion/motion_planner.py
+@author Anh Tu Duong (anhtu.duong@studenti.unitn.it)
+@date 2023-05-25
+
+@brief Defines the MotionPlanner class that plans the motion
+"""
 
 # Resolve paths
 import os
@@ -20,13 +28,19 @@ from motion.command import Command
 # Constants
 from constants import *
 from motion.action_list import ACTION_LIST
+USE_ACTION_LIST = False
+
+# ---------------------- CLASS ----------------------
 
 class MotionPlanner():
     """
+    The class that plans the motion
     """
 
     def __init__(self, motion_planner_path=MOTION_PLANNER_PATH):
         """
+        Constructor
+        :param motion_planner_path: path to the motion planner file, ``str``
         """
         self.motion_planner_path = motion_planner_path
         self.action_list = []
@@ -35,6 +49,7 @@ class MotionPlanner():
 
     def extract_json(self):
         """
+        Parses the JSON file and extracts the list of objects
         """
         # Load the JSON content from the file
         with open(self.motion_planner_path, 'r') as file:
@@ -89,6 +104,7 @@ class MotionPlanner():
 
     def to_json(self):
         """
+        Saves the list of objects to a JSON file
         """
         # Create a list of objects
         json_data = []
@@ -102,6 +118,11 @@ class MotionPlanner():
 
     def pick_and_place(self, model_name, pose_pick, pose_place):
         """
+        Creates a pick and place sequence
+        :param model_name: The name of the model, ``str``
+        :param pose_pick: The pick pose, ``list``
+        :param pose_place: The place pose, ``list``
+        :return: The list of actions, ``list``
         """
         # Extract pose
         pick = list_to_Pose(pose_pick)
@@ -111,32 +132,32 @@ class MotionPlanner():
 
         # Pick
         action_list.append(Command.move_to(f'Move to middle', pose=[0.456, 0.619, 1.2, 0.0, 1.0, 0.0, 0.0]))
-        pick.position.z += 0.2
+        pick.position.z += 0.15
         action_list.append(Command.move_to(f'Move above {model_name}', pose=Pose_to_list(pick)))
         action_list.append(Command.move_gripper(f'Open gripper', diameter=60))
         pick.position.z -= 0.1
         action_list.append(Command.move_to(f'Move down {model_name}', pose=Pose_to_list(pick)))
-        pick.position.z -= 0.1
+        pick.position.z -= 0.05
         action_list.append(Command.move_to(f'Move down to {model_name}', pose=Pose_to_list(pick)))
         action_list.append(Command.move_gripper(f'Grasp {model_name}', diameter=35))
         action_list.append(Command.attach_models(f'Attach {model_name} to gripper', model_name_1=model_name, link_name_1='link', model_name_2=ROBOT_NAME, link_name_2=GRIPPER_LINK))
-        pick.position.z += 0.1
+        pick.position.z += 0.05
         action_list.append(Command.move_to(f'Pick up {model_name}', pose=Pose_to_list(pick)))
         pick.position.z += 0.1
         action_list.append(Command.move_to(f'Move up {model_name}', pose=Pose_to_list(pick)))
 
         # Place
         action_list.append(Command.move_to(f'Move to middle', pose=[0.456, 0.619, 1.2, 0.0, 1.0, 0.0, 0.0]))
-        place.position.z += 0.2
+        place.position.z += 0.15
         action_list.append(Command.move_to('Move above the place position', pose=Pose_to_list(place)))
         place.position.z -= 0.1
         action_list.append(Command.move_to('Move down', pose=Pose_to_list(place)))
-        place.position.z -= 0.1
+        place.position.z -= 0.05
         action_list.append(Command.move_to('Move down to the place position', pose=Pose_to_list(place)))
         action_list.append(Command.attach_models(f'Attach {model_name} to table', model_name_1=model_name, link_name_1='link', model_name_2='tavolo', link_name_2='link'))
         action_list.append(Command.detach_models(f'Detach {model_name} from gripper', model_name_1=model_name, link_name_1='link', model_name_2=ROBOT_NAME, link_name_2=GRIPPER_LINK))
         action_list.append(Command.move_gripper(f'Release {model_name}', diameter=60))
-        place.position.z += 0.1
+        place.position.z += 0.05
         action_list.append(Command.move_to(f'Move above {model_name}', pose=Pose_to_list(place)))
         place.position.z += 0.1
         action_list.append(Command.move_to(f'Move up', pose=Pose_to_list(place)))
@@ -145,7 +166,12 @@ class MotionPlanner():
 
     def run(self):
         """
+        Executes the actions in the motion plan
         """
+
+        if USE_ACTION_LIST:
+            self.action_list = ACTION_LIST
+            return
 
         # Actions
         model = 'X1-Y2-Z2-CHAMFER 1'
