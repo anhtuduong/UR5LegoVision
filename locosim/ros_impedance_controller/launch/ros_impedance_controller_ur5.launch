@@ -114,6 +114,6 @@
 	<node name="goto0" pkg="ur_description" type="go0" args="1.0" output="screen"/>
 
 	<!-- 8 run moveit demo -->
-	<include file="$(find moveit_ur5)/launch/main.launch" />
+	<!-- <include file="$(find moveit_ur5)/launch/main.launch" /> -->
 
 </launch>
