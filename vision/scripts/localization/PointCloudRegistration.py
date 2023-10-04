@@ -1,7 +1,13 @@
+"""!
+@package vision.scripts.localization.PointCloudRegistration
+@file vision/scripts/localization/PointCloudRegistration.py
+@author Anh Tu Duong (anhtu.duong@studenti.unitn.it)
+@date 2023-05-04
 
+@brief Defines the class PointCloudRegistration.py
+"""
 
 # Reslove paths
-import os
 import sys
 from pathlib import Path
 FILE = Path(__file__).resolve()
@@ -26,14 +32,14 @@ from utils_ur5.TransformationUtils import TransformationUtils
 
 class PointCloudRegistration:
     """
-    @brief Class for point cloud registration
+    Class for point cloud registration
     """
 
     def load_point_cloud(point_cloud):
         """
-        @brief Load point clouds regard to PLY file or point cloud taken from PLY file
-        @param point_cloud (str or list): path to PLY file or point cloud taken from PLY file
-        @return point_cloud (open3d.geometry.PointCloud): point cloud
+        Load point clouds regard to PLY file or point cloud taken from PLY file
+        :param point_cloud: point cloud, ``str`` or ``list``
+        :return cloud: point cloud, ``open3d.geometry.PointCloud``
         """
         
         # If point_cloud is a string, it is a path to a PLY file
@@ -56,8 +62,8 @@ class PointCloudRegistration:
 
     def visualize_pointcloud(point_clouds):
         """
-        @brief Visualize the point clouds
-        @param point_clouds (list): list of point clouds
+        Visualize the point clouds
+        :param point_clouds: point clouds, ``list``
         """
         if not isinstance(point_clouds, list):
             point_clouds = [point_clouds]
@@ -83,9 +89,9 @@ class PointCloudRegistration:
     # Convert open3d.geometry.PointCloud to list of point_cloud
     def convert_open3d_pointcloud_to_list(point_cloud):
         """
-        @brief Convert open3d.geometry.PointCloud to list of point_cloud
-        @param point_cloud (open3d.geometry.PointCloud): point cloud
-        @return point_cloud (list): list of point_cloud
+        Convert open3d.geometry.PointCloud to list of point_cloud
+        :param point_cloud: point cloud, ``open3d.geometry.PointCloud``
+        :return point_cloud: point cloud, ``list``
         """
         point_cloud = np.array(point_cloud.points)
         return point_cloud
@@ -93,9 +99,9 @@ class PointCloudRegistration:
     # Save list point cloud to one PLY file
     def save_pointcloud_to_PLY(point_clouds, ply_path):
         """
-        @brief Save list point cloud to one PLY file
-        @param point_clouds (list): list of point clouds
-        @param ply_path (str): path to PLY output file
+        Save list point cloud to one PLY file
+        :param point_clouds: list of point clouds, ``list``
+        :param ply_path: path to PLY file, ``str``
         """
         if not isinstance(point_clouds, list):
             point_clouds = [point_clouds]
@@ -109,9 +115,10 @@ class PointCloudRegistration:
 
     def downsample_point_cloud(point_cloud, voxel_size=0.05):
         """
-        @brief Downsample the point cloud
-        @param point_cloud: point cloud
-        @return downsampled_point_cloud (np.array): downsampled point cloud
+        Downsample the point cloud
+        :param point_cloud: point cloud
+        :param voxel_size: voxel size, ``float``
+        :return downsampled_point_cloud: downsampled point cloud, ``open3d.geometry.PointCloud``
         """
 
         # Downsample the point cloud
@@ -122,9 +129,9 @@ class PointCloudRegistration:
 
     def compute_FPFH_features(point_cloud):
         """
-        @brief Compute FPFH features
-        @param point_cloud: point cloud
-        @return fpfh_features (np.array): FPFH features
+        Compute FPFH features
+        :param point_cloud: point cloud, ``open3d.geometry.PointCloud``
+        :return fpfh_features: FPFH features, ``np.array``
         """
         time_execution = TimeExecution()
 
@@ -150,12 +157,12 @@ class PointCloudRegistration:
 
     def match_FPFH_features(source, target, fpfh_source, fpfh_target):
         """
-        @brief Perform FPFH feature matching
-        @param source: source point cloud
-        @param target: target point cloud
-        @param fpfh_source (np.array): FPFH features of the source point cloud
-        @param fpfh_target (np.array): FPFH features of the target point cloud
-        @return transformation_matrix (np.array): 4x4 transformation matrix
+        Perform FPFH feature matching
+        @param source: source point cloud, ``open3d.geometry.PointCloud``
+        @param target: target point cloud, ``open3d.geometry.PointCloud``
+        @param fpfh_source: FPFH features of source point cloud, ``np.array``
+        @param fpfh_target: FPFH features of target point cloud, ``np.array``
+        @return transformation_matrix: 4x4 transformation matrix, ``np.array``
         """
         time_execution = TimeExecution()
 
@@ -180,9 +187,9 @@ class PointCloudRegistration:
 
     def icp_alignment(source, target, initial_transformation):
         """
-        @brief Alignment using ICP
-        @param source: source point cloud
-        @param target: target point cloud
+        Alignment using ICP
+        @param source: source point cloud, ``open3d.geometry.PointCloud``
+        @param target: target point cloud, ``open3d.geometry.PointCloud``
         @param initial_transformation (np.array): 4x4 initial transformation matrix
         @return transformation_matrix (np.array): 4x4 transformation matrix
         """
@@ -208,11 +215,12 @@ class PointCloudRegistration:
     
     def iterative_refinement(source, target, initial_transformation, num_iterations=1):
         """
-        @brief Iterative refinement
-        @param source: source point cloud
-        @param target: target point cloud
+        Iterative refinement
+        @param source: source point cloud, ``open3d.geometry.PointCloud``
+        @param target: target point cloud, ``open3d.geometry.PointCloud``
         @param initial_transformation (np.array): 4x4 initial transformation matrix
-        @return transformation_matrix (np.array): 4x4 transformation matrix
+        @param num_iterations (int): number of iterations, ``int``
+        @return transformation_matrix (np.array): 4x4 transformation matrix, ``np.array``
         """
         time_execution = TimeExecution()
 

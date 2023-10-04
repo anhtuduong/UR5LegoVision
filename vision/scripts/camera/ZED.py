@@ -1,3 +1,11 @@
+"""!
+@package vision.scripts.camera.ZED
+@file vision/scripts/camera/ZED.py
+@author Anh Tu Duong (anhtu.duong@studenti.unitn.it)
+@date 2023-05-04
+
+@brief Defines the ZED camera class.
+"""
 
 # Resolve paths
 import os
@@ -15,9 +23,17 @@ from cv_bridge import CvBridge, CvBridgeError
 import cv2 as cv
 from utils_ur5.Logger import Logger as log
 
+# ---------------------- CLASS ----------------------
+
 class ZED:
+    """
+    This class represents the ZED camera
+    """
 
     def __init__(self):
+        """
+        Constructor
+        """
         self.cv_image = None
         self.cv_bridge = CvBridge()
         self.image_sub = ros.Subscriber("/ur5/zed_node/left_raw/image_raw_color", Image, self.receive_image)
@@ -26,8 +42,9 @@ class ZED:
         log.debug('ZED camera initialized')
 
     def receive_image(self, data):
-        """ @brief Callback function whenever take msg from ZED camera
-            @param data (msg): data taken from ZED node
+        """
+        Callback function whenever take msg from ZED camera
+        :param msg: data taken from ZED node, ``Image``
         """
         # Convert ROS image to OpenCV image
         try:
@@ -36,17 +53,18 @@ class ZED:
         except CvBridgeError as e:
             print(e)
 
-
     def get_image(self):
-        """ @brief Get image from ZED camera
-            @return cv_image: image taken from ZED camera
+        """
+        Get image from ZED camera
+        :return: image from ZED camera, ``numpy.ndarray``
         """
         log.debug('image returned')
         return self.cv_image
     
     def save_image(self, path, img):
-        """ @brief Save image from ZED camera
-            @param path: path to save image
+        """
+        Save image from ZED camera
+        :param path: path to save image, ``str``
         """
         try:
             cv.imwrite(path, img)

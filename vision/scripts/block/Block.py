@@ -2,8 +2,9 @@
 @package vision.scripts.block.Block
 @file vision/scripts/block/Block.py
 @author Anh Tu Duong (anhtu.duong@studenti.unitn.it)
-@brief Defines the abstract class Block.
 @date 2023-05-04
+
+@brief Defines the abstract class Block.
 """
 # ---------------------- IMPORT ----------------------
 from abc import ABC, abstractmethod
@@ -32,14 +33,16 @@ class Block:
     """
 
     def __init__(self, name, conf, x1, y1, x2, y2, img_source_path):
-        """ @brief Class constructor
-            @param name (String): block name
-            @param conf (float): confidence
-            @param x1 (float): xmin of bounding box
-            @param y1 (float): ymin of bounding box
-            @param x2 (float): xmax of bounding box
-            @param y2 (float): ymax of bounding box
-            @param img_source_path (String): path to image
+        """
+        Constructor
+
+        :param name: name of block, ``str``
+        :param conf: confidence of block, ``float``
+        :param x1: x coordinate of top left corner, ``int``
+        :param y1: y coordinate of top left corner, ``int``
+        :param x2: x coordinate of bottom right corner, ``int``
+        :param y2: y coordinate of bottom right corner, ``int``
+        :param img_source_path: path to the image source, ``str``
         """
 
         self.name = name
@@ -57,19 +60,18 @@ class Block:
         self.transformation_matrix = None
         self.position = None
         self.rotation = None
-        self.point_cloud = ()
-        self.point_world = ()
-        self.segment = None
 
     def get_name(self):
-        """ @brief Get block name
-            @return (String): block name
+        """
+        Get name of block
+        :return (str): name of block, ``str``
         """
         return self.name
 
     def get_pixels(self):
-        """ @brief Get pixel coordinates of block
-            @return (list): list of pixel coordinates of block
+        """
+        Get pixels of block
+        :return (list): list of pixels, ``list``
         """
         pixels = []
         for i in range(self.xmin, self.xmax):
@@ -78,7 +80,8 @@ class Block:
         return pixels
 
     def show(self):
-        """ @brief Show block info
+        """
+        Show detected block
         """
 
         self.img = self.img_source.crop((self.xmin, self.ymin, self.xmax, self.ymax))
@@ -93,13 +96,25 @@ class Block:
         # Block details
         display(self.img)
         
-
     def set_point_cloud(self, point_cloud):
+        """
+        Set point cloud of block
+        :param point_cloud: point cloud of block, ``PointCloud``
+        """
         self.point_cloud = point_cloud
 
     def set_transformation_matrix(self, transformation_matrix):
+        """
+        Set transformation matrix of block
+        :param transformation_matrix: transformation matrix of block, ``np.ndarray``
+        """
         self.transformation_matrix = transformation_matrix
 
     def set_pose(self, position, rotation):
+        """
+        Set pose of block
+        :param position: position of block, ``np.ndarray``
+        :param rotation: rotation of block, ``np.ndarray``
+        """
         self.position = position
         self.rotation = rotation

@@ -1,8 +1,9 @@
 """!
 @file DetectManual.py
 @author Anh Tu Duong (anhtu.duong@studenti.unitn.it)
-@brief Defines the class DetectManual.py
 @date 2023-05-04
+
+@brief Defines the class DetectManual.py
 """
 # ---------------------- IMPORT ----------------------
 import os
@@ -21,7 +22,7 @@ from vision.scripts.block.Block import Block
 
 # ---------------------- GLOBAL CONSTANTS ----------------------
 
-BLOCK_NAMES = [  'X1-Y1-Z2',
+BLOCK_NAMES = [ 'X1-Y1-Z2',
                 'X1-Y2-Z1',
                 'X1-Y2-Z2',
                 'X1-Y2-Z2-CHAMFER',
@@ -37,15 +38,14 @@ BLOCK_NAMES = [  'X1-Y1-Z2',
 
 class DetectManual:
     """
-    @brief
+    This class allows user to select points on image and assign them to a class
     """
 
     def __init__(self, image_path):
-        """ @brief Class constructor
-            @param img_path (String): path of input image
-            @param output_path (String): path of out image
         """
-
+        Constructor
+        :param image_path: path to the image source, ``str``
+        """
         self.image_path = image_path
         self.class_list = BLOCK_NAMES
         self.point_list = []
@@ -54,6 +54,9 @@ class DetectManual:
         self.select_points()
 
     def select_points(self):
+        """
+        Select points on image and assign them to a class
+        """
         self.image = cv2.imread(self.image_path)
         cv2.namedWindow("image")
         cv2.imshow("image", self.image)
@@ -81,6 +84,14 @@ class DetectManual:
             
 
     def _on_mouse(self, event, x, y, flags, param):
+        """
+        Callback function whenever mouse is clicked
+        :param event: event type, ``int``
+        :param x: x coordinate, ``int``
+        :param y: y coordinate, ``int``
+        :param flags: flags, ``int``
+        :param param: parameters, ``tuple``
+        """
         if event == cv2.EVENT_LBUTTONDOWN:
             class_window = "Choose a class"
             for i, class_name in enumerate(self.class_list):
@@ -96,6 +107,14 @@ class DetectManual:
                 self.point_list.pop()
 
     def _on_button_click(self, event, x, y, flags, param):
+        """
+        Callback function whenever mouse is clicked
+        :param event: event type, ``int``
+        :param x: x coordinate, ``int``
+        :param y: y coordinate, ``int``
+        :param flags: flags, ``int``
+        :param param: parameters, ``tuple``
+        """
         if event == cv2.EVENT_LBUTTONDOWN:
             class_name = param[2]
             original_x, original_y = param[0], param[1]

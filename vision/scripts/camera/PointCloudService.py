@@ -1,3 +1,11 @@
+"""!
+@package vision.scripts.camera.PointCloudService
+@file vision/scripts/camera/PointCloudService.py
+@author Anh Tu Duong (anhtu.duong@studenti.unitn.it)
+@date 2023-05-04
+
+@brief Defines the PointCloudService class.
+"""
 
 # Reslve paths
 import os
@@ -23,10 +31,17 @@ w_R_c = np.matrix([[0, -0.499, 0.866], [-1, 0, 0], [0, -0.866, -0.499]])
 x_c = np.array([-0.9, 0.24, -0.35])
 base_offset = np.array([0.5, 0.35, 1.75])
 
+# ---------------------- CLASS ----------------------
 
 class PointCloudService:
+    """
+    This class provides services for point cloud
+    """
 
     def __init__(self):
+        """
+        Constructor
+        """
         self.pointcloud_received = None
         self.pointcloud_sub = ros.Subscriber("/ur5/zed_node/point_cloud/cloud_registered", PointCloud2, self.receive_pointcloud, queue_size=1)
         self.pointcloud_pub = ros.Publisher("/ur5/zed_node/point_cloud/block", PointCloud2, queue_size=1)
@@ -35,15 +50,17 @@ class PointCloudService:
         log.debug('Point cloud initialized')
 
     def receive_pointcloud(self, msg):
-        """ @brief Callback function whenever take point_cloud msg from ZED camera
-            @param msg (msg): msg taken from ZED node
+        """
+        Callback function whenever take msg from ZED camera
+        :param msg: data taken from ZED node
         """
         self.pointcloud_received = msg
 
     def get_pointcloud(self, pixels):
-        """ @brief Get point_cloud from ZED camera
-            @param pixels (list): list of pixels
-            @return point_cloud (list): list of point_cloud
+        """
+        Get point_cloud from ZED camera
+        :param pixels: list of pixel, ``list``
+        :return point_cloud: list of point_cloud, ``list``
         """
         point_cloud = []
         for pixel in pixels:
@@ -54,28 +71,30 @@ class PointCloudService:
         return point_cloud
 
     def publish_pointcloud(self, pixels):
-        """ @brief Publish point_cloud to ZED camera
-            @param pixels (list): list of pixel
+        """
+        Publish point_cloud to ROS topic
+        :param pixels: list of pixel, ``list``
         """
         pc = point_cloud2.create_cloud_xyz32(self.pointcloud_received.header, self.get_pointcloud(pixels))
         self.pointcloud_pub.publish(pc)
         log.debug('point_cloud published')
 
     def save_pointcloud_to_ply(point_cloud, output_path):
-        """ @brief Save point_cloud to ply file
-            @param pointcloud (list): list of point_cloud
-            @param output_path (str): output path of ply file
+        """
+        Save point_cloud to PLY file
+        :param point_cloud: list of point_cloud, ``list``
+        :param output_path: path to PLY output file, ``str``
         """
         point_cloud = np.array(point_cloud)
         polydata = pv.PolyData(point_cloud)
         polydata.save(output_path)
         log.debug(f'point_cloud saved to {output_path}')
 
-    # Clean point_cloud that remove Z value between min(Z) and min(Z) + 0.001
     def clean_pointcloud(point_cloud):
-        """ @brief Clean point_cloud that remove Z value between min(Z) and min(Z) + 0.001
-            @param point_cloud (list): list of point_cloud
-            @return point_cloud (list): list of point_cloud
+        """
+        Clean point_cloud that remove Z value between min(Z) and min(Z) + 0.001
+        :param point_cloud: list of point_cloud, ``list``
+        :return point_cloud: list of point_cloud, ``list``
         """
         point_cloud = np.array(point_cloud)
         z_min = np.min(point_cloud[:,2])
@@ -87,8 +106,8 @@ class PointCloudService:
     # Visualize point clouds
     def visualize_pointcloud(point_cloud):
         """
-        @brief Visualize point cloud
-        @param point_clouds (list): list of point_clouds as NumPy arrays
+        Visualize point cloud
+        :param point_cloud: list of point_cloud, ``list``
         """
 
         cloud = pv.PolyData(point_cloud)
@@ -103,9 +122,10 @@ class PointCloudService:
 
     # Transform point cloud to world frame
     def transform_pointcloud_to_world_frame(point_cloud):
-        """ @brief Transform point_cloud to world frame
-            @param point_cloud (list): list of point_cloud
-            @return point_cloud (list): list of point_cloud
+        """
+        Transform point_cloud to world frame
+        :param point_cloud: list of point_cloud, ``list``
+        :return point_cloud: list of point_cloud, ``list``
         """
         point_cloud = np.array(point_cloud)
         for i in range(len(point_cloud)):
@@ -116,9 +136,10 @@ class PointCloudService:
     
     # Get point cloud from ply file
     def get_pointcloud_from_ply(ply_path):
-        """ @brief Get point_cloud from ply file
-            @param ply_path (str): path to ply file
-            @return point_cloud (list): list of point_cloud
+        """
+        Get point_cloud from ply file
+        :param ply_path: path to ply file, ``str``
+        :return point_cloud: list of point_cloud, ``list``
         """
         point_cloud = pv.read(ply_path)
         point_cloud = np.array(point_cloud.points)
@@ -127,9 +148,10 @@ class PointCloudService:
     
     # Render point cloud from STL file
     def render_pointcloud_from_stl(stl_path):
-        """ @brief Render point_cloud from STL file
-            @param stl_path (str): path to stl file
-            @return point_cloud (list): list of point_cloud
+        """
+        Render point_cloud from STL file
+        :param stl_path: path to STL file, ``str``
+        :return point_cloud: list of point_cloud, ``list``
         """
         # Load the STL file
         mesh = pv.read(stl_path)
@@ -143,9 +165,10 @@ class PointCloudService:
 
     # Save point cloud to PLY file
     def save_pointcloud_to_PLY(point_cloud, ply_path):
-        """ @brief Save point_cloud to PLY file
-            @param point_cloud (list): list of point_cloud
-            @param ply_path (str): path to PLY output file
+        """
+        Save point_cloud to PLY file
+        :param point_cloud: list of point_cloud, ``list``
+        :param ply_path: path to PLY file, ``str``
         """
         point_cloud.save(ply_path)
         log.debug(f"Saved point cloud to PLY file: {ply_path}")

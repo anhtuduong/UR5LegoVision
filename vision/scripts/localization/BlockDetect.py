@@ -1,8 +1,9 @@
 """!
 @file BlockDetect.py
 @author Anh Tu Duong (anhtu.duong@studenti.unitn.it)
-@brief Defines the class BlockDetect.
 @date 2023-05-04
+
+@brief Defines the class BlockDetect.
 """
 
 import os
@@ -48,12 +49,13 @@ BLOCK_NAMES = [ 'X1-Y1-Z2',
 
 class BlockDetect:
     """
-    @brief This class use custom trained weights and detect blocks with YOLOv5
+    This class use custom trained weights and detect blocks with YOLOv5
     """
 
     def __init__(self, img_path):
-        """ @brief Class constructor
-            @param img_path (String): path of input image
+        """
+        Constructor
+        :param img_path: path to the image source, ``str``
         """
 
         MODEL.conf = CONFIDENCE
@@ -96,6 +98,10 @@ class BlockDetect:
                 choice = '0'
 
     def detect_manual(self, img_path):
+        """
+        Detect manually
+        :param img_path: path to the image source, ``str``
+        """
         self.block_list.clear()
         detectManual = DetectManual(img_path)
         self.block_list = detectManual.block_list
@@ -105,8 +111,9 @@ class BlockDetect:
         self.show()
 
     def detect_ROI(self, img_path):
-        """ @brief Detect using Region Of Interest
-            @param img_path (String): path of input image
+        """
+        Detect using Region Of Interest
+        :param img_path: path to the image source, ``str``
         """
 
         print('Draw RegionOfInterest')
@@ -115,8 +122,9 @@ class BlockDetect:
         self.detect(IMG_ROI)
 
     def detect(self, img_path):
-        """ @brief This function pass the image path to the model and calculate bounding boxes for each object
-            @param img_path (String): path of input image
+        """
+        This function pass the image path to the model and calculate bounding boxes for each object
+        :param img_path: path to the image source, ``str``
         """
         self.block_list.clear()
 
@@ -144,15 +152,17 @@ class BlockDetect:
         self.show()
 
     def show(self):
-        """ @brief This function show infos of detected blocks
+        """
+        This function show infos of detected blocks
         """
         for index, block in enumerate(self.block_list, start=1):
             print(index)
             block.show()
 
     def get_block_list(self): 
-        """ @brief This function return the list of detected blocks
-            @return block_list (list): list of detected blocks
+        """
+        This function return the list of detected blocks
+        :return (list): list of detected blocks, ``list``
         """
         return self.block_list
 
