@@ -24,12 +24,12 @@ Using UR5 Robot</h1>
 
 - [Project Description](#project-description)
 - [Installation](#installation)
-- [Run UR5BlokVision](#run-ur5blokvision)
+- [Run UR5LegoVision](#run-ur5Legovision)
 - [Conclusion](#conclusion)
 
 
 # Project Description
-UR5BlokVision is an autonomous robotic project that performs pick-and-place tasks using a UR5 robot arm equipped with a ZED camera for perception. The goal of the project is to achieve autonomous assembly of "lego-like" Mega Bloks by detecting, localizing, and manipulating the blocks using the robot arm.
+UR5LegoVision is an autonomous robotic project that performs pick-and-place tasks using a UR5 robot arm equipped with a ZED camera for perception. The goal of the project is to achieve autonomous assembly of "lego-like" Mega Bloks by detecting, localizing, and manipulating the blocks using the robot arm.
 
 ![demo.gif](docs/demo.gif)
 
@@ -47,7 +47,7 @@ The Planning component is yet to be fully developed, and it poses the primary ch
 ---
   
 # Installation
-To set up the UR5BlokVision project, follow these steps:
+To set up the UR5LegoVision project, follow these steps:
 
 ## 1. Install locosim:
 
@@ -275,13 +275,13 @@ cd ~/ros_ws/src/
 Now you can clone the repository inside the ROS workspace you just created:
 
 ```
-git clone git@github.com:anhtuduong/UR5BlokVision.git
+git clone git@github.com:anhtuduong/UR5LegoVision.git
 ```
 
 Update submodules:
 
 ```
-cd ~/ros_ws/src/UR5BlokVision
+cd ~/ros_ws/src/UR5LegoVision
 ```
 ```
 git submodule update --init --recursive
@@ -306,6 +306,10 @@ Whenever you modify some of the ROS packages (e.g. the ones that contain the xac
 
 the install step install the ros packages inside the "$HOME/ros_ws/install" folder rather than the devel folder. This folder will be added to the ROS_PACKAGE_PATH instead of the devel one.
 
+```
+source ~/ros_ws/install/setup.bash
+```
+
 Finally, run (you should do it any time you add a new ros package)
 
 ```
@@ -328,7 +332,7 @@ copy the following lines (at the end of the .bashrc), remember to replace the st
 source /opt/ros/ROS_VERSION/setup.bash
 source $HOME/ros_ws/install/setup.bash
 export PATH=/opt/openrobots/bin:$PATH
-export LOCOSIM_DIR=$HOME/ros_ws/src/UR5BlokVision/locosim
+export LOCOSIM_DIR=$HOME/ros_ws/src/UR5LegoVision/locosim
 export PYTHONPATH=/opt/openrobots/lib/pythonPYTHON_VERSION/site-packages:$LOCOSIM_DIR/robot_control:$PYTHONPATH
 export ROS_PACKAGE_PATH=$ROS_PACKAGE_PATH:/opt/openrobots/share/
 ```
@@ -339,26 +343,26 @@ the .bashrc is a file that is **automatically** sourced whenever you open a new 
 
 ---
 
-# Run UR5BlokVision
+# Run UR5LegoVision
 
 ### Start the robot
 ```bash
-python3 -i /ros_ws/src/UR5BlokVision/main.py
+python3 -i /ros_ws/src/UR5LegoVision/main.py
 ```
 
 ### Start vision node
 Open a new terminal
 ```bash
-python3 -i /ros_ws/src/UR5BlokVision/vision/scripts/main.py
+python3 -i /ros_ws/src/UR5LegoVision/vision/scripts/main.py
 ```
 This code will start `vision` node, which will capture images from ZED camera, detect localize objects and send their poses to the `planning` node. 
 
 ### Start motion node
 Open a new terminal
 ```bash
-python3 -i /ros_ws/src/UR5BlokVision/motion/main.py
+python3 -i /ros_ws/src/UR5LegoVision/motion/main.py
 ```
-This code will start `motion` node and for now it will execute the robot command APIs, which can be found in `/ros_ws/src/UR5BlokVision/motion/action_list.py`.
+This code will start `motion` node and for now it will execute the robot command APIs, which can be found in `/ros_ws/src/UR5LegoVision/motion/action_list.py`.
 
 **Work in progress:** Develop `planning` node.
 
@@ -366,8 +370,8 @@ This code will start `motion` node and for now it will execute the robot command
 
 # Conclusion
 
-The UR5BlokVision project has made significant progress in implementing the Vision and Motion components, enabling the robot to detect and manipulate "lego-like" Mega Bloks autonomously. The Planning component remains to be developed, and addressing the challenges in planning and error handling will be crucial to achieving a fully autonomous Lego block assembly system.
+The UR5LegoVision project has made significant progress in implementing the Vision and Motion components, enabling the robot to detect and manipulate "lego-like" Mega Bloks autonomously. The Planning component remains to be developed, and addressing the challenges in planning and error handling will be crucial to achieving a fully autonomous Lego block assembly system.
 
-For more detailed technical information and results, refer to the [report](https://github.com/anhtuduong/UR5BlokVision/blob/main/docs/report.pdf) that will be provided upon completion of the Planning component. The project demonstrates the successful application of vision-based robotics in pick-and-place tasks, showcasing the potential for real-world applications of similar autonomous systems.
+For more detailed technical information and results, refer to the [report](https://github.com/anhtuduong/UR5LegoVision/blob/main/docs/report.pdf) that will be provided upon completion of the Planning component. The project demonstrates the successful application of vision-based robotics in pick-and-place tasks, showcasing the potential for real-world applications of similar autonomous systems.
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
