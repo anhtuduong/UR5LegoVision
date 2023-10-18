@@ -35,7 +35,69 @@ class PointCloudRegistration:
     Class for point cloud registration
     """
 
-    def load_point_cloud(point_cloud):
+    def __init__(self, block):
+        """
+        Constructor
+        :param block: block, ``Block``
+        """
+        log.debug_highlight(f'Localizing block {block.name}...')
+        pc = PointCloudService()
+
+        # Get the point cloud
+        pointcloud = pc.get_pointcloud(block.get_pixels())
+        pointcloud = PointCloudService.transform_pointcloud_to_world_frame(pointcloud)
+        pointcloud = PointCloudService.clean_pointcloud(pointcloud)
+        
+        # Load the point clouds
+        target = PointCloudRegistration.load_point_cloud(pointcloud)
+        source = PointCloudRegistration.load_point_cloud(MODEL[block.get_name()]['pointcloud_file'])
+
+        # Set the color of the point clouds
+        source.paint_uniform_color([1, 0, 0]) # Red
+        target.paint_uniform_color([0, 0, 1]) # Blue
+
+        # Downsample the point clouds
+        source = PointCloudRegistration.downsample_point_cloud(source, 0.001)
+        target = PointCloudRegistration.downsample_point_cloud(target, 0.001)
+
+        # Compute the FPFH features
+        fpfh_source = PointCloudRegistration.compute_FPFH_features(source)
+        fpfh_target = PointCloudRegistration.compute_FPFH_features(target)
+
+        # Perform FPFH feature matching
+        transformation_matrix = PointCloudRegistration.match_FPFH_features(source,
+                                                                        target, 
+                                                                        fpfh_source, 
+                                                                        fpfh_target
+        )
+
+        # Perform iterative refinement ICP
+        transformation_matrix = PointCloudRegistration.iterative_refinement(source,
+                                                                            target,
+                                                                            transformation_matrix,
+                                                                            num_iterations=20
+        )
+
+        # Compute the 6DOF transformation parameters
+        translation, euler_angles = TransformationUtils.compute_6DoF(transformation_matrix)
+
+        # Transform the source point cloud
+        transformed_cloud = source
+        transformed_cloud.transform(transformation_matrix)
+
+        # Visualize the point clouds
+        PointCloudRegistration.visualize_pointcloud([source, target])
+
+        # Save the point clouds
+        PointCloudRegistration.save_pointcloud_to_PLY([source, target], PLY_AFTER_ALIGN_PATH)
+
+        block.set_point_cloud(transformed_cloud)
+        block.set_transformation_matrix(transformation_matrix)
+        block.set_pose(translation, euler_angles)
+
+    # End of __init__() ------------------------------------------------------ #
+
+    def load_point_cloud(point_cloud, verbose=False):
         """
         Load point clouds regard to PLY file or point cloud taken from PLY file
         :param point_cloud: point cloud, ``str`` or ``list``
@@ -55,8 +117,8 @@ class PointCloudRegistration:
         else:
             raise TypeError("point_cloud must be a string of PLY path or a list")
 
-        # Print the point cloud information
-        log.info(f'Point cloud loaded: {len(cloud.points)} points')
+        if verbose:
+            log.debug(f'Point cloud loaded: {len(cloud.points)} points')
 
         return cloud
 
@@ -97,7 +159,7 @@ class PointCloudRegistration:
         return point_cloud
     
     # Save list point cloud to one PLY file
-    def save_pointcloud_to_PLY(point_clouds, ply_path):
+    def save_pointcloud_to_PLY(point_clouds, ply_path, verbose=False):
         """
         Save list point cloud to one PLY file
         :param point_clouds: list of point clouds, ``list``
@@ -111,23 +173,22 @@ class PointCloudRegistration:
             result_cloud = result_cloud + point_cloud
 
         o3d.io.write_point_cloud(ply_path, result_cloud)
-        log.debug(f"Point cloud saved to {ply_path}")
+        if verbose:
+            log.debug(f"Point cloud saved to {ply_path}")
 
-    def downsample_point_cloud(point_cloud, voxel_size=0.05):
+    def downsample_point_cloud(point_cloud, voxel_size=0.05, verbose=False):
         """
         Downsample the point cloud
         :param point_cloud: point cloud
         :param voxel_size: voxel size, ``float``
         :return downsampled_point_cloud: downsampled point cloud, ``open3d.geometry.PointCloud``
         """
-
-        # Downsample the point cloud
         downsampled_point_cloud = point_cloud.voxel_down_sample(voxel_size)
-        log.info(f"Point cloud downsampled: {len(downsampled_point_cloud.points)} points")
-
+        if verbose:
+            log.debug(f"Point cloud downsampled: {len(downsampled_point_cloud.points)} points")
         return downsampled_point_cloud
 
-    def compute_FPFH_features(point_cloud):
+    def compute_FPFH_features(point_cloud, verbose=False):
         """
         Compute FPFH features
         :param point_cloud: point cloud, ``open3d.geometry.PointCloud``
@@ -147,7 +208,8 @@ class PointCloudRegistration:
                 point_cloud,
                 o3d.geometry.KDTreeSearchParamHybrid(radius=radius_feature, max_nn=30)
             )
-            log.debug(f"FPFH features computed in {time_execution.get_duration():.3f}s")
+            if verbose:
+                log.debug(f"FPFH features computed in {time_execution.get_duration():.3f}s")
 
         except Exception as e:
             log.error(f"FPFH features not computed: {e}")
@@ -155,7 +217,7 @@ class PointCloudRegistration:
 
         return fpfh_features
 
-    def match_FPFH_features(source, target, fpfh_source, fpfh_target):
+    def match_FPFH_features(source, target, fpfh_source, fpfh_target, verbose=False):
         """
         Perform FPFH feature matching
         @param source: source point cloud, ``open3d.geometry.PointCloud``
@@ -181,11 +243,12 @@ class PointCloudRegistration:
         )
 
         transformation_matrix = result.transformation
-        log.debug(f"FPFH features matched in {time_execution.get_duration():.3f}s")
+        if verbose:
+            log.debug(f"FPFH features matched in {time_execution.get_duration():.3f}s")
 
         return transformation_matrix
 
-    def icp_alignment(source, target, initial_transformation):
+    def icp_alignment(source, target, initial_transformation, verbose=False):
         """
         Alignment using ICP
         @param source: source point cloud, ``open3d.geometry.PointCloud``
@@ -201,7 +264,7 @@ class PointCloudRegistration:
             source, target, max_correspondence_distance,
             transformation_matrix,
             o3d.pipelines.registration.TransformationEstimationPointToPoint(),
-            o3d.pipelines.registration.ICPConvergenceCriteria(max_iteration=2000)
+            o3d.pipelines.registration.ICPConvergenceCriteria(max_iteration=1000)
         )
 
         transformation_matrix = result_icp.transformation
@@ -209,11 +272,12 @@ class PointCloudRegistration:
         evaluation = o3d.pipelines.registration.evaluate_registration(
             source, target, max_correspondence_distance, transformation_matrix
         )
-        log.debug(f"fitness={evaluation.fitness:.3f}, inlier_rmse={evaluation.inlier_rmse:.3f}, correspondence_set={len(result_icp.correspondence_set)}")
+        if verbose:
+            log.debug(f"fitness={evaluation.fitness:.3f}, inlier_rmse={evaluation.inlier_rmse:.3f}, correspondence_set={len(result_icp.correspondence_set)}")
 
         return transformation_matrix
     
-    def iterative_refinement(source, target, initial_transformation, num_iterations=1):
+    def iterative_refinement(source, target, initial_transformation, num_iterations=1, verbose=False):
         """
         Iterative refinement
         @param source: source point cloud, ``open3d.geometry.PointCloud``
@@ -224,7 +288,8 @@ class PointCloudRegistration:
         """
         time_execution = TimeExecution()
 
-        log.debug(f"Iterative refinement ICP: {num_iterations} iterations")
+        if verbose:
+            log.debug(f"Iterative refinement ICP: {num_iterations} iterations")
 
         transformation_matrix = initial_transformation
 
@@ -233,7 +298,8 @@ class PointCloudRegistration:
                 source, target, transformation_matrix
             )
 
-        log.debug(f"Iterative refinement ICP in {time_execution.get_duration():.3f}s")
+        if verbose:
+            log.debug(f"Iterative refinement ICP in {time_execution.get_duration():.3f}s")
 
         return transformation_matrix
 

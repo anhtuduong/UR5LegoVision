@@ -49,26 +49,27 @@ class ZED:
         # Convert ROS image to OpenCV image
         try:
             self.cv_image = self.cv_bridge.imgmsg_to_cv2(data, "bgr8")
-            # log.debug('image received from zed_node')
         except CvBridgeError as e:
             print(e)
 
-    def get_image(self):
+    def get_image(self, verbose=False):
         """
         Get image from ZED camera
         :return: image from ZED camera, ``numpy.ndarray``
         """
-        log.debug('image returned')
+        if verbose:
+            log.debug('Get image from ZED camera')
         return self.cv_image
     
-    def save_image(self, path, img):
+    def save_image(self, path, img, verbose=False):
         """
         Save image from ZED camera
         :param path: path to save image, ``str``
         """
         try:
             cv.imwrite(path, img)
-            log.debug('image saved to:' + path)
+            if verbose:
+                log.debug('image saved to:' + path)
         except CvBridgeError as e:
             print(e)
         

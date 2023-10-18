@@ -131,7 +131,7 @@ class MotionPlanner():
         action_list = []
 
         # Pick
-        action_list.append(Command.move_to(f'Move to middle', pose=[0.456, 0.619, 1.2, 0.0, 1.0, 0.0, 0.0]))
+        action_list.append(Command.move_to(f'Move to middle', pose=conf.robot_params[ROBOT_NAME]['pose_middle']))
         pick.position.z += 0.15
         action_list.append(Command.move_to(f'Move above {model_name}', pose=Pose_to_list(pick)))
         action_list.append(Command.move_gripper(f'Open gripper', diameter=60))
@@ -147,7 +147,7 @@ class MotionPlanner():
         action_list.append(Command.move_to(f'Move up {model_name}', pose=Pose_to_list(pick)))
 
         # Place
-        action_list.append(Command.move_to(f'Move to middle', pose=[0.456, 0.619, 1.2, 0.0, 1.0, 0.0, 0.0]))
+        action_list.append(Command.move_to(f'Move to middle', pose=conf.robot_params[ROBOT_NAME]['pose_middle']))
         place.position.z += 0.15
         action_list.append(Command.move_to('Move above the place position', pose=Pose_to_list(place)))
         place.position.z -= 0.1

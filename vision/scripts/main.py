@@ -38,73 +38,22 @@ class Vision:
         """
 
         ros.init_node('vision', anonymous=True)
+        log.info('VISION NODE STARTED')
+
         zed = ZED()
-        zed.save_image(IMG_ZED_PATH, zed.get_image())
-        block_detect = BlockDetect(IMG_ZED_PATH)
-        self.block_list = block_detect.get_block_list()
-        pc = PointCloudService()
+        img = zed.get_image(verbose=True)
+        zed.save_image(IMG_ZED_PATH, img)
+
+        block_detect = BlockDetect(IMG_ZED_PATH, save_result=True, open_result=True)
+        self.block_list = block_detect.block_list
 
         for block in self.block_list:
-            pointcloud = pc.get_pointcloud(block.get_pixels())
-            pointcloud = PointCloudService.transform_pointcloud_to_world_frame(pointcloud)
-            pointcloud = PointCloudService.clean_pointcloud(pointcloud)
-            
-            # Load the point clouds
-            target = PointCloudRegistration.load_point_cloud(pointcloud)
-            source = PointCloudRegistration.load_point_cloud(MODEL[block.get_name()]['pointcloud_file'])
+            PointCloudRegistration(block)
+            log.debug(f'Block {block.name} localized at:')
+            log.debug(f'Position: {block.position}')
+            log.debug(f'Rotation: {block.rotation}')
 
-            # Set the color of the point clouds
-            source.paint_uniform_color([1, 0, 0]) # Red
-            target.paint_uniform_color([0, 0, 1]) # Blue
-
-            # Downsample the point clouds
-            source = PointCloudRegistration.downsample_point_cloud(source, 0.001)
-            target = PointCloudRegistration.downsample_point_cloud(target, 0.001)
-
-            # Compute the FPFH features
-            fpfh_source = PointCloudRegistration.compute_FPFH_features(source)
-            fpfh_target = PointCloudRegistration.compute_FPFH_features(target)
-
-            # Perform FPFH feature matching
-            transformation_matrix = PointCloudRegistration.match_FPFH_features(source,
-                                                                            target, 
-                                                                            fpfh_source, 
-                                                                            fpfh_target
-            )
-
-            # Perform iterative refinement ICP
-            transformation_matrix = PointCloudRegistration.iterative_refinement(source,
-                                                                                target,
-                                                                                transformation_matrix,
-                                                                                num_iterations=10
-            )
-
-            # Compute the 6DOF transformation parameters
-            translation, euler_angles = TransformationUtils.compute_6DoF(transformation_matrix)
-
-            # Transform the source point cloud
-            transformed_cloud = source
-            transformed_cloud.transform(transformation_matrix)
-
-            # Visualize the point clouds
-            PointCloudRegistration.visualize_pointcloud([source, target])
-
-            # Save the point clouds
-            PointCloudRegistration.save_pointcloud_to_PLY([source, target], PLY_AFTER_ALIGN_PATH)
-
-            block.set_point_cloud(transformed_cloud)
-            block.set_transformation_matrix(transformation_matrix)
-            block.set_pose(translation, euler_angles)
-
-    def get_block_list(self):
-        """
-        Getter for block_list
-
-        :return block_list: list of Block objects
-        """
-        return self.block_list
-
-            
+        log.info('Done localizing blocks')
                 
         
             

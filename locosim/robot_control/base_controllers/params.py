@@ -28,10 +28,7 @@ robot_params['ur5'] ={  'dt': 0.001,
                         'spawn_y' : 0,
                         'spawn_z' : 0,
                         'buffer_size': 50000, # note the frames are all aligned with base for joints = 0
-                        'q_pick': np.array([-2.41, -1.24, -2.44, -1.05, -1.59, 0.84]),
-                        'q_middle': np.array([-1.24, -1.12, -2.64, -0.98, -1.59, -0.27]),
-                        'q_place': np.array([-0.23, -1.42, -2.47, -0.83, -1.59, -1.36]),
-                        'pose_middle': np.array([0.453576, 0.619019, 1.21557, -0.686442, 0.727039, 0.0, 0.0145918]),
+                        'pose_middle': [0.456, 0.619, 1.2, 0.0, 1.0, 0.0, 0.0],
                         'pick_limit': {
                               'x': [0.0, 0.25286],
                               'y': [0.39775, 0.76],

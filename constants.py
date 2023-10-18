@@ -19,7 +19,9 @@ if str(ROOT) not in sys.path:
 import numpy as np
 
 # Log paths
+LOG_FOLDER = os.path.abspath(os.path.join(ROOT, "logs"))
 IMG_ZED_PATH = os.path.abspath(os.path.join(ROOT, "logs/img_ZED_cam.png"))
+IMG_RESULT_PATH = os.path.abspath(os.path.join(ROOT, "logs/img_ZED_cam_result.png"))
 POINT_CLOUD_PATH = os.path.abspath(os.path.join(ROOT, "logs/point_cloud.txt"))
 PLY_PATH = os.path.abspath(os.path.join(ROOT, "logs/point_cloud.ply"))
 PLY_FROM_ROS_PATH = os.path.abspath(os.path.join(ROOT, "logs/point_cloud_from_ros.ply"))

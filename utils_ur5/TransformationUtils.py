@@ -21,7 +21,7 @@ class TransformationUtils:
     @brief Transformation utilities
     """
 
-    def compute_6DoF(transformation_matrix):
+    def compute_6DoF(transformation_matrix, verbose=False):
         """
         @brief Compute the 6DOF transformation parameters
         @param transformation_matrix_icp (np.array): 4x4 transformation matrix
@@ -35,9 +35,10 @@ class TransformationUtils:
         # Compute the Euler angles from the rotation matrix
         euler_angles = np.degrees(TransformationUtils.rotation_matrix_to_euler_angles(rotation_matrix))
 
-        # Print the 6DOF transformation parameters
-        log.info(f"Translation: {translation}")
-        log.info(f"Euler angles: {euler_angles}")
+        if verbose:
+            # Print the 6DOF transformation parameters
+            log.info(f"Translation: {translation}")
+            log.info(f"Euler angles: {euler_angles}")
 
         return translation, euler_angles
 
