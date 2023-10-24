@@ -70,13 +70,8 @@ class Motion():
         self.move_to_srv = ros.ServiceProxy('/ur5/move_to', MoveTo)
         ros.wait_for_service('move_gripper')
         self.move_gripper_srv = ros.ServiceProxy('/ur5/move_gripper', generic_float)
-
+        
         self.gazebo_command = GazeboCommand()
-
-        # Predefined poses
-        # self.q_pick = conf.robot_params[self.robot_name]['q_pick']
-        # self.q_middle = conf.robot_params[self.robot_name]['q_middle']
-        # self.q_place = conf.robot_params[self.robot_name]['q_place']
 
     def joint_states_callback(self, msg):
         """

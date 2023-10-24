@@ -2,7 +2,7 @@ task: detect
 mode: train
 model: /content/runs/detect/train2/weights/last.pt
 data: /content/datasets/lego-1/data.yaml
-epochs: 300
+epochs: 500
 patience: 50
 batch: 23
 imgsz: 640

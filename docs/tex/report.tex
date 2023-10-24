@@ -12,7 +12,7 @@
 	bottom=2.5cm,  % bottom margin
 }
 
-\title{Vision-Based Block Detection, Localization, and Assembly Using UR5 Robot Arm - Project Progress Report}
+\title{Vision-Based Lego Detection, Localization, and Assembly Using UR5 Robot Arm - Project Progress Report}
 \author{Anh Tu Duong}
 \date{\today}
 
@@ -21,18 +21,18 @@
 	\maketitle
 	
 	\section{Introduction}
-	This progress report provides an overview of the work completed so far in the "Vision-Based Block Detection, Localization, and Assembly Using UR5 Robot Arm" project. The project aims to achieve autonomous pick-and-place assembly of Lego blocks using a UR5 robot arm, with three main components: Vision for object detection and localization, Motion for robot arm manipulation, and the Planning component, which is yet to be developed.
+	This progress report provides an overview of the work completed so far in the "Vision-Based Lego Detection, Localization, and Assembly Using UR5 Robot Arm" project. The project aims to achieve autonomous pick-and-place assembly of Lego blocks using a UR5 robot arm, with three main components: Vision for object detection and localization, Motion for robot arm manipulation, and the Planning component, which is yet to be developed.
 	
 	\begin{figure}[H]
 		\centering
-		\includegraphics[width=0.5\textwidth]{scene-start.png}
+		\includegraphics[width=0.5\textwidth]{images/scene-start.png}
 		\caption{UR5 robot with ZED camera and Lego blocks on the table}
 		\label{fig:scene-start}
 	\end{figure}
 	
 	\begin{figure}[H]
 		\centering
-		\includegraphics[width=0.6\textwidth]{design-main.png}
+		\includegraphics[width=0.6\textwidth]{images/design-main.png}
 		\caption{Main workflow}
 		\label{fig:design-main}
 	\end{figure}
@@ -42,7 +42,7 @@
 	
 	\begin{figure}[H]
 		\centering
-		\makebox[\textwidth][c]{\includegraphics[width=1.2\textwidth]{design-vision.png}}
+		\makebox[\textwidth][c]{\includegraphics[width=1.2\textwidth]{images/design-vision.png}}
 		\caption{Vision workflow}
 		\label{fig:design-vision}
 	\end{figure}
@@ -50,35 +50,35 @@
 	The vision work starts with preprocessing the data: Dataset collection, YOLO training and Point cloud generation from 3D Lego model. The vision node runtime starts with the Detection and Localization of Lego blocks using point cloud registration technique. The result we want to achieve is Lego's translation and orientation, then send them to the Planning node.
 	
 	\subsection{Dataset collection}
-	A dataset (about 2000 images) containing real images (10\%) from the ZED camera and synthetic images (90\%) generated from Blender with 3D models has been collected. I also put synthetic 3D models inside real background images to enrich dataset.\\
+	A dataset (about 14000 images) containing real images (10\%) from the ZED camera and synthetic images (90\%) generated from Blender with 3D models has been collected. I also put synthetic 3D models inside real background images to enrich dataset.\\
 	
 	\begin{figure}[H]
 		\centering
-		\includegraphics[width=1.0\textwidth]{dataset.png}
+		\includegraphics[width=1.0\textwidth]{images/dataset.png}
 		\caption{Dataset}
 		\label{fig:dataset}
 	\end{figure}
 	
 	The dataset is divided into:
 	\begin{itemize}
-		\item Training set (70\%): 1.5k images
-		\item Validation set (20\%): 411 images
-		\item Testing set (10\%): 205 images
+		\item Training set (86\%): 12000 images
+		\item Validation set (11\%): 1600 images
+		\item Testing set (3\%): 400 images
 	\end{itemize}
 	
 	\subsection{YOLO training}
-	YOLOv5 was employed to train an object detection model. The model gets 95\% accuracy. However some poses of the Lego blocks are very similar. For example, the only different between block X1-Y2-Z1 and X1-Y2-Z2 is their height. I'm still looking for a way to solve this issue.
+	YOLOv8L was employed to train an object detection model. After 300 epochs, the model gets 98.5\% accuracy.
 	
 	\begin{figure}[H]
 		\centering
-		\makebox[\textwidth][c]{\includegraphics[width=1.2\textwidth]{yolo_train_results.png}}
-		\caption{YOLOv5 train results}
+		\makebox[\textwidth][c]{\includegraphics[width=1.1\textwidth]{images/yolo_train_results.png}}
+		\caption{YOLOv8 train results}
 		\label{fig:train_results}
 	\end{figure}
 	
 	\begin{figure}[H]
 		\centering
-		\makebox[\textwidth][c]{\includegraphics[width=1.0\textwidth]{confusion_matrix.png}}
+		\makebox[\textwidth][c]{\includegraphics[width=1.0\textwidth]{images/confusion_matrix.png}}
 		\caption{Confusion matrix}
 		\label{fig:confusion_matrix}
 	\end{figure}
@@ -88,18 +88,18 @@
 	
 	\begin{figure}[H]
 		\centering
-		\makebox[\textwidth][c]{\includegraphics[width=0.5\textwidth]{pointcloud-from-3d.png}}
+		\makebox[\textwidth][c]{\includegraphics[width=0.5\textwidth]{images/pointcloud-from-3d.png}}
 		\caption{From 3D Lego model to point cloud}
 		\label{fig:pointcloud-from-3d}
 	\end{figure}
 	
 	\subsection{Detection}
-	The Vision node starts with capturing images from the ZED camera and detecting Lego blocks using the trained YOLOv5 model. The bounding box information for detected objects is passed to the Localization process.
+	The Vision node starts with capturing images from the ZED camera and detecting Lego blocks using the trained YOLOv8 model. The bounding box information for detected objects is passed to the Localization process.
 	
 	\begin{figure}[H]
 		\centering
-		\makebox[\textwidth][c]{\includegraphics[width=0.8\textwidth]{detect.png}}
-		\caption{Object detection using YOLOv5}
+		\makebox[\textwidth][c]{\includegraphics[width=0.8\textwidth]{images/detect.png}}
+		\caption{Object detection using YOLOv8}
 		\label{fig:detect}
 	\end{figure}
 	
@@ -108,7 +108,7 @@
 	
 	\begin{figure}[H]
 		\centering
-		\makebox[\textwidth][c]{\includegraphics[width=0.8\textwidth]{pointcloud-clean.png}}
+		\makebox[\textwidth][c]{\includegraphics[width=0.8\textwidth]{images/pointcloud-clean.png}}
 		\label{fig:pointcloud-clean}
 	\end{figure}
 	
@@ -116,7 +116,7 @@
 	
 	\begin{figure}[H]
 		\centering
-		\makebox[\textwidth][c]{\includegraphics[width=0.9\textwidth]{pointcloud-align.png}}
+		\makebox[\textwidth][c]{\includegraphics[width=0.9\textwidth]{images/pointcloud-align.png}}
 		\caption{Point cloud registration}
 		\label{fig:pointcloud-align}
 	\end{figure}
@@ -154,7 +154,7 @@
 	
 	\begin{figure}[!ht]
 		\centering
-		\makebox[\textwidth][c]{\includegraphics[width=1.0\textwidth]{design-motion.png}}
+		\makebox[\textwidth][c]{\includegraphics[width=1.0\textwidth]{images/design-motion.png}}
 		\caption{Motion node workflow}
 		\label{fig:design-motion}
 	\end{figure}
@@ -187,7 +187,7 @@
 	\end{itemize}
 	
 	\section{Conclusion}
-	The "Vision-Based Block Detection, Localization, and Assembly Using UR5 Robot Arm" project has made significant progress in implementing the Vision and Motion components. However, the Planning component remains to be developed, which poses the primary challenge. Addressing the difficulties in planning and implementing robust error handling will be crucial to achieving a fully autonomous Lego block assembly system. With further development and refinement, the project has the potential to demonstrate the capabilities of vision-based robotics in real-world applications.
+	The "Vision-Based Lego Detection, Localization, and Assembly Using UR5 Robot Arm" project has made significant progress in implementing the Vision and Motion components. However, the Planning component remains to be developed, which poses the primary challenge. Addressing the difficulties in planning and implementing robust error handling will be crucial to achieving a fully autonomous Lego block assembly system. With further development and refinement, the project has the potential to demonstrate the capabilities of vision-based robotics in real-world applications.
 	
 	\textbf{Note:} This report provides an overview of the progress made so far. Detailed technical information and results will be provided in the final report upon completion of the Planning component.
 	
