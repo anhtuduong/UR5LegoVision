@@ -28,7 +28,7 @@ robot_params['ur5'] ={  'dt': 0.001,
                         'spawn_y' : 0,
                         'spawn_z' : 0,
                         'buffer_size': 50000, # note the frames are all aligned with base for joints = 0
-                        'pose_middle': [0.456, 0.619, 1.2, 0.0, 1.0, 0.0, 0.0],
+                        'pose_middle': [0.456, 0.619, 1.2, 0, 180, 0],
                         'pick_limit': {
                               'x': [0.0, 0.25286],
                               'y': [0.39775, 0.76],

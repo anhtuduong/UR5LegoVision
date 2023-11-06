@@ -31,12 +31,12 @@
     <include>
       <name>X1-Y2-Z2-CHAMFER 1</name>
       <uri>model://X1-Y2-Z2-CHAMFER</uri>
-      <pose>0.19 0.48 0.87 0 0 0</pose>
+      <pose>0.19 0.48 0.87 0 0 0.8</pose>
     </include>
     <include>
       <name>X1-Y2-Z2-CHAMFER 2</name>
       <uri>model://X1-Y2-Z2-CHAMFER</uri>
-      <pose>0.26 0.63 0.87 0 0 0</pose>
+      <pose>0.26 0.63 0.87 0 0 -1</pose>
     </include>
     <include>
       <name>X1-Y2-Z2</name>
@@ -46,12 +46,12 @@
     <include>
       <name>X1-Y4-Z2</name>
       <uri>model://X1-Y4-Z2</uri>
-      <pose>0.09 0.69 0.87 0 0 0</pose>
+      <pose>0.09 0.69 0.87 0 0 -2.4</pose>
     </include>
     <include>
       <name>X1-Y2-Z2-TWINFILLET</name>
       <uri>model://X1-Y2-Z2-TWINFILLET</uri>
-      <pose>0.19 0.71 0.87 0 0 0</pose>
+      <pose>0.19 0.71 0.87 0 0 -1.5</pose>
     </include>
     <include>
       <name>X1-Y1-Z2</name>

@@ -29,7 +29,7 @@ from motion.command import Command
 from constants import *
 from motion.action_list import ACTION_LIST
 
-USE_ACTION_LIST = True
+USE_ACTION_LIST = False
 
 # ---------------------- CLASS ----------------------
 
@@ -64,7 +64,7 @@ class MotionPlanner():
                 pose = Pose()
                 pose.position.x = item['pose']['position']['x']
                 pose.position.y = item['pose']['position']['y']
-                pose.position.z = item['pose']['position']['z']
+                pose.z = item['pose']['position']['z']
                 pose.orientation.x = item['pose']['orientation']['x']
                 pose.orientation.y = item['pose']['orientation']['y']
                 pose.orientation.z = item['pose']['orientation']['z']
@@ -126,42 +126,42 @@ class MotionPlanner():
         :return: The list of actions, ``list``
         """
         # Extract pose
-        pick = list_to_Pose(pose_pick)
-        place = list_to_Pose(pose_place)
+        pick = list_to_PosRot(pose_pick)
+        place = list_to_PosRot(pose_place)
 
         action_list = []
 
         # Pick
         action_list.append(Command.move_to(f'Move to middle', pose=conf.robot_params[ROBOT_NAME]['pose_middle']))
-        pick.position.z += 0.15
-        action_list.append(Command.move_to(f'Move above {model_name}', pose=Pose_to_list(pick)))
+        pick.z += 0.15
+        action_list.append(Command.move_to(f'Move above {model_name}', pose=PosRot_to_list(pick)))
         action_list.append(Command.move_gripper(f'Open gripper', diameter=60))
-        pick.position.z -= 0.1
-        action_list.append(Command.move_to(f'Move down {model_name}', pose=Pose_to_list(pick)))
-        pick.position.z -= 0.05
-        action_list.append(Command.move_to(f'Move down to {model_name}', pose=Pose_to_list(pick)))
+        pick.z -= 0.1
+        action_list.append(Command.move_to(f'Move down {model_name}', pose=PosRot_to_list(pick)))
+        pick.z -= 0.05
+        action_list.append(Command.move_to(f'Move down to {model_name}', pose=PosRot_to_list(pick)))
         action_list.append(Command.move_gripper(f'Grasp {model_name}', diameter=35))
         action_list.append(Command.attach_models(f'Attach {model_name} to gripper', model_name_1=model_name, link_name_1='link', model_name_2=ROBOT_NAME, link_name_2=GRIPPER_LINK))
-        pick.position.z += 0.05
-        action_list.append(Command.move_to(f'Pick up {model_name}', pose=Pose_to_list(pick)))
-        pick.position.z += 0.1
-        action_list.append(Command.move_to(f'Move up {model_name}', pose=Pose_to_list(pick)))
+        pick.z += 0.05
+        action_list.append(Command.move_to(f'Pick up {model_name}', pose=PosRot_to_list(pick)))
+        pick.z += 0.1
+        action_list.append(Command.move_to(f'Move up {model_name}', pose=PosRot_to_list(pick)))
 
         # Place
         action_list.append(Command.move_to(f'Move to middle', pose=conf.robot_params[ROBOT_NAME]['pose_middle']))
-        place.position.z += 0.15
-        action_list.append(Command.move_to('Move above the place position', pose=Pose_to_list(place)))
-        place.position.z -= 0.1
-        action_list.append(Command.move_to('Move down', pose=Pose_to_list(place)))
-        place.position.z -= 0.05
-        action_list.append(Command.move_to('Move down to the place position', pose=Pose_to_list(place)))
+        place.z += 0.15
+        action_list.append(Command.move_to('Move above the place position', pose=PosRot_to_list(place)))
+        place.z -= 0.1
+        action_list.append(Command.move_to('Move down', pose=PosRot_to_list(place)))
+        place.z -= 0.05
+        action_list.append(Command.move_to('Move down to the place position', pose=PosRot_to_list(place)))
         action_list.append(Command.attach_models(f'Attach {model_name} to table', model_name_1=model_name, link_name_1='link', model_name_2='tavolo', link_name_2='link'))
         action_list.append(Command.detach_models(f'Detach {model_name} from gripper', model_name_1=model_name, link_name_1='link', model_name_2=ROBOT_NAME, link_name_2=GRIPPER_LINK))
         action_list.append(Command.move_gripper(f'Release {model_name}', diameter=60))
-        place.position.z += 0.05
-        action_list.append(Command.move_to(f'Move above {model_name}', pose=Pose_to_list(place)))
-        place.position.z += 0.1
-        action_list.append(Command.move_to(f'Move up', pose=Pose_to_list(place)))
+        place.z += 0.05
+        action_list.append(Command.move_to(f'Move above {model_name}', pose=PosRot_to_list(place)))
+        place.z += 0.1
+        action_list.append(Command.move_to(f'Move up', pose=PosRot_to_list(place)))
 
         return action_list
 
@@ -172,37 +172,39 @@ class MotionPlanner():
 
         if USE_ACTION_LIST:
             self.action_list = ACTION_LIST
+            log.debug('Using action list')
             return
 
+        log.debug('Using motion planner')
         # Actions
         model = 'X1-Y2-Z2-CHAMFER 1'
-        pick = [0.19, 0.48, 0.91, 0.7071055, -0.7071081, 9e-7, 9e-7]
-        place = [0.663671, 0.7, 0.91, -1.0, 0.0, 0.0, 0.0]
+        pick = [0.19, 0.48, 0.91, 0, 180, 135.8366233]
+        place = [0.663671, 0.7, 0.91, 0, 180, 180]
         self.action_list.extend(self.pick_and_place(model, pick, place))
 
         model = 'X1-Y2-Z2-CHAMFER 2'
-        pick = [0.26, 0.63, 0.91, 0.7071055, -0.7071081, 9e-7, 9e-7]
-        place = [0.536209, 0.7, 0.91, 0.0, 1.0, 0.0, 0.0]
+        pick = [0.26, 0.63, 0.91, 0, 180, 33.2957801]
+        place = [0.536209, 0.7, 0.91, 0, 180, 0]
         self.action_list.extend(self.pick_and_place(model, pick, place))
 
         model = 'X1-Y2-Z2'
-        pick = [0.09, 0.51, 0.91, 0.7071055, -0.7071081, 9e-7, 9e-7]
-        place = [0.599847, 0.7, 0.91, 0.0, 1.0, 0.0, 0.0]
+        pick = [0.09, 0.51, 0.91, 0, 180, 90]
+        place = [0.599847, 0.7, 0.91, 0, 180, 0]
         self.action_list.extend(self.pick_and_place(model, pick, place))
 
         model = 'X1-Y4-Z2'
-        pick = [0.09, 0.69, 0.91, 0.7071055, -0.7071081, 9e-7, 9e-7]
-        place = [0.6, 0.7, 0.9483, 0.0, 1.0, 0.0, 0.0]
+        pick = [0.09, 0.69, 0.91, 0, 180, -47.5098709]
+        place = [0.6, 0.7, 0.9483, 0, 180, 0]
         self.action_list.extend(self.pick_and_place(model, pick, place))
 
         model = 'X1-Y2-Z2-TWINFILLET'
-        pick = [0.19, 0.71, 0.91, 0.7071055, -0.7071081, 9e-7, 9e-7]
-        place = [0.6, 0.7, 0.9863, 0.0, 1.0, 0.0, 0.0]
+        pick = [0.19, 0.71, 0.91, 0, 180, 4.0563305]
+        place = [0.6, 0.7, 0.9863, 0, 180, 0]
         self.action_list.extend(self.pick_and_place(model, pick, place))
 
         model = 'X1-Y1-Z2'
-        pick = [0.16, 0.58, 0.91, 0.7071055, -0.7071081, 9e-7, 9e-7]
-        place = [0.600155, 0.7, 1.0245, 0.0, 1.0, 0.0, 0.0]
+        pick = [0.16, 0.58, 0.91, 0, 180, 0]
+        place = [0.600155, 0.7, 1.0245, 0, 180, 0]
         self.action_list.extend(self.pick_and_place(model, pick, place))
 
 

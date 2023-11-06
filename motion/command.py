@@ -8,7 +8,6 @@
 """
 
 # Resolve paths
-import os
 import sys
 from pathlib import Path
 FILE = Path(__file__).resolve()
@@ -18,6 +17,7 @@ if str(ROOT) not in sys.path:
 
 # Import
 from geometry_msgs.msg import Pose
+from motion.utils import *
 
 # ---------------------- CLASS ----------------------
 
@@ -37,15 +37,17 @@ class Command():
         pose_target.position.x = pose[0]
         pose_target.position.y = pose[1]
         pose_target.position.z = pose[2]
-        pose_target.orientation.x = pose[3]
-        pose_target.orientation.y = pose[4]
-        pose_target.orientation.z = pose[5]
-        pose_target.orientation.w = pose[6]
+        # Convert Euler angles to quaternions
+        qx, qy, qz, qw = euler_to_quaternion(pose[3], pose[4], pose[5])
+        pose_target.orientation.x = qx
+        pose_target.orientation.y = qy
+        pose_target.orientation.z = qz
+        pose_target.orientation.w = qw
         
         return {
             'type': 'move to',
             'description': description,
-            'pose': pose
+            'pose': Pose_to_list(pose_target)
         }
 
     def move_joints(description='', joints=[]):
