@@ -18,7 +18,7 @@
  
                 <inertial>
                     <!-- Volume:  1.1813374000e-05 -->
-                    <mass>0.05</mass>
+                    <mass>0.001</mass>
 
                     <!-- Center of mass:  5.4000000000e-07  4.8881100000e-03  2.4580050000e-02 -->
                     <pose>0 0 0 0 0 0</pose>

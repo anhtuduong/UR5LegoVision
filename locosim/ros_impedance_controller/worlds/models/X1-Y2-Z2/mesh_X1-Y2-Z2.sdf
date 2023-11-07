@@ -17,7 +17,7 @@
  
                  <inertial>
                     <!-- Volume:  1.4626929000e-05 -->
-                    <mass>0.05</mass>
+                    <mass>0.001</mass>
 
                     <!-- Center of mass:  9.6000000000e-07  5.6000000000e-07  2.8797740000e-02 -->
                     <pose>0 0 -0.064e-02 0 0 0</pose>
@@ -72,7 +72,7 @@
  
                          <script> 
                              <uri>file://media/materials/scripts/gazebo.material</uri>
-                             <name>Gazebo/Orange</name>
+                             <name>Gazebo/SkyBlue</name>
                          </script>
                          <shader type="vertex">
                            <normal_map>__default__</normal_map>

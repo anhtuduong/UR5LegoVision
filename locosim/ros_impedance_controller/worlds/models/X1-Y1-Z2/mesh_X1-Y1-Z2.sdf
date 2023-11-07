@@ -15,7 +15,7 @@
             <kinematic>0</kinematic>
 
             <inertial>
-                <mass>0.05</mass>
+                <mass>0.001</mass>
 
                 <!-- Center of mass:  1.4400000000e-06 -5.0000000000e-08  2.7859970000e-02 -->
                 <pose>0 0 -0.064e-02 0 0 0</pose>
