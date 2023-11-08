@@ -29,7 +29,7 @@ from motion.command import Command
 from constants import *
 from motion.action_list import ACTION_LIST
 
-USE_ACTION_LIST = False
+USE_ACTION_LIST = True
 
 # ---------------------- CLASS ----------------------
 

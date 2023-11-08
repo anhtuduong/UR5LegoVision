@@ -46,7 +46,7 @@
     <include>
       <name>X1-Y4-Z2</name>
       <uri>model://X1-Y4-Z2</uri>
-      <pose>0.09 0.69 0.87 0 0 -2.4</pose>
+      <pose>0.06 0.65 0.885 0 -1.5707963 -2.4</pose>
     </include>
     <include>
       <name>X1-Y2-Z2-TWINFILLET</name>
