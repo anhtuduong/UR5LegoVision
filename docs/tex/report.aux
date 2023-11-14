@@ -3,38 +3,42 @@
 \@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{1}\protected@file@percent }
 \@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces UR5 robot with ZED camera and Lego blocks on the table}}{1}\protected@file@percent }
 \newlabel{fig:scene-start}{{1}{1}}
-\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Main workflow}}{1}\protected@file@percent }
-\newlabel{fig:design-main}{{2}{1}}
-\@writefile{toc}{\contentsline {section}{\numberline {2}Vision}{2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {2}Methodology}{1}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Main workflow}}{2}\protected@file@percent }
+\newlabel{fig:design-main}{{2}{2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Vision}{2}\protected@file@percent }
 \@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Vision workflow}}{2}\protected@file@percent }
 \newlabel{fig:design-vision}{{3}{2}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Dataset collection}{3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.1.1}Detection}{3}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{Dataset collection}{3}\protected@file@percent }
 \@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Dataset}}{3}\protected@file@percent }
 \newlabel{fig:dataset}{{4}{3}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}YOLO training}{3}\protected@file@percent }
+\@writefile{toc}{\contentsline {paragraph}{YOLO training}{3}\protected@file@percent }
 \@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces YOLOv8 train results}}{4}\protected@file@percent }
 \newlabel{fig:train_results}{{5}{4}}
 \@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Confusion matrix}}{4}\protected@file@percent }
 \newlabel{fig:confusion_matrix}{{6}{4}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Point cloud generation from 3D Lego model}{5}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces From 3D Lego model to point cloud}}{5}\protected@file@percent }
-\newlabel{fig:pointcloud-from-3d}{{7}{5}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.4}Detection}{5}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Object detection using YOLOv8}}{5}\protected@file@percent }
-\newlabel{fig:detect}{{8}{5}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.5}Localization}{5}\protected@file@percent }
-\newlabel{fig:pointcloud-clean}{{2.5}{6}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Object detection using YOLOv8}}{5}\protected@file@percent }
+\newlabel{fig:detect}{{7}{5}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.1.2}Localization}{5}\protected@file@percent }
+\newlabel{fig:pointcloud-clean}{{2.1.2}{5}}
+\@writefile{toc}{\contentsline {paragraph}{Point cloud generation from 3D Lego model}{5}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces From 3D Lego model to point cloud}}{6}\protected@file@percent }
+\newlabel{fig:pointcloud-from-3d}{{8}{6}}
+\@writefile{toc}{\contentsline {paragraph}{Point Cloud Registration}{6}\protected@file@percent }
 \@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Point cloud registration}}{6}\protected@file@percent }
 \newlabel{fig:pointcloud-align}{{9}{6}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.5.1}FPFH}{6}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.5.2}ICP}{7}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {3}Motion}{7}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Command Extraction}{7}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Trajectory Planning}{7}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces Motion node workflow}}{8}\protected@file@percent }
-\newlabel{fig:design-motion}{{10}{8}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Robot Arm Manipulation}{8}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {4}Planning: (Work in Progress)}{8}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Difficulty and Challenges}{8}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {5}Next Steps}{8}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {6}Conclusion}{9}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{FPFH}{6}\protected@file@percent }
+\@writefile{toc}{\contentsline {subparagraph}{ICP}{7}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Motion}{7}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces Motion node workflow}}{7}\protected@file@percent }
+\newlabel{fig:design-motion}{{10}{7}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.2.1}Trajectory Planning}{8}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {2.2.2}Robot Control}{8}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3}Planning: (Work in Progress)}{8}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {3}Challenge and Next Steps}{8}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {11}{\ignorespaces Image as input}}{8}\protected@file@percent }
+\newlabel{fig:input-image}{{11}{8}}
+\@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces Point cloud registration}}{9}\protected@file@percent }
+\newlabel{fig:pointcloud-wrong}{{12}{9}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Conclusion}{9}\protected@file@percent }

@@ -12,7 +12,8 @@
 	bottom=2.5cm,  % bottom margin
 }
 
-\title{Vision-Based Lego Detection, Localization, and Assembly Using UR5 Robot Arm - Project Progress Report}
+\title{Vision-Based Lego Detection, Localization, and Assembly Using UR5 Robot Arm\\
+\large Bachelor Thesis Project Report}
 \author{Anh Tu Duong}
 \date{\today}
 
@@ -21,14 +22,22 @@
 	\maketitle
 	
 	\section{Introduction}
-	This progress report provides an overview of the work completed so far in the "Vision-Based Lego Detection, Localization, and Assembly Using UR5 Robot Arm" project. The project aims to achieve autonomous pick-and-place assembly of Lego blocks using a UR5 robot arm, with three main components: Vision for object detection and localization, Motion for robot arm manipulation, and the Planning component, which is yet to be developed.
+	This progress report provides an overview of the work completed so far in the project "Vision-Based Lego Detection, Localization, and Assembly Using UR5 Robot Arm". The project aims to achieve autonomous pick-and-place assembly of Lego blocks using a UR5 robot arm.
 	
 	\begin{figure}[H]
 		\centering
-		\includegraphics[width=0.5\textwidth]{images/scene-start.png}
+		\includegraphics[width=0.75\textwidth]{images/scene-start.png}
 		\caption{UR5 robot with ZED camera and Lego blocks on the table}
 		\label{fig:scene-start}
 	\end{figure}
+	
+	\section{Methodology}
+	The methodology is structured around the implementation of three ROS (Robot Operating System) nodes representing the core components of the system:
+	\begin{itemize}
+		\item Vision: Responsible for object detection and localization. This node captures data from the ZED stereo camera, processes it using computer vision algorithms, and publishes relevant information on ROS topics.
+		\item Motion: Dedicated to robot arm manipulation, including trajectory planning and control. This node subscribes to information from the Vision Node, determining optimal trajectories for the UR5 robot arm, and executing precise movements.
+		\item Planning: Currently under development, this node will play a pivotal role in systematic task planning and coordination. Once fully implemented, it will communicate with both the Vision and Motion nodes, orchestrating the sequence of actions required for Lego construction.
+	\end{itemize}
 	
 	\begin{figure}[H]
 		\centering
@@ -37,8 +46,8 @@
 		\label{fig:design-main}
 	\end{figure}
 	
-	\section{Vision}
-	The Vision component serves as the perception module of the robot and has been successfully implemented.
+	\subsection{Vision}
+	The Vision component serves as the perception module of the robot. The result we want to achieve is sending Lego's position and orientation to the robot.
 	
 	\begin{figure}[H]
 		\centering
@@ -47,10 +56,11 @@
 		\label{fig:design-vision}
 	\end{figure}
 	
-	The vision work starts with preprocessing the data: Dataset collection, YOLO training and Point cloud generation from 3D Lego model. The vision node runtime starts with the Detection and Localization of Lego blocks using point cloud registration technique. The result we want to achieve is Lego's translation and orientation, then send them to the Planning node.
+	\subsubsection{Detection}
+	Detection is the first phase in the Vision workflow, aiming to identify and classify Lego blocks within the robot's field of view. In order to do that, a preprocess phase consisted of Dataset collection and Object detection model training has been done.
 	
-	\subsection{Dataset collection}
-	A dataset (about 14000 images) containing real images (10\%) from the ZED camera and synthetic images (90\%) generated from Blender with 3D models has been collected. I also put synthetic 3D models inside real background images to enrich dataset.\\
+	\paragraph{Dataset collection}
+	A dataset (about 14000 images) containing real images (10\%) from the ZED camera and synthetic images (90\%) generated from Blender with 3D models has been collected.
 	
 	\begin{figure}[H]
 		\centering
@@ -66,7 +76,7 @@
 		\item Testing set (3\%): 400 images
 	\end{itemize}
 	
-	\subsection{YOLO training}
+	\paragraph{YOLO training}
 	YOLOv8L was employed to train an object detection model. After 300 epochs, the model gets 98.5\% accuracy.
 	
 	\begin{figure}[H]
@@ -83,17 +93,6 @@
 		\label{fig:confusion_matrix}
 	\end{figure}
 	
-	\subsection{Point cloud generation from 3D Lego model}
-	Point clouds were generated from the 3D models of the Lego blocks to represent their shapes. These point clouds will be matching with the point clouds of the Lego in the scene to localize it, which will be presented in Localization phase.
-	
-	\begin{figure}[H]
-		\centering
-		\makebox[\textwidth][c]{\includegraphics[width=0.5\textwidth]{images/pointcloud-from-3d.png}}
-		\caption{From 3D Lego model to point cloud}
-		\label{fig:pointcloud-from-3d}
-	\end{figure}
-	
-	\subsection{Detection}
 	The Vision node starts with capturing images from the ZED camera and detecting Lego blocks using the trained YOLOv8 model. The bounding box information for detected objects is passed to the Localization process.
 	
 	\begin{figure}[H]
@@ -103,8 +102,8 @@
 		\label{fig:detect}
 	\end{figure}
 	
-	\subsection{Localization}
-	In the Localization process, the bounding boxes from the Vision component are used to extract point clouds of every pixels from the ZED camera data. After cleaning the point cloud belonging to the table, the rest represents a fragment of Lego blocks.
+	\subsubsection{Localization}
+	The objective of Localization phase is to transform the initially detected 2D information of Lego blocks into a comprehensive 3D understanding. This crucial step bridges the gap between the robot's perception and its ability to interact with the physical world, enabling precise positioning and orientation of the objects within the three-dimensional workspace. The bounding boxes from the Vision component are used to extract point clouds of every pixels from the ZED camera data. After cleaning the point cloud belonging to the table, the rest represents a fragment of Lego blocks.
 	
 	\begin{figure}[H]
 		\centering
@@ -112,6 +111,17 @@
 		\label{fig:pointcloud-clean}
 	\end{figure}
 	
+	\paragraph{Point cloud generation from 3D Lego model}
+	Point clouds were generated from the 3D models of the Lego blocks to represent their shapes. These point clouds will be matching with the point clouds of the Lego in the scene to localize it.
+	
+	\begin{figure}[H]
+		\centering
+		\makebox[\textwidth][c]{\includegraphics[width=0.5\textwidth]{images/pointcloud-from-3d.png}}
+		\caption{From 3D Lego model to point cloud}
+		\label{fig:pointcloud-from-3d}
+	\end{figure}
+	
+	\paragraph{Point Cloud Registration}
 	Point Cloud Registration is a fundamental problem in 3D computer vision and photogrammetry. Given several sets of points in different coordinate systems, the aim of registration is to find the transformation that best aligns all of them into a common coordinate system. Point Cloud Registration plays a significant role in this localization phase. Having point cloud rendered from the 3D model mesh (source point cloud) and the point cloud of an object detected from ZED camera (target point cloud), we need to perform some calculation to align the source point cloud to the target point cloud. The transformation matrix calculated after alignment is the pose of the Lego object in the scene.
 	
 	\begin{figure}[H]
@@ -123,7 +133,7 @@
 	
 	FPFH and ICP are 2 algorithms used to perform point cloud registration:
 	
-	\subsubsection{FPFH}
+	\subparagraph{FPFH}
 	
 	FPFH (Fast Point Feature Histograms) is a feature descriptor commonly used in point cloud analysis and 3D computer vision tasks. It is an extension of the Point Feature Histograms (PFH) descriptor, designed to capture the geometric properties of 3D points. The FPFH descriptor calculates the local surface characteristics of a point in a point cloud by considering its neighbors. Here's a high-level overview of how FPFH features are computed:
 	\begin{itemize}
@@ -137,7 +147,7 @@
 	
 	The FPFH descriptor takes into account not only the geometric positions of the neighboring points but also the differences in their surface normals. This combination allows for a more robust representation of local surface properties and provides a measure of distinctiveness between different points.
 	
-	\subsubsection{ICP}
+	\subparagraph{ICP}
 	
 	ICP stands for Iterative Closest Point. The ICP algorithm iteratively finds the best transformation that minimizes the distance between corresponding points in the two point clouds. The steps of ICP can be summarized as follows:
 	\begin{itemize}
@@ -149,46 +159,47 @@
 		\item Output: The final transformation matrix gives the registration result. Apply this transformation to the source point cloud to align it with the target point cloud.
 	\end{itemize}
 	
-	\section{Motion}
-	The Motion component is responsible for trajectory planning and robot arm manipulation.
+	\subsection{Motion}
+	The Motion component is responsible for trajectory planning and robot control.
 	
 	\begin{figure}[!ht]
 		\centering
-		\makebox[\textwidth][c]{\includegraphics[width=1.0\textwidth]{images/design-motion.png}}
+		\makebox[\textwidth][c]{\includegraphics[width=0.8\textwidth]{images/design-motion.png}}
 		\caption{Motion node workflow}
 		\label{fig:design-motion}
 	\end{figure}
 	
-	\subsection{Command Extraction}
-	A high level API has been implemented to specify different commands, mainly used to control robot arm and gripper. These commands are taken from the Planning node.
+	\subsubsection{Trajectory Planning}
+	Has been developed with the help of the MoveIt package. MoveIt is a powerful motion planning framework in ROS that simplifies trajectory planning and robot arm manipulation. Using the target poses and orientations provided, MoveIt calculates feasible trajectories for the robot arm. These trajectories ensure safe and efficient pick-and-place movements, taking into account the robot's kinematics and workspace limitations.
 	
-	\subsection{Trajectory Planning}
-	Has been developed with the help of the MoveIt package. MoveIt is a powerful motion planning framework in ROS that simplifies trajectory planning and robot arm manipulation. Using the target poses and orientations provided by the Planner's commands, the MoveIt component calculates feasible trajectories for the robot arm. These trajectories ensure safe and efficient pick-and-place movements, taking into account the robot's kinematics and workspace limitations. (To be studied and written in detail in the next weeks)
+	\subsubsection{Robot Control}
+	With the trajectories determined, the Motion node sends control commands to the UR5 robot arm, enabling it to navigate to specified locations, grasp Lego blocks and accurately place them at the desired positions to construct the predefined structure.
 	
-	\subsection{Robot Arm Manipulation}
-	With the trajectories determined, the Motion node sends control commands to the UR5 robot arm, enabling it to navigate to specified locations, grasp Lego blocks and accurately place them at the desired positions to construct the predefined structure. This is currently developing in Gazebo simulation, which has a lot of bugs (for example, when placing a Lego block on top of the other, they will "dance", pop out of the table, or sometimes blend together). I have been discussing this with prof Focchi and we are planning to move to another simulation framework.
+	\subsection{Planning: (Work in Progress)}
+	The Planning component is responsible for high-level task planning and error handling, integrating Vision and Motion nodes.
 	
-	\section{Planning: (Work in Progress)}
-	The Planning component is yet to be developed, and this presents the primary challenge in the project.
-	
-	\subsection{Difficulty and Challenges}
-	\begin{itemize}
-		\item The Planning component involves high-level coordination and task planning, integrating the information received from the Vision and Motion nodes. Designing an efficient planning algorithm that considers the availability of Lego blocks, sequence of pick-and-place operations, and error handling is a complex task.
-		\item Error handling and recovery mechanisms need to be incorporated in the planning process to handle unexpected events, such as incomplete object detection or localization failures.
-	\end{itemize}
-	
-	\section{Next Steps}
+	\section{Challenge and Next Steps}
 	To complete the project, the following steps need to be taken:
 	
 	\begin{itemize}
 		\item \textbf{Develop the Planning Component:} The Planning component needs to be designed and implemented to coordinate the communication between the Vision and Motion nodes, generate a high-level plan for the robot arm, and handle error scenarios.
-		\item \textbf{Testing and Refinement:} Thorough testing of the entire system should be performed to identify any issues or inconsistencies. Refinements may be required in the YOLO training model, localization and motion phase for improved performance and reliability.
-		\item \textbf{Documentation and Final Report:} Proper documentation of the code, algorithms, and the overall system should be completed. A comprehensive final report detailing the project's methodology, results, and conclusions should be prepared.
+		\item \textbf{Construction image as input:} While the current construction process follows a pre-defined configuration (the final position of each Lego block is known), the next step involves incorporating the ability to interpret and process construction images as input. This enhancement aims to make the system more versatile, allowing it to adapt to variety of Lego constructions beyond the predefined configurations.
+		\begin{figure}[!ht]
+			\centering
+			\makebox[\textwidth][c]{\includegraphics[width=0.7\textwidth]{images/design-image-as-input.png}}
+			\caption{Image as input}
+			\label{fig:input-image}
+		\end{figure}
+		\item \textbf{Refinement for vision accuracy:} The vision accuracy refinement step involves fine-tuning the algorithms responsible for detecting and localizing Lego blocks. This refinement ensures a higher level of precision in translating visual data into actionable information, reducing errors in the alignment of the point cloud.
+		\begin{figure}[!ht]
+			\centering
+			\makebox[\textwidth][c]{\includegraphics[width=0.6\textwidth]{images/pointcloud-wrong.png}}
+			\caption{Point cloud registration}
+			\label{fig:pointcloud-wrong}
+		\end{figure}
 	\end{itemize}
 	
 	\section{Conclusion}
 	The "Vision-Based Lego Detection, Localization, and Assembly Using UR5 Robot Arm" project has made significant progress in implementing the Vision and Motion components. However, the Planning component remains to be developed, which poses the primary challenge. Addressing the difficulties in planning and implementing robust error handling will be crucial to achieving a fully autonomous Lego block assembly system. With further development and refinement, the project has the potential to demonstrate the capabilities of vision-based robotics in real-world applications.
-	
-	\textbf{Note:} This report provides an overview of the progress made so far. Detailed technical information and results will be provided in the final report upon completion of the Planning component.
 	
 \end{document}

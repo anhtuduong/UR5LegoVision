@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2023.5.31)  24 OCT 2023 21:02
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2023.5.31)  14 NOV 2023 02:00
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -139,20 +139,20 @@ File: l3backend-pdfmode.def 2020-02-03 L3 backend support: PDF mode
 (./report.aux)
 \openout1 = `report.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 19.
-LaTeX Font Info:    ... okay on input line 19.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 20.
+LaTeX Font Info:    ... okay on input line 20.
 
 (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
@@ -211,100 +211,107 @@ e
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 21.
+(Font)              <12> on input line 22.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 21.
+(Font)              <8> on input line 22.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 21.
-<images/scene-start.png, id=1, 602.25pt x 451.6875pt>
+(Font)              <6> on input line 22.
+<images/scene-start.png, id=1, 996.72375pt x 548.0475pt>
 File: images/scene-start.png Graphic file (type png)
 <use images/scene-start.png>
-Package pdftex.def Info: images/scene-start.png  used on input line 28.
-(pdftex.def)             Requested size: 221.78923pt x 166.34293pt.
-<images/design-main.png, id=2, 541.02126pt x 304.13625pt>
+Package pdftex.def Info: images/scene-start.png  used on input line 29.
+(pdftex.def)             Requested size: 332.68385pt x 182.92177pt.
+<images/design-main.png, id=3, 541.02126pt x 286.06876pt>
 File: images/design-main.png Graphic file (type png)
 <use images/design-main.png>
-Package pdftex.def Info: images/design-main.png  used on input line 35.
-(pdftex.def)             Requested size: 266.14978pt x 149.62207pt.
-<images/design-vision.png, id=4, 1064.97874pt x 1115.16624pt>
-File: images/design-vision.png Graphic file (type png)
-<use images/design-vision.png>
-Package pdftex.def Info: images/design-vision.png  used on input line 45.
-(pdftex.def)             Requested size: 532.29282pt x 557.39458pt.
+Package pdftex.def Info: images/design-main.png  used on input line 44.
+(pdftex.def)             Requested size: 266.14978pt x 140.73364pt.
 [1
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./images/scene-start.png> 
-<./images/design-main.png>] [2 <./images/design-vision.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 53--54
-
- []
-
-<images/dataset.png, id=20, 1844.8925pt x 1063.975pt>
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map} <./images/scene-start.png>]
+<images/design-vision.png, id=15, 1105.12875pt x 739.76375pt>
+File: images/design-vision.png Graphic file (type png)
+<use images/design-vision.png>
+Package pdftex.def Info: images/design-vision.png  used on input line 54.
+(pdftex.def)             Requested size: 532.29282pt x 356.30165pt.
+ [2 <./images/design-main.png> <./images/design-vision.png>]
+<images/dataset.png, id=21, 1844.8925pt x 1063.975pt>
 File: images/dataset.png Graphic file (type png)
 <use images/dataset.png>
-Package pdftex.def Info: images/dataset.png  used on input line 57.
+Package pdftex.def Info: images/dataset.png  used on input line 67.
 (pdftex.def)             Requested size: 443.57848pt x 255.8138pt.
-<images/yolo_train_results.png, id=21, 867.24pt x 433.62pt>
+<images/yolo_train_results.png, id=22, 867.24pt x 433.62pt>
 File: images/yolo_train_results.png Graphic file (type png)
 <use images/yolo_train_results.png>
-Package pdftex.def Info: images/yolo_train_results.png  used on input line 74.
+Package pdftex.def Info: images/yolo_train_results.png  used on input line 84.
 (pdftex.def)             Requested size: 487.93903pt x 243.9702pt.
-[3 <./images/dataset.png>]
-<images/confusion_matrix.png, id=27, 867.24pt x 650.43pt>
+ [3 <./images/dataset.png>]
+<images/confusion_matrix.png, id=28, 867.24pt x 650.43pt>
 File: images/confusion_matrix.png Graphic file (type png)
 <use images/confusion_matrix.png>
-Package pdftex.def Info: images/confusion_matrix.png  used on input line 81.
+Package pdftex.def Info: images/confusion_matrix.png  used on input line 91.
 (pdftex.def)             Requested size: 443.57848pt x 332.68753pt.
  [4 <./images/yolo_train_results.png> <./images/confusion_matrix.png>]
-<images/pointcloud-from-3d.png, id=33, 602.25pt x 301.125pt>
-File: images/pointcloud-from-3d.png Graphic file (type png)
-<use images/pointcloud-from-3d.png>
-Package pdftex.def Info: images/pointcloud-from-3d.png  used on input line 91.
-(pdftex.def)             Requested size: 221.78923pt x 110.89528pt.
-<images/detect.png, id=34, 719.68875pt x 468.75125pt>
+<images/detect.png, id=34, 1215.54124pt x 834.11626pt>
 File: images/detect.png Graphic file (type png)
 <use images/detect.png>
-Package pdftex.def Info: images/detect.png  used on input line 101.
-(pdftex.def)             Requested size: 354.86412pt x 231.13493pt.
+Package pdftex.def Info: images/detect.png  used on input line 100.
+(pdftex.def)             Requested size: 354.86412pt x 243.50392pt.
 <images/pointcloud-clean.png, id=35, 602.25pt x 225.84375pt>
 File: images/pointcloud-clean.png Graphic file (type png)
 <use images/pointcloud-clean.png>
-Package pdftex.def Info: images/pointcloud-clean.png  used on input line 111.
+Package pdftex.def Info: images/pointcloud-clean.png  used on input line 110.
 (pdftex.def)             Requested size: 354.86412pt x 133.07779pt.
- [5 <./images/pointcloud-from-3d.png> <./images/detect.png>]
-<images/pointcloud-align.png, id=41, 602.25pt x 188.20313pt>
+<images/pointcloud-from-3d.png, id=36, 602.25pt x 301.125pt>
+File: images/pointcloud-from-3d.png Graphic file (type png)
+<use images/pointcloud-from-3d.png>
+Package pdftex.def Info: images/pointcloud-from-3d.png  used on input line 119.
+
+(pdftex.def)             Requested size: 221.78923pt x 110.89528pt.
+ [5 <./images/detect.png> <./images/pointcloud-clean.png>]
+<images/pointcloud-align.png, id=42, 602.25pt x 188.20313pt>
 File: images/pointcloud-align.png Graphic file (type png)
 <use images/pointcloud-align.png>
-Package pdftex.def Info: images/pointcloud-align.png  used on input line 119.
+Package pdftex.def Info: images/pointcloud-align.png  used on input line 129.
 (pdftex.def)             Requested size: 399.21791pt x 124.76007pt.
-
-[6 <./images/pointcloud-clean.png> <./images/pointcloud-align.png>]
-<images/design-motion.png, id=48, 1047.915pt x 598.235pt>
+ [6 <./images/pointcloud-from-3d.png> <./images/pointcloud-align.png>]
+<images/design-motion.png, id=48, 664.4825pt x 408.52625pt>
 File: images/design-motion.png Graphic file (type png)
 <use images/design-motion.png>
-Package pdftex.def Info: images/design-motion.png  used on input line 157.
-(pdftex.def)             Requested size: 443.57848pt x 253.2287pt.
- [7]
-[8 <./images/design-motion.png>] [9] (./report.aux) ) 
+Package pdftex.def Info: images/design-motion.png  used on input line 167.
+(pdftex.def)             Requested size: 354.86412pt x 218.16978pt.
+ [7 <./images/design-motion.png>]
+<images/design-image-as-input.png, id=54, 460.72125pt x 184.69pt>
+File: images/design-image-as-input.png Graphic file (type png)
+<use images/design-image-as-input.png>
+Package pdftex.def Info: images/design-image-as-input.png  used on input line 1
+89.
+(pdftex.def)             Requested size: 310.50357pt x 124.47154pt.
+<images/pointcloud-wrong.png, id=55, 963.6pt x 451.6875pt>
+File: images/pointcloud-wrong.png Graphic file (type png)
+<use images/pointcloud-wrong.png>
+Package pdftex.def Info: images/pointcloud-wrong.png  used on input line 196.
+(pdftex.def)             Requested size: 266.14978pt x 124.75548pt.
+ [8 <./images/design-image-as-input.png>] [9 <./images/pointcloud-wrong.png>] (
+./report.aux) ) 
 Here is how much of TeX's memory you used:
- 2828 strings out of 483183
- 43978 string characters out of 5966292
- 282144 words of memory out of 5000000
- 17819 multiletter control sequences out of 15000+600000
+ 2842 strings out of 483183
+ 44395 string characters out of 5966292
+ 281171 words of memory out of 5000000
+ 17831 multiletter control sequences out of 15000+600000
  536928 words of font info for 39 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
- 31i,6n,37p,706b,285s stack positions out of 5000i,500n,10000p,200000b,80000s
- </home/toto/.texlive2019/
-texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1000.600pk></usr/share/texlive/texmf-
-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/f
-onts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/t
-ype1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/pu
-blic/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/am
-sfonts/cm/cmr17.pfb>
-Output written on report.pdf (9 pages, 3568789 bytes).
+ 31i,7n,37p,722b,357s stack positions out of 5000i,500n,10000p,200000b,80000s
+ </home/toto/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/
+tcrm1000.600pk></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cm
+bx10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.p
+fb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></us
+r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share
+/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb>
+Output written on report.pdf (9 pages, 4684174 bytes).
 PDF statistics:
- 82 PDF objects out of 1000 (max. 8388607)
+ 86 PDF objects out of 1000 (max. 8388607)
  42 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
- 56 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 66 words of extra memory for PDF output out of 10000 (max. 10000000)
 
