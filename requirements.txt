@@ -2,3 +2,4 @@ dash
 open3d
 ultralytics
 torch
+tkinter
