@@ -54,7 +54,7 @@ class LegoBuilder:
             block_button.pack(padx=5, pady=5)
             self.block_buttons.append(block_button)
 
-        self.canvas = tk.Canvas(self.root, width=400, height=400, bg="white")
+        self.canvas = tk.Canvas(self.root, width=300, height=300, bg="white")
         self.canvas.pack(side=tk.LEFT, padx=10, pady=10)
         self.canvas.bind("<Button-1>", self.place_block)
         self.canvas.bind("<Button-3>", self.delete_block)

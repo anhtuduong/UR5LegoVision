@@ -20,8 +20,7 @@ Using UR5 Robot</h1>
 
 </div>
 
-## Table of Contents
-
+### Table of Contents
 - [Project Description](#project-description)
 - [Installation](#installation)
 - [Run UR5LegoVision](#run-ur5Legovision)
@@ -29,11 +28,13 @@ Using UR5 Robot</h1>
 
 
 # Project Description
-UR5LegoVision is an autonomous robotic project that performs pick-and-place tasks using a UR5 robot arm equipped with a ZED camera for perception. The goal of the project is to achieve autonomous assembly of "lego-like" Mega Bloks by detecting, localizing, and manipulating the blocks using the robot arm.
+UR5LegoVision is a robotic project that performs pick-and-place tasks using a UR5 robot arm equipped with a ZED camera for perception. The goal of the project is to achieve autonomous assembly of "lego-like" Mega Bloks by detecting, localizing, and manipulating the blocks using the robot arm.
 
 ![demo.gif](docs/demo.gif)
 
-The main components of the project are as follows:
+The methodology is structured around the implementation of three ROS (Robot Operating System) nodes representing the core components of the system:
+
+![images/design-main.png](docs/tex/images/design-main.png)
 
 ## Vision
 The Vision component serves as the perception module of the robot and is responsible for detecting and localizing the "lego-like" Mega Bloks using a ZED camera. The workflow of the Vision component involves dataset collection, YOLO training for object detection, and point cloud generation from 3D Lego models. Point cloud registration techniques are used to align the point clouds of the detected objects with their 3D models, obtaining the translation and orientation information of the blocks.
@@ -44,12 +45,14 @@ The Motion component is responsible for trajectory planning and robot arm manipu
 ## Planning
 The Planning component is yet to be fully developed, and it poses the primary challenge in the project. It involves high-level coordination and task planning, integrating information from the Vision and Motion components. The Planning component will generate a high-level plan for the robot arm, considering factors such as the availability of Lego blocks, sequence of pick-and-place operations, and error handling.
 
+📌 [See full documentation](https://github.com/anhtuduong/UR5LegoVision/blob/main/docs/report.pdf)
+
 ---
   
 # Installation
 To set up the UR5LegoVision project, follow these steps:
 
-## 1. Install locosim:
+## Install locosim:
 
 Locosim is a didactic framework to learn/test basic controllers schemes on quadruped robots (HyQ/Solo/Aliengo/Go1 are supported) and manipulators (UR5 is supported). Locosim in this project has been customized to cater to specific needs and requirements. For the original Locosim framework, please refer to the following [link!](https://github.com/mfocchi/locosim)
 
@@ -242,7 +245,7 @@ sudo apt install python3-pip
 PIP_PREFIX install cvxpy==1.2.0
 ```
 
-## 2. Download code and setup ROS workspace
+## Download code and setup ROS workspace
 
 Now that you installed all the dependencies you are ready to get the code, but first you need to create a ros workspace:
 
