@@ -45,7 +45,7 @@ The Motion component is responsible for trajectory planning and robot arm manipu
 ## Planning
 The Planning component is yet to be fully developed, and it poses the primary challenge in the project. It involves high-level coordination and task planning, integrating information from the Vision and Motion components. The Planning component will generate a high-level plan for the robot arm, considering factors such as the availability of Lego blocks, sequence of pick-and-place operations, and error handling.
 
-📌 [See full documentation](https://github.com/anhtuduong/UR5LegoVision/blob/main/docs/report.pdf)
+📌 [See full documentation](docs/report.pdf)
 
 ---
   
