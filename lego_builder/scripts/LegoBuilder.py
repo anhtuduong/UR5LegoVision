@@ -39,8 +39,26 @@ class LegoBuilder:
         self.create_widgets()
 
     def create_widgets(self):
-        block_frame = tk.Frame(self.root)
-        block_frame.pack(side=tk.LEFT, padx=10, pady=10)
+        # Create a frame to contain the buttons with a scrollbar
+        button_frame = tk.Frame(self.root)
+        button_frame.pack(side=tk.LEFT, padx=10, pady=10, fill=tk.Y)
+
+        # Add a canvas to place the buttons and a scrollbar
+        canvas = tk.Canvas(button_frame)
+        scrollbar = tk.Scrollbar(button_frame, orient=tk.VERTICAL, command=canvas.yview)
+        scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+        canvas.pack(side=tk.LEFT, padx=5, pady=5, fill=tk.BOTH, expand=True)
+        canvas.configure(yscrollcommand=scrollbar.set)
+
+        # Create a frame inside the canvas to hold the buttons
+        frame_buttons = tk.Frame(canvas)
+        canvas.create_window((0, 0), window=frame_buttons, anchor=tk.NW)
+
+        # Bind the canvas to handle resizing of the buttons
+        frame_buttons.bind("<Configure>", lambda event, canvas=canvas: self.on_configure(event, canvas))
+
+        # Bind the mouse wheel to the button_frame for scrolling
+        button_frame.bind("<MouseWheel>", lambda event, canvas=canvas: self.on_mousewheel(event, canvas))
 
         block_names = BLOCK_NAMES
         self.block_buttons = []
@@ -48,13 +66,15 @@ class LegoBuilder:
             block_image = Image.open(f"{BUTTON_IMG_PATH}/{block_name}.png")
             block_image = block_image.resize((RESIZE_PX, RESIZE_PX), Image.ANTIALIAS)
             pil_image = block_image.copy()  # Make a copy of the PIL image
+
             tk_image = ImageTk.PhotoImage(block_image)
-            block_button = tk.Button(block_frame, image=tk_image, command=lambda img=tk_image, pil=pil_image: self.select_block(img, pil))
-            block_button.image = tk_image  # Keep a reference to the image object
-            block_button.pack(padx=5, pady=5)
+            block_button = tk.Button(frame_buttons, text=block_name, image=tk_image, compound=tk.TOP,
+                                     command=lambda img=tk_image, pil=pil_image: self.select_block(img, pil))
+            block_button.image = tk_image
+            block_button.pack(side=tk.TOP, padx=5, pady=5)
             self.block_buttons.append(block_button)
 
-        self.canvas = tk.Canvas(self.root, width=300, height=300, bg="white")
+        self.canvas = tk.Canvas(self.root, width=500, height=500, bg="white")
         self.canvas.pack(side=tk.LEFT, padx=10, pady=10)
         self.canvas.bind("<Button-1>", self.place_block)
         self.canvas.bind("<Button-3>", self.delete_block)
@@ -62,8 +82,13 @@ class LegoBuilder:
         export_button = tk.Button(self.root, text="Export Image", command=self.export_image)
         export_button.pack(side=tk.BOTTOM, padx=10, pady=10)
 
-        # Create a dictionary to map canvas items to their respective block images
         self.canvas_items = {}
+
+    def on_configure(self, event, canvas):
+        canvas.configure(scrollregion=canvas.bbox("all"))
+
+    def on_mousewheel(self, event, canvas):
+        canvas.yview_scroll(int(-1 * (event.delta / 120)), "units")
 
     def select_block(self, block_image, pil_image):
         self.current_block = block_image
@@ -110,17 +135,28 @@ class LegoBuilder:
             self.canvas.delete(items)
 
     def export_image(self):
-        canvas_image = Image.new("RGB", (self.canvas.winfo_width(), self.canvas.winfo_height()), "white")
+        canvas_image = Image.new("RGBA", (self.canvas.winfo_width(), self.canvas.winfo_height()), (255, 255, 255, 255))
+
+        # Get the canvas background color (white) and paste it onto the canvas image
+        canvas_bg = Image.new("RGB", (self.canvas.winfo_width(), self.canvas.winfo_height()), "white")
+        canvas_image.paste(canvas_bg, (0, 0))
 
         # Iterate through canvas items and export them onto the canvas image
         for item, block_image in self.canvas_items.items():
             x0, y0 = self.canvas.coords(item)
             block_image = block_image.pil_image
             block_image = block_image.resize((RESIZE_PX, RESIZE_PX), Image.LANCZOS)  # Resize the image if needed
-            canvas_image.paste(block_image, (int(x0), int(y0), int(x0) + RESIZE_PX, int(y0) + RESIZE_PX))
 
+            # Get the alpha channel from the block image
+            alpha = block_image.getchannel('A')
+
+            # Paste the block image onto the canvas image considering the alpha channel
+            canvas_image.paste(block_image, (int(x0), int(y0)), mask=alpha)
+
+        # Save the canvas image with transparency and background intact
         canvas_image.save(f"{OUTPUT_PATH}/output.png")
         print("Image exported successfully.")
+
 
 def main():
     root = tk.Tk()
