@@ -17,7 +17,8 @@ if str(ROOT) not in sys.path:
 
 BUTTON_IMG_PATH = os.path.abspath(os.path.join(ROOT, "lego_builder/button_img"))
 OUTPUT_PATH = os.path.abspath(os.path.join(ROOT, "lego_builder/output"))
-RESIZE_PX = 100
+BUTTON_IMG_PX = 30
+IMG_PX = 100
 
 import tkinter as tk
 from PIL import Image, ImageTk
@@ -64,13 +65,15 @@ class LegoBuilder:
         self.block_buttons = []
         for block_name in block_names:
             block_image = Image.open(f"{BUTTON_IMG_PATH}/{block_name}.png")
-            block_image = block_image.resize((RESIZE_PX, RESIZE_PX), Image.ANTIALIAS)
-            pil_image = block_image.copy()  # Make a copy of the PIL image
+            # block_image = block_image.resize((RESIZE_PX, RESIZE_PX), Image.LANCZOS)
+            # pil_image = block_image.copy()  # Make a copy of the PIL image
 
-            tk_image = ImageTk.PhotoImage(block_image)
-            block_button = tk.Button(frame_buttons, text=block_name, image=tk_image, compound=tk.TOP,
-                                     command=lambda img=tk_image, pil=pil_image: self.select_block(img, pil))
-            block_button.image = tk_image
+            button_block_img = block_image.copy()
+            button_block_img = button_block_img.resize((BUTTON_IMG_PX, BUTTON_IMG_PX), Image.LANCZOS)
+            button_tk_image = ImageTk.PhotoImage(button_block_img)
+            block_button = tk.Button(frame_buttons, text=block_name, image=button_tk_image, compound=tk.TOP,
+                                     command=lambda img=block_image.copy(): self.select_block(img))
+            block_button.image = button_tk_image
             block_button.pack(side=tk.TOP, padx=5, pady=5)
             self.block_buttons.append(block_button)
 
@@ -90,8 +93,11 @@ class LegoBuilder:
     def on_mousewheel(self, event, canvas):
         canvas.yview_scroll(int(-1 * (event.delta / 120)), "units")
 
-    def select_block(self, block_image, pil_image):
-        self.current_block = block_image
+    def select_block(self, block_image):
+        block_image = block_image.resize((IMG_PX, IMG_PX), Image.LANCZOS)
+        pil_image = block_image.copy()  # Make a copy of the PIL image
+        tk_image = ImageTk.PhotoImage(block_image)
+        self.current_block = tk_image
         self.pil_image = pil_image
         self.canvas.delete("ghost_block")  # Remove previous ghost block if exists
 
@@ -145,7 +151,7 @@ class LegoBuilder:
         for item, block_image in self.canvas_items.items():
             x0, y0 = self.canvas.coords(item)
             block_image = block_image.pil_image
-            block_image = block_image.resize((RESIZE_PX, RESIZE_PX), Image.LANCZOS)  # Resize the image if needed
+            block_image = block_image.resize((IMG_PX, IMG_PX), Image.LANCZOS)
 
             # Get the alpha channel from the block image
             alpha = block_image.getchannel('A')
