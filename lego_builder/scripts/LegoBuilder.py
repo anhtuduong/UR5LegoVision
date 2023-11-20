@@ -15,7 +15,7 @@ ROOT = FILE.parents[2]
 if str(ROOT) not in sys.path:
     sys.path.append(str(ROOT))  # add ROOT to PATH
 
-BUTTON_IMG_PATH = os.path.abspath(os.path.join(ROOT, "lego_builder/button_img"))
+BUTTON_IMG_PATH = os.path.abspath(os.path.join(ROOT, "lego_builder/block_img"))
 OUTPUT_PATH = os.path.abspath(os.path.join(ROOT, "lego_builder/output"))
 BUTTON_IMG_PX = 30
 IMG_PX = 200
