@@ -17,9 +17,13 @@ if str(ROOT) not in sys.path:
 
 BUTTON_IMG_PATH = os.path.abspath(os.path.join(ROOT, "lego_builder/block_img"))
 OUTPUT_PATH = os.path.abspath(os.path.join(ROOT, "lego_builder/output"))
-BUTTON_IMG_PX = 30
+
+CANVAS_WIDTH = 500
+CANVAS_HEIGHT = 500
+BUTTON_IMG_PX = 40
 IMG_PX = 200
 SCALE_FACTOR = 2
+EXPORT_TRANSPARENCY = True
 
 import tkinter as tk
 from PIL import Image, ImageTk
@@ -84,7 +88,7 @@ class LegoBuilder:
 
             self.block_buttons.append(block_button)
 
-        self.canvas = tk.Canvas(self.root, width=500, height=500, bg="white")
+        self.canvas = tk.Canvas(self.root, width=CANVAS_WIDTH, height=CANVAS_HEIGHT, bg="white")
         self.canvas.pack(side=tk.LEFT, padx=10, pady=10)
         self.canvas.bind("<Button-1>", self.place_block)
         self.canvas.bind("<Button-3>", self.delete_block)
@@ -185,12 +189,15 @@ class LegoBuilder:
             self.canvas.delete(items)
 
     def export_image(self):
-        canvas_width = self.canvas.winfo_width() * SCALE_FACTOR
-        canvas_height = self.canvas.winfo_height() * SCALE_FACTOR
-        canvas_image = Image.new("RGBA", (canvas_width, canvas_height), (255, 255, 255, 255))
+        canvas_width = CANVAS_WIDTH * SCALE_FACTOR
+        canvas_height = CANVAS_HEIGHT * SCALE_FACTOR
+        canvas_image = Image.new("RGBA", (canvas_width, canvas_height), (255, 255, 255, 0))
 
-        # Get the canvas background color (white) and paste it onto the canvas image
-        canvas_bg = Image.new("RGB", (canvas_width, canvas_height), "white")
+        # Get the canvas background and paste it onto the canvas image
+        if EXPORT_TRANSPARENCY:
+            canvas_bg = Image.new("RGBA", (canvas_width, canvas_height), (255, 255, 255, 0))
+        else:
+            canvas_bg = Image.new("RGB", (canvas_width, canvas_height), "white")
         canvas_image.paste(canvas_bg, (0, 0))
 
         # Iterate through canvas items and export them onto the canvas image
