@@ -1,9 +1,9 @@
 """!
-@file LegoConstructor.py
+@file LegoMatching.py
 @author Anh Tu Duong (anhtu.duong@studenti.unitn.it)
 @date 2023-11-20
 
-@brief Defines the class LegoConstructor.
+@brief Defines the class LegoMatching.
 This class is used to identify and place lego blocks on a given image.
 """
 
@@ -41,7 +41,7 @@ BLOCK_NAMES = [
 
 INPUT_IMG_PATH = '/home/toto/ros_ws/src/UR5LegoVision/lego_builder/output/output.png'
 
-class LegoConstructor:
+class LegoMatching:
     def __init__(self, input_img_path):
         self.input_img = cv2.imread(input_img_path)
         self.input_img_gray = cv2.cvtColor(self.input_img, cv2.COLOR_BGR2GRAY)
@@ -137,5 +137,5 @@ class LegoConstructor:
         return background_img
 
 if __name__ == "__main__":
-    castle_builder = LegoConstructor(INPUT_IMG_PATH)
-    castle_builder.identify_blocks(threshold=THRESHOLD)  # Adjust threshold as needed
+    construct = LegoMatching(INPUT_IMG_PATH)
+    construct.identify_blocks(threshold=THRESHOLD)
