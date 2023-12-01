@@ -29,13 +29,9 @@ DETECT_PATH = os.path.abspath("./runs/detect/predict")
 RUN_PATH = os.path.abspath("./runs")
 CONFIDENCE = 0.25
 
-# YOLOv5
-# WEIGHTS_PATH = os.path.abspath(os.path.join(ROOT, "vision/weights/best.pt"))
-# MODEL = torch.hub.load('ultralytics/yolov5', 'custom', WEIGHTS_PATH, force_reload=True)
-
 # YOLOv8
 from ultralytics import YOLO
-WEIGHTS_PATH = os.path.abspath(os.path.join(ROOT, "vision/yolov8-training/weights/best.pt"))
+WEIGHTS_PATH = os.path.abspath(os.path.join(ROOT, "vision/yolov8-training/600_epochs/weights/best.pt"))
 model = YOLO(WEIGHTS_PATH)
 
 BLOCK_NAMES = [ 'X1-Y1-Z2',
